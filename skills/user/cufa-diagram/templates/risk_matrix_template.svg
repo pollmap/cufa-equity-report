@@ -1,0 +1,22 @@
+<svg width="100%" viewBox="0 0 680 400">
+<text class="th" x="340" y="24" text-anchor="middle" style="font-size:16px">리스크 매트릭스 (발생확률 × 영향도)</text>
+<!-- 그리드 (3×3) -->
+<line x1="160" y1="50" x2="640" y2="50" stroke="#2A2845" stroke-width="0.3"/>
+<line x1="160" y1="150" x2="640" y2="150" stroke="#2A2845" stroke-width="0.3"/>
+<line x1="160" y1="250" x2="640" y2="250" stroke="#2A2845" stroke-width="0.3"/>
+<line x1="160" y1="350" x2="640" y2="350" stroke="#2A2845" stroke-width="0.3"/>
+<line x1="320" y1="50" x2="320" y2="350" stroke="#2A2845" stroke-width="0.3"/>
+<line x1="480" y1="50" x2="480" y2="350" stroke="#2A2845" stroke-width="0.3"/>
+<!-- 위험 영역 하이라이트 -->
+<rect x="480" y="50" width="160" height="100" fill="#E24B4A" opacity="0.05"/>
+<!-- 축 레이블 (겹침 주의: 그리드 외부에 배치) -->
+<text class="ts" x="240" y="370" text-anchor="middle">낮음</text>
+<text class="ts" x="400" y="370" text-anchor="middle">보통</text>
+<text class="ts" x="560" y="370" text-anchor="middle">높음</text>
+<text class="ts" x="400" y="390" text-anchor="middle">발생 확률 →</text>
+<text class="ts" x="148" y="100" text-anchor="end">높음</text>
+<text class="ts" x="148" y="200" text-anchor="end">보통</text>
+<text class="ts" x="148" y="300" text-anchor="end">낮음</text>
+<!-- 버블: cx/cy를 그리드 영역 내에 배치 -->
+<!-- <circle cx="400" cy="80" r="22" fill="#FF4D4D" fill-opacity="0.25" stroke="#FF4D4D" stroke-width="1"/> -->
+</svg>

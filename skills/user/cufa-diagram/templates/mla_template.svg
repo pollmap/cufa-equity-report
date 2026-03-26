@@ -1,0 +1,37 @@
+<svg width="100%" viewBox="0 0 680 440">
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<!-- MLA 밸류체인 계층도 템플릿 -->
+<!-- Layer 1→N, 상위일수록 고부가가치 -->
+<text class="th" x="340" y="30" text-anchor="middle" style="font-size:16px">{TITLE} 밸류체인 계층도 (MLA)</text>
+<text class="ts" x="340" y="48" text-anchor="middle">Multi-layer architecture — Layer 1→N, 상위일수록 고부가</text>
+
+<!-- Layer 1 (최하위 = 인풋) -->
+<g class="c-pink">
+  <rect x="60" y="70" width="560" height="70" rx="12" stroke-width="0.5"/>
+  <text class="th" x="90" y="96" text-anchor="start">Layer 1  {L1_TITLE}</text>
+  <text class="ts" x="90" y="116" text-anchor="start">{L1_DESC}</text>
+</g>
+<line x1="340" y1="140" x2="340" y2="158" class="arr" marker-end="url(#arrow)"/>
+
+<!-- Layer 2 -->
+<g class="c-green">
+  <rect x="60" y="162" width="560" height="70" rx="12" stroke-width="0.5"/>
+  <text class="th" x="90" y="188" text-anchor="start">Layer 2  {L2_TITLE}</text>
+  <text class="ts" x="90" y="208" text-anchor="start">{L2_DESC}</text>
+</g>
+<line x1="340" y1="232" x2="340" y2="250" class="arr" marker-end="url(#arrow)"/>
+
+<!-- Layer 3 (최상위 = 최고 부가가치) -->
+<g class="c-amber">
+  <rect x="60" y="254" width="560" height="70" rx="12" stroke-width="1"/>
+  <text class="th" x="90" y="280" text-anchor="start">Layer 3  {L3_TITLE} ★ 최고 부가가치</text>
+  <text class="ts" x="90" y="300" text-anchor="start">{L3_DESC}</text>
+</g>
+
+<text class="ts" x="340" y="360" text-anchor="middle">{FOOTER}</text>
+<!-- 
+  사용법: {TITLE}, {L1_TITLE} 등을 실제 내용으로 교체
+  레이어 추가: 기존 패턴 복사 후 y좌표 조정 (레이어당 +92px)
+  viewBox 높이 조정: 레이어 수 × 92 + 120
+-->
+</svg>

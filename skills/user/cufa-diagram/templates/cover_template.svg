@@ -1,0 +1,11 @@
+<svg width="100%" viewBox="0 0 680 300">
+<text class="th" x="340" y="28" text-anchor="middle" style="font-size:16px">{COMPANY} ({TICKER}) — 투자 요약</text>
+<text class="ts" x="340" y="46" text-anchor="middle">{TAGLINE}</text>
+<!-- BUY/SELL 박스 -->
+<g class="c-green"><rect x="40" y="64" width="140" height="80" rx="12" stroke-width="0.5"/>
+<text class="th" x="110" y="90" text-anchor="middle" dominant-baseline="central" style="font-size:22px;font-weight:900">{RATING}</text>
+<text class="ts" x="110" y="110" text-anchor="middle" dominant-baseline="central">목표주가</text>
+<text class="th" x="110" y="130" text-anchor="middle" dominant-baseline="central" style="font-size:16px">{TARGET_PRICE}</text></g>
+<!-- 지표 박스들: 동일 패턴으로 x를 200, 330, 460, 570 등으로 배치 -->
+<!-- 투자포인트 3개: 40~235, 245~440, 450~645 (너비 195, 간격 10) -->
+</svg>

@@ -1,0 +1,8 @@
+settings.json
+settings.local.json
+projects/
+plans/
+*.output
+statsig/
+todos/
+credentials/

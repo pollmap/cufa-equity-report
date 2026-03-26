@@ -1,0 +1,44 @@
+<svg width="100%" viewBox="0 0 680 400">
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<!-- DSA 시스템 아키텍처 템플릿 -->
+<text class="th" x="340" y="28" text-anchor="middle" style="font-size:16px">{TITLE} (DSA)</text>
+<text class="ts" x="340" y="46" text-anchor="middle">{SUBTITLE}</text>
+
+<!-- 입력 요소 (왼쪽, 2~4개) -->
+<g class="c-purple"><rect x="20" y="70" width="150" height="44" rx="8" stroke-width="0.5"/>
+<text class="th" x="95" y="88" text-anchor="middle" dominant-baseline="central">{INPUT_1}</text>
+<text class="ts" x="95" y="106" text-anchor="middle" dominant-baseline="central">{INPUT_1_VAL}</text></g>
+
+<g class="c-teal"><rect x="20" y="126" width="150" height="44" rx="8" stroke-width="0.5"/>
+<text class="th" x="95" y="144" text-anchor="middle" dominant-baseline="central">{INPUT_2}</text>
+<text class="ts" x="95" y="162" text-anchor="middle" dominant-baseline="central">{INPUT_2_VAL}</text></g>
+
+<!-- 화살표 → 합산 -->
+<line x1="170" y1="92" x2="210" y2="120" class="arr" marker-end="url(#arrow)"/>
+<line x1="170" y1="148" x2="210" y2="130" class="arr" marker-end="url(#arrow)"/>
+
+<!-- 합산 (중앙) -->
+<g class="c-amber"><rect x="212" y="104" width="130" height="44" rx="10" stroke-width="0.5"/>
+<text class="th" x="277" y="122" text-anchor="middle" dominant-baseline="central">{SUM_TITLE}</text>
+<text class="ts" x="277" y="140" text-anchor="middle" dominant-baseline="central">{SUM_VAL}</text></g>
+
+<!-- 결과 체인 (오른쪽) -->
+<line x1="342" y1="126" x2="380" y2="92" class="arr" marker-end="url(#arrow)"/>
+
+<g class="c-green"><rect x="382" y="70" width="270" height="44" rx="8" stroke-width="0.5"/>
+<text class="th" x="517" y="88" text-anchor="middle" dominant-baseline="central">{RESULT_1}</text>
+<text class="ts" x="517" y="106" text-anchor="middle" dominant-baseline="central">{RESULT_1_VAL}</text></g>
+
+<line x1="517" y1="114" x2="517" y2="132" class="arr" marker-end="url(#arrow)"/>
+
+<g class="c-green"><rect x="382" y="134" width="270" height="44" rx="8" stroke-width="0.5"/>
+<text class="th" x="517" y="152" text-anchor="middle" dominant-baseline="central">{RESULT_2}</text>
+<text class="ts" x="517" y="170" text-anchor="middle" dominant-baseline="central">{RESULT_2_VAL}</text></g>
+
+<!-- 타임라인 (하단) -->
+<text class="th" x="340" y="220" text-anchor="middle">타임라인</text>
+<rect x="60" y="232" width="560" height="6" rx="3" fill="var(--bg2)"/>
+<!-- 구간별 색상 바와 마일스톤 -->
+
+<text class="ts" x="340" y="380" text-anchor="middle">{FOOTER}</text>
+</svg>

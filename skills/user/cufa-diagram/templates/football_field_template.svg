@@ -1,0 +1,18 @@
+<svg width="100%" viewBox="0 0 680 280">
+<text class="th" x="340" y="24" text-anchor="middle" style="font-size:16px">Football Field — 방법론별 적정주가 범위</text>
+<!-- 현재가 기준선 -->
+<line x1="340" y1="40" x2="340" y2="240" stroke="#A78BFA" stroke-width="0.8" stroke-dasharray="4"/>
+<text class="ts" x="340" y="38" text-anchor="middle">현재 {CURRENT_PRICE}</text>
+
+<!-- 범위 바 (y간격 28px) -->
+<text class="ts" x="84" y="68" text-anchor="end">{METHOD_1}</text>
+<g class="c-purple"><rect x="{M1_X}" y="56" width="{M1_W}" height="18" rx="4" stroke-width="0.5"/></g>
+<text class="ts" x="{M1_X_LEFT}" y="68" text-anchor="end">{M1_LOW}</text>
+<text class="ts" x="{M1_X_RIGHT}" y="68" text-anchor="start">{M1_HIGH}</text>
+
+<!-- 추가 범위 바: 동일 패턴 반복, y+28 -->
+<!-- 
+  X 좌표 계산: x = (가격 - 80000) / (200000 - 80000) * 560 + 60
+  너비: (고가 - 저가) / (200000 - 80000) * 560
+-->
+</svg>

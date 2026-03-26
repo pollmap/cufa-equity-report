@@ -1,0 +1,19 @@
+<svg width="100%" viewBox="0 0 680 240">
+<text class="th" x="340" y="24" text-anchor="middle" style="font-size:16px">Peer 밸류에이션 비교</text>
+<!-- 헤더 -->
+<text class="ts" x="40" y="52" text-anchor="start">기업</text>
+<text class="ts" x="200" y="52" text-anchor="middle">Fwd PER</text>
+<text class="ts" x="300" y="52" text-anchor="middle">PBR</text>
+<text class="ts" x="400" y="52" text-anchor="middle">EV/EBITDA</text>
+<text class="ts" x="500" y="52" text-anchor="middle">OPM</text>
+<text class="ts" x="600" y="52" text-anchor="middle">ROE</text>
+<line x1="40" y1="58" x2="640" y2="58" stroke="var(--b)" stroke-width="0.5"/>
+<!-- 일반 행 (y간격 20px) -->
+<text class="ts" x="40" y="76" text-anchor="start">{PEER_1}</text>
+<text class="t" x="200" y="76" text-anchor="middle">{P1_PER}</text>
+<!-- ... -->
+<!-- 하이라이트 행 -->
+<g class="c-purple"><rect x="36" y="124" width="608" height="20" rx="4" stroke-width="0"/></g>
+<text class="th" x="40" y="138" text-anchor="start">{TARGET}</text>
+<text class="th" x="200" y="138" text-anchor="middle">{T_PER}</text>
+</svg>
