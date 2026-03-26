@@ -13,3 +13,10 @@ history.jsonl
 file-history/
 *.db
 *.db-journal
+backups/
+debug/
+paste-cache/
+plugins/
+shell-snapshots/
+tasks/
+usage-data/
