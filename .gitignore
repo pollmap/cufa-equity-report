@@ -6,3 +6,10 @@ plans/
 statsig/
 todos/
 credentials/
+.credentials.json
+cache/
+sessions/
+history.jsonl
+file-history/
+*.db
+*.db-journal

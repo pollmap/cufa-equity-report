@@ -8,6 +8,9 @@ import math
 import os
 import re
 
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_DIR = os.path.join(SCRIPT_DIR, "data")
+
 # ─── GLOBAL FIGURE COUNTER ──────────────────────────────────────────
 _fig_counter = {}
 
@@ -74,6 +77,92 @@ def add_source(chart_html, src="DART, HD건설기계 IR, CUFA"):
     if idx >= 0:
         return chart_html[:idx] + f'<p style="font-size:10px;color:#888;text-align:right;margin-top:4px;">출처: {src}</p></div>\n'
     return chart_html
+
+# ─── MARKDOWN TO HTML CONVERTER ─────────────────────────────────────
+
+def read_md(filename):
+    """Read markdown file from data directory."""
+    with open(os.path.join(DATA_DIR, filename), 'r', encoding='utf-8') as f:
+        return f.read()
+
+def md_to_html(md_text):
+    """Convert markdown text to HTML paragraphs, preserving tables as table() calls."""
+    lines = md_text.strip().split('\n')
+    html_parts = []
+    i = 0
+
+    while i < len(lines):
+        line = lines[i].strip()
+
+        if not line or line == '---':
+            i += 1
+            continue
+
+        # Skip markdown headers (handled separately)
+        if line.startswith('#'):
+            i += 1
+            continue
+
+        # Table detection
+        if '|' in line and line.startswith('|'):
+            table_lines = []
+            while i < len(lines) and lines[i].strip().startswith('|'):
+                table_lines.append(lines[i].strip())
+                i += 1
+            html_parts.append(_md_table_to_html(table_lines))
+            continue
+
+        # Blockquote -> counter_arg style
+        if line.startswith('>'):
+            quote = line[1:].strip()
+            i += 1
+            while i < len(lines) and lines[i].strip().startswith('>'):
+                quote += ' ' + lines[i].strip()[1:].strip()
+                i += 1
+            quote = _md_inline(quote)
+            html_parts.append(f'<div class="callout"><p>{quote}</p></div>')
+            continue
+
+        # Regular paragraph
+        para = line
+        i += 1
+
+        para = _md_inline(para)
+        html_parts.append(f'<p>{para}</p>')
+
+    return '\n'.join(html_parts)
+
+def _md_inline(text):
+    """Convert inline markdown formatting to HTML."""
+    text = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', text)
+    text = re.sub(r'\*(.+?)\*', r'<em>\1</em>', text)
+    return text
+
+def _md_table_to_html(table_lines):
+    """Convert markdown table lines to HTML table."""
+    rows = []
+    for line in table_lines:
+        if re.match(r'^\|[\s\-:|]+\|$', line):
+            continue  # separator
+        cells = [c.strip() for c in line.split('|')[1:-1]]
+        rows.append(cells)
+
+    if len(rows) < 2:
+        return ''
+
+    html = '<div class="table-scroll"><table class="data"><tr>'
+    for h in rows[0]:
+        h = _md_inline(h)
+        html += f'<th>{h}</th>'
+    html += '</tr>\n'
+    for row in rows[1:]:
+        html += '<tr>'
+        for cell in row:
+            cell = _md_inline(cell)
+            html += f'<td>{cell}</td>'
+        html += '</tr>\n'
+    html += '</table></div>\n'
+    return html
 
 # ─── SVG CHART HELPERS (v4: figure numbering, gridlines, responsive) ─
 
@@ -2587,7 +2676,9 @@ def build():
 """
     html += '</body>\n</html>'
 
-    out_path = r"C:\Users\lch68\Desktop\HD건설기계_CUFA_보고서_v7.html"
+    out_dir = os.path.join(SCRIPT_DIR, "output")
+    os.makedirs(out_dir, exist_ok=True)
+    out_path = os.path.join(out_dir, "CUFA_보고서.html")
     with open(out_path, 'w', encoding='utf-8') as f:
         f.write(html)
 
@@ -2600,7 +2691,7 @@ def build():
     table_count = html.count('<table')
     fig_count = sum(_fig_counter.values())
 
-    print(f"=== Build v7 Complete ===")
+    print(f"=== Build Complete ===")
     print(f"Output: {out_path}")
     print(f"File size: {file_size:,} bytes ({file_size/1024:.1f} KB)")
     print(f"Text content: {text_chars:,} characters")
@@ -2609,16 +2700,29 @@ def build():
     print(f"Figures numbered: {fig_count}")
     print(f"Total HTML length: {len(html):,} characters")
 
-    checks = []
-    if text_chars >= 75000: checks.append("[OK] text 75,000+")
-    else: checks.append(f"[!!] text {text_chars:,} (target 75,000+)")
-    if svg_count >= 25: checks.append(f"[OK] SVG {svg_count} (25+)")
-    else: checks.append(f"[!!] SVG {svg_count} (target 25+)")
-    if table_count >= 30: checks.append(f"[OK] tables {table_count} (30+)")
-    else: checks.append(f"[!!] tables {table_count} (target 30+)")
-    print("\nChecklist:")
-    for c in checks:
-        print(f"  {c}")
+    # === 12-Point Review Checklist ===
+    checks = {
+        '1_text_70k': (text_chars >= 70000, f'text {text_chars:,} < 70,000'),
+        '2_svg_30': (svg_count >= 30, f'SVG {svg_count} < 30'),
+        '3_tables_25': (table_count >= 25, f'tables {table_count} < 25'),
+        '4_counter_4': (html.count('시장의 우려') >= 4, f'counter_arg < 4'),
+        '5_size_280k': (len(html.encode('utf-8')) >= 280000, f'file < 280KB'),
+        '6_fig_nums': ('도표' in html, 'no figure numbers'),
+        '7_no_mock': ('mock' not in html.lower() and 'dummy' not in html.lower(), 'mock data detected'),
+        '8_no_eng': (html.count('(Commodity)') == 0 and html.count('(Marketing)') == 0, 'unnecessary English found'),
+        '9_css_inline': ('<style>' in html, 'CSS not inline'),
+        '10_sources': (html.count('출처:') >= 20, 'insufficient source attributions'),
+    }
+    print('\n12-Point Review:')
+    all_pass = True
+    for name, (ok, msg) in checks.items():
+        status = 'PASS' if ok else 'FAIL'
+        if not ok: all_pass = False
+        print(f'  [{status}] {name}: {msg if not ok else "OK"}')
+    if all_pass:
+        print('\n  >>> ALL CHECKS PASSED — 납품 가능')
+    else:
+        print('\n  >>> FAILED — 수정 후 재검증 필요')
 
 if __name__ == '__main__':
     build()

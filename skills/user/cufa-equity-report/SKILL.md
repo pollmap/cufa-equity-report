@@ -721,6 +721,7 @@ def draw_pbr_band(fig, ax, t, dates, prices, bps_series, multiples, **kw):
 - 데이터 밀도를 떨어뜨리는 여백 남용 금지
 - border-radius 최대 4px (둥글둥글 금지)
 - 외부 CDN/라이브러리 일체 금지 (순수 HTML/CSS/JS만)
+- 외부 CSS 파일 참조 금지 — CSS는 반드시 `gen_css()` 함수에서 `<style>` 태그 안에 인라인 삽입. 별도 .css 파일 생성 절대 금지. 다른 Python 파일에서 CSS를 추출하는 방식도 금지 (빌드 재현성 파괴)
 
 ## 7. 찬희님 선호 (최우선 준수)
 
@@ -732,7 +733,13 @@ def draw_pbr_band(fig, ax, t, dates, prices, bps_series, multiples, **kw):
 - **단정적 서술체**: "~이다" (○)
 - **Bold 도입문 + 밑줄 결론문** 패턴 엄수
 - **한국어 100%**
-- **불필요한 영어 번역 금지**: 한국어 단어 뒤에 괄호로 영어 번역을 붙이지 말 것. "면(noodle block)", "바이럴(Viral Marketing)", "커모디티(Commodity)" 등 한국어로 충분히 통용되는 단어는 영어 삭제. 금융 전문 약어(OPM, PER, WACC 등)와 고유명사(Walmart, TikTok 등)만 영어 허용. 판단 기준: "이 영어 없이도 한국어 독자가 100% 이해하는가?" → Yes면 영어 제거.
+- **불필요한 영어/외래어 금지 (상세)**:
+  - 금지 패턴: 한국어(English) 병기 — "면(noodle block)", "바이럴(Viral Marketing)", "환산 효과(Translation Effect)"
+  - 금지 외래어: 커모디티→원자재, 포트폴리오→투자 조합 (한국어 대체어가 자연스러운 경우)
+  - 허용: 금융 전문 약어 — OPM, PER, WACC, DCF, EPS, ROE, ROIC, EBITDA, CAPA, ASP, BPS, FCF
+  - 허용: 고유명사 — Walmart, TikTok, Bloomberg, MSCI, Samsung
+  - 허용: 정착된 외래어 — 브랜드, 마케팅, 프리미엄, 블랙스완 (한국어에 완전 정착)
+  - 판단 기준: "이 영어/외래어 없이 자연스러운 한국어 대체어가 있는가?" → Yes면 한국어 사용
 
 ## 8. 89점+ 자동 달성 빌드 시스템 (v8 아키텍처)
 
@@ -742,16 +749,38 @@ def draw_pbr_band(fig, ax, t, dates, prices, bps_series, multiples, **kw):
 **해결**: 마크다운으로 먼저 75,000자+ 본문을 작성 → 검증 → HTML 변환.
 
 ```
-Phase 0: Nexus MCP 데이터 수집 (기본) or 재무데이터 Excel
-  → dart_financial_statements: IS/BS/CF 5개년 (CFS 연결 필수!)
-  → stocks_market_overview / pykrx: 주가, PER/PBR 밴드
-  → ecos_search: 금리, 환율, GDP 등 매크로 변수
-  → MCP 실패 시 pykrx/yfinance 직접 호출, 그래도 안 되면 찬희님 수동
-  → {종목명}_재무데이터.xlsx 있으면 읽어서 Appendix 자동 생성
+Phase 0: 데이터 수집 (Nexus MCP 131도구 활용)
+  → Phase 0a: 기본 재무 (dart_financial_statements, stocks_quote, stocks_history)
+    → dart_financial_statements: IS/BS/CF 5개년 (CFS 연결 필수!)
+    → stocks_quote: 현재가/시총/PER/PBR
+    → stocks_history: 12개월 주가 추이
+    → dart_financial_ratios: ROE/OPM/부채비율
+    → dart_major_shareholders: 지배구조
+    → ecos_search: 금리, 환율, GDP 등 매크로 변수
+    → {종목명}_재무데이터.xlsx 있으면 읽어서 Appendix 자동 생성
+  → Phase 0b: 1차 데이터 (news_search 30건, news_market_sentiment, WebSearch/WebFetch)
+    → news_search(query="종목명 핵심제품", count=30) → 뉴스 30건 수집
+    → news_market_sentiment(keyword="종목명") → 감성 분석
+    → gdelt_search(query="Company English name") → 글로벌 영어 뉴스
+    → WebSearch("종목명 제품명 Amazon reviews rating") → 해외 소비자 데이터
+    → WebFetch(관련 산업 리포트 URL) → 시장 규모/성장률/트렌드
+    → WebSearch("Google Trends 제품명 키워드 global interest") → 검색 트렌드
+  → Phase 0c: 산업 데이터 (trade_korea_exports, kosis_get_table, gdelt_search)
+    → trade_korea_exports(hs_code="해당 HS코드") → 관세청 수출 데이터
+    → kosis_get_table → 산업별 공식 통계
+  → 결과: data/primary_data/collected_data.md에 저장
+  → MCP에서 못 가져온 건 빈칸 → 찬희님 수동 입력
+  → mock 데이터 절대 금지
   ↓
 Phase 1: 마크다운 본문 작성 (75,000자+ 목표)
-  → {종목명}_CUFA_본문.md (순수 텍스트+테이블)
-  → 섹션별 최소 자수 검증
+  → 4개 에이전트 병렬 작성 (삼양식품 v3 검증 패턴):
+    Agent A: data/md_sec1_3.md  (기업개요 + 산업분석 + IP①)  ~20,000자+
+    Agent B: data/md_sec4_6.md  (IP② + IP③ + 재무분석)       ~15,000자+
+    Agent C: data/md_sec7_9.md  (Peer비교 + 실적추정 + 밸류에이션) ~15,000자+
+    Agent D: data/md_sec10_11.md (리스크 + Appendix)           ~12,000자+
+  → 각 에이전트 완료 즉시 글자수 검증 (python3 -c "len(open(...).read())")
+  → 4파일 합산 62,000자+ 미달 시 가장 짧은 파일부터 보강
+  → {종목명}_CUFA_본문.md 합본 (선택)
   ↓
 Phase 2: HTML 변환 (build_template.py 기반)
   → 마크다운 본문을 sidebar_wrap()에 삽입
@@ -763,7 +792,14 @@ Phase 3: Evaluator 검증 (자동)
   → 89점 체크리스트 전항목 검증
   → 미달 시 자동 보강 → 재검증
   ↓
-Output: {종목명}_CUFA_보고서.html (250KB+, 75K자+, SVG 28+, 테이블 25+)
+Phase 4: 12-Point Review (납품 전 필수 검증)
+  → 12개 항목 전부 통과해야 납품 가능
+  1. 텍스트 70,000자+  2. SVG 30개+  3. 테이블 25개+  4. counter_arg 4건+
+  5. 파일 280KB+  6. 도표번호 연속  7. 목업 데이터 없음  8. 불필요 영어/외래어 없음
+  9. CSS 인라인  10. __file__ 기반 경로  11. Bold/밑줄 패턴  12. 출처 전수
+  → 1개라도 미달 시 수정 후 재검증
+  ↓
+Output: {종목명}_CUFA_보고서.html (280KB+, 70K자+, SVG 30+, 테이블 25+, counter_arg 4+)
 ```
 
 ### 8-0a. 마크다운 본문 작성 가이드 (Phase 1)
@@ -855,7 +891,24 @@ Output: {종목명}_CUFA_보고서.html (250KB+, 75K자+, SVG 28+, 테이블 25+
 
 **합계: 58,000자+ (마크다운 본문만). HTML 변환 시 차트 해설·callout·expand 추가로 75,000자+ 달성.**
 
-### 8-0b. "아무것도 모르는 사람도 이해하게" 쓰는 법
+### 8-0b. 4-File Markdown Split 규격 (v3 삼양식품 검증)
+
+**파일 명명**: `data/md_sec{시작}_{끝}.md`
+
+| 파일 | 섹션 | 최소 자수 | 내용 |
+|------|------|----------|------|
+| md_sec1_3.md | 1~3 | 20,000자 | 기업개요(8K) + 산업분석(8K) + IP①(5K) |
+| md_sec4_6.md | 4~6 | 15,000자 | IP②(5K) + IP③(4K) + 재무분석(6K) |
+| md_sec7_9.md | 7~9 | 15,000자 | Peer(4K) + 실적추정(6K) + 밸류에이션(5K) |
+| md_sec10_11.md | 10~11 | 12,000자 | 리스크(4K) + Appendix(3K+테이블) |
+
+**구조 규칙**:
+- 각 파일은 `## N. {섹션제목}` 헤더로 시작
+- 마크다운 문법: `**Bold**`, `__밑줄__`, `| 테이블 |`, `> 인용(counter_arg용)`
+- 에이전트 프롬프트에 반드시 재무데이터 테이블 포함 (MCP에서 수집한 CFS 데이터)
+- 에이전트 완료 후 즉시 글자수 검증 → 미달 시 재작성 지시
+
+### 8-0c. "아무것도 모르는 사람도 이해하게" 쓰는 법
 
 SMIC S-Oil 보고서가 89점인 핵심 이유: **정유업을 모르는 사람도 읽고 투자 판단을 내릴 수 있다.**
 
@@ -1799,21 +1852,28 @@ eval_agent = Agent(prompt="생성된 HTML 심사, 85점 이상까지 반복...")
 fix_agent = Agent(prompt="Evaluator 지적사항 수정...")
 ```
 
-## 15. 빌드 템플릿 (build_template.py)
+## 15. 빌드 템플릿 (build_template.py → v3 Markdown-First 패턴)
 
-`~/.claude/skills/user/cufa-equity-report/build_template.py` (2,403줄)
+`~/.claude/skills/user/cufa-equity-report/build_template.py`
+
+**v3 아키텍처** (삼양식품에서 검증):
+- `SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))` 기반 경로 (하드코딩 금지)
+- `DATA_DIR = os.path.join(SCRIPT_DIR, "data")` 에서 마크다운 4개 파일 읽기
+- `read_md(filename)` → `md_to_html()` → `sidebar_wrap()` 파이프라인
+- CSS는 `gen_css()` 함수에서 인라인 생성 (외부 파일 참조 금지)
+- 출력: `os.path.join(SCRIPT_DIR, "output", "{종목명}_CUFA_보고서.html")`
 
 종목 교체 시 수정 포인트:
-1. `gen_cover()` — 종목명, IS 데이터, 사이드바
-2. `gen_toc()` — 섹션 제목
-3. `gen_key_charts()` — 핵심 수치 4개
-4. `gen_glossary()` — 산업 용어
-5. `gen_section1~11()` — 본문 전체
-6. Sticky bar — 종목명/목표가/투자의견
-7. Float TOC — 섹션 목록
-8. `build()` output 경로
+1. `data/md_sec1_3.md` ~ `data/md_sec10_11.md` — 본문 전체 (에이전트가 작성)
+2. `gen_cover()` — 종목명, IS 데이터, 사이드바 메트릭스
+3. `gen_toc()` — 섹션 제목 (투자포인트 내용에 따라)
+4. `gen_key_charts()` — 핵심 수치 4개
+5. `gen_glossary()` — 산업 용어
+6. SVG 차트 데이터 — 각 gen_sectionN()의 차트 파라미터
+7. Sticky bar — 종목명/목표가/투자의견
+8. Float TOC — 섹션 목록
 
-헬퍼 함수(svg_*, table, counter_arg, add_source, CSS, JS)는 **수정 불필요** — 그대로 재사용.
+헬퍼 함수(svg_*, table, counter_arg, add_source, read_md, md_to_html, gen_css, JS)는 **수정 불필요** — 그대로 재사용.
 
 ## 16. 디자인 안티패턴 금지 (바이브코딩 교훈)
 
@@ -1855,10 +1915,13 @@ claude mcp add nexus-finance --transport http http://62.171.141.206/mcp
 
 **빌드 파이프라인에 통합:**
 ```
-Phase 0: Data Collection (Nexus MCP)
-  → DART 재무제표 → P×Q 기초 데이터
-  → pykrx 주가 → PER/PBR 밴드
-  → ECOS 매크로 → 산업 분석 배경
+Phase 0: 데이터 수집 (Nexus MCP 131도구 활용)
+  → Phase 0a: 기본 재무 (dart_financial_statements, stocks_quote, stocks_history)
+  → Phase 0b: 1차 데이터 (news_search 30건, news_market_sentiment, WebSearch/WebFetch)
+  → Phase 0c: 산업 데이터 (trade_korea_exports, kosis_get_table, gdelt_search)
+  → 결과: data/primary_data/collected_data.md에 저장
+  → MCP에서 못 가져온 건 빈칸 → 찬희님 수동 입력
+  → mock 데이터 절대 금지
 Phase 1: Plan → Phase 2: Build → Phase 3: Evaluate
 ```
 
@@ -2434,3 +2497,240 @@ else:
 - 주요 플레이어 비교표: TOP 10 기업 × 5~6개 지표
 - 정책/규제 매핑: 국가별 규제 현황 테이블
 - 투자 전략 명시: "어떤 밸류체인 포지션에 투자해야 하는가" 결론
+
+## 22. v4 자동 리서치 파이프라인 (삼양식품에서 검증)
+
+삼양식품 v4 빌드에서 검증된 완전 자동화 워크플로우. 어떤 종목이든 이 파이프라인을 따르면 10차원 전 항목 18점+ 달성 가능.
+
+### 22-1. Phase 0: MCP 데이터 수집 (자동화)
+
+```
+Phase 0a: 기본 재무 데이터 (Nexus MCP)
+  1. dart_search_company(keyword="종목명") → 종목코드 확인
+  2. dart_financial_statements(stock_code, year) × 3~5년 → CFS IS/BS 추출
+  3. dart_financial_ratios(stock_code) → ROE/OPM/부채비율
+  4. stocks_quote(stock_code) → 현재가/시총/PER/PBR
+  5. stocks_history(stock_code, 12개월) → 주가 추이
+  6. dart_major_shareholders(stock_code) → 지배구조
+
+Phase 0b: 1차 데이터 수집 (v4 핵심 차별화)
+  7. news_search(query="종목명 핵심제품", count=30) → 뉴스 30건 수집
+     → 핵심 숫자 추출: 매출/수출/점유율/신규 투자 등
+  8. news_market_sentiment(keyword="종목명") → 감성 분석
+  9. gdelt_search(query="Company English name", lang="english") → 글로벌 영어 뉴스
+  10. trade_korea_exports(hs_code="해당 HS코드") → 관세청 수출 데이터
+  11. WebSearch("종목명 제품명 Amazon reviews rating 2026") → 해외 소비자 데이터
+  12. WebFetch(관련 산업 리포트 URL) → 시장 규모/성장률/트렌드
+  13. WebSearch("Google Trends 제품명 키워드 global interest") → 검색 트렌드
+
+  → 수집 결과를 data/primary_data/collected_data.md에 저장
+  → "출처: {매체명}, {날짜}" 형태로 모든 데이터에 출처 태깅
+```
+
+### 22-2. Phase 1: 마크다운 4-File 병렬 작성
+
+```
+4개 에이전트 동시 발사:
+  Agent A: data/md_sec1_3.md  → 기업개요(8K자) + 산업분석(8K자) + IP①(5K자) = 21K자+
+  Agent B: data/md_sec4_6.md  → IP②(5K자) + IP③(4K자) + 재무분석(6K자) = 15K자+
+  Agent C: data/md_sec7_9.md  → Peer(4K자) + 실적추정(6K자) + 밸류에이션(5K자) = 15K자+
+  Agent D: data/md_sec10_11.md → 리스크(4K자) + Appendix(3K자+테이블) = 12K자+
+
+에이전트 프롬프트 필수 포함 사항:
+  1. 재무데이터 테이블 (Phase 0에서 수집한 CFS 데이터)
+  2. 1차 데이터 핵심 포인트 (collected_data.md에서 추출)
+  3. 섹션별 최소 자수 + 필수 구성요소 체크리스트
+  4. 서술 규칙: Bold 도입문, 밑줄 결론, 인라인 출처, 불필요 영어 금지
+  5. counter_arg 위치 (IP마다 1건 필수)
+  6. 독자적 분석 프레임 1개 (종목마다 고유 지표 개발)
+```
+
+### 22-3. 인라인 출처 시스템 (30건+ 필수)
+
+```
+모든 핵심 숫자에 인라인 출처:
+  "매출 2조 3,518억원(매일경제, 2026.03)"
+  "OPM 22.3%(DART CFS, 2025)"
+  "글로벌 라면 시장 $55.68B(accio.com, 2026)"
+
+출처 카테고리:
+  - DART CFS: 재무제표 수치
+  - 관세청: 수출입 통계
+  - KOSIS: 한국 통계
+  - {매체명, 날짜}: 뉴스/기사
+  - {사이트명}: 웹 크롤링 데이터
+  - CUFA 추정: 자체 추정치 (반드시 추정 근거 1문장 병기)
+
+검증 규칙:
+  - build 함수에서 "(출처:" 또는 "(DART" 또는 "(관세청" 등 출처 패턴 30개+ 체크
+  - 미달 시 경고 출력
+```
+
+### 22-4. 1차 데이터 Appendix 표준 (A-11)
+
+```
+Appendix A-11: 1차 데이터 수집 결과
+
+필수 하위 테이블:
+  A-11-1: 뉴스 수집 요약 (날짜/제목/핵심 데이터)
+  A-11-2: 감성 분석 결과 (긍정/부정/중립/감성비)
+  A-11-3: 해외 소비자 데이터 (아마존/구글 트렌드)
+  A-11-4: 수출입 통계 (관세청/KOSIS)
+  A-11-5: 수집 방법론 명시 ("Nexus Finance MCP news_search + WebFetch 크롤링")
+
+수집일 명시, 데이터 건수 명시 ("뉴스 30건, 2026.01~03")
+```
+
+### 22-5. 독자적 분석 프레임 개발 가이드
+
+```
+매 보고서마다 1개 이상의 종목 고유 지표 개발:
+
+삼양식품 사례: BPR (불닭 침투율) = 국가별 인구 1인당 불닭 소비량
+  - 공식: 해당국 불닭 매출 ÷ ASP ÷ 인구수
+  - 시계열: 2024→2025 추이
+  - S-커브: "BPR 1.0 = 변곡점" 경험적 규칙
+  - SVG: BPR 국가별 히트맵 + 시계열 라인
+
+HD건설기계 사례: SRR (시너지 실현률) = 실현 시너지 / 발표 시너지 × 100
+  - 분기별 추적
+
+개발 절차:
+  1. 종목의 핵심 투자 논리 식별
+  2. 이를 정량화할 수 있는 지표 설계
+  3. 데이터 소스 확보 (MCP/크롤링)
+  4. 시계열 구축 (2~3년)
+  5. 임계점/규칙 도출 ("X 이상이면 Y")
+  6. SVG 시각화 + Appendix 테이블
+```
+
+### 22-6. 캐치프레이즈 표준
+
+```
+SMIC 패턴: 임팩트 있는 한 줄 (설명적 X, 위트 O)
+  ✗ "불닭의 글로벌 패권, K-푸드 대표 브랜드가 만드는 구조적 성장 스토리"
+  ✓ "타오르라, 불닭"
+  ✓ "매운맛이 세계를 삼키다"
+
+규칙:
+  - 최대 10자 이내 (한국어 기준)
+  - 종목/산업의 핵심 키워드 포함
+  - 말장난/언어유희 환영 (SMIC: "파마리, 오르리", "애니야, 밸류가 짜다")
+  - 보고서 커버 tagline에 배치
+```
+
+### 22-7. 10차원 품질 체크리스트 (전 항목 18점+ 기준)
+
+```
+[서술 깊이 18+]
+□ 인과 4단 체인 3개+ (주장→근거→검증→시사점)
+□ 핵심 주장 5개+ 출처 명시
+□ 1차 데이터로 최소 1개 주장 직접 검증
+
+[논리 구조 18+]
+□ counter_arg 7건+ (IP마다 2건)
+□ 독자적 프레임 1개+
+□ "Why X? Why not Y?" 밸류에이션 근거
+
+[산업 기초 18+]
+□ 비전문가 온보딩 2,000자+ (제조공정/수익모델/밸류체인)
+□ 전문용어 첫 등장 시 정의
+□ 산업 TOP 10 기업 테이블
+
+[데이터 밀도 18+]
+□ 인라인 출처 30건+
+□ 스케일 비교 5건+ ("매출 X조 = GDP의 Y%")
+□ 모든 도표 하단에 출처
+
+[매출 추정 18+]
+□ P×Q 제품별 4개+ 카테고리
+□ ASP 분해 (MIX/가격/환율)
+□ 원가 8항목+ Bottom-up
+□ 분기별 추정 테이블
+
+[밸류에이션 18+]
+□ 2개+ 방법론 크로스체크
+□ WACC 파라미터 분해 (Rf/β/ERP/Ke/Kd)
+□ Football Field + DCF 민감도
+□ Implied PER Sanity Check
+
+[1차 데이터 18+]
+□ MCP 뉴스 30건+ 수집
+□ 감성 분석 (news_market_sentiment)
+□ 해외 웹 데이터 1건+ (아마존/구글트렌드)
+□ 관세청/KOSIS 공식 통계 1건+
+□ Appendix A-11에 전체 수록 + 방법론 명시
+
+[독자적 프레임 18+]
+□ 고유 지표 1개 (BPR, SRR 등)
+□ 시계열 2개년+
+□ 임계점/규칙 1개+
+□ SVG 시각화
+
+[시각화 18+]
+□ SVG 32개+
+□ 인터랙티브 (expand, tooltip, sticky, progress)
+□ 반응형 4단계 (1400/1024/768/480px)
+□ MLA 밸류체인 + DSA 아키텍처
+
+[완성도 18+]
+□ 캐치프레이즈 10자 이내 임팩트
+□ 도표 캡션 100% 통일 ("도표 X-Y. 제목 | 출처")
+□ Bold 도입문 + 밑줄 결론 전 섹션
+□ 불필요 영어/외래어 0건
+```
+
+### 22-8. 전체 파이프라인 실행 순서
+
+```
+0. MCP 데이터 수집 (병렬, ~5분)
+   → dart_financial_statements × 3~5년
+   → stocks_quote + stocks_history
+   → news_search 30건 + news_market_sentiment
+   → trade_korea_exports (해당 HS코드)
+   → WebSearch + WebFetch (아마존/트렌드/산업 리포트)
+   → 결과: data/primary_data/collected_data.md
+
+1. 플랜 + 찬희님 승인 (~3분)
+   → IP 3개 + 독자적 프레임 + 목표주가 + Peer 그룹
+
+2. 마크다운 4-File 병렬 작성 (~10분)
+   → 4 에이전트 동시 발사
+   → 각 에이전트 완료 즉시 글자수 검증
+   → 합계 62K자+ 확인
+
+3. 빌드 + 검증 (~3분)
+   → build_v3.py로 HTML 생성
+   → 12-Point Review + 10차원 체크리스트
+
+4. 1차 데이터 삽입 + 리빌드 (~5분)
+   → collected_data.md에서 핵심 데이터 추출
+   → 마크다운에 인라인 출처와 함께 삽입
+   → Appendix A-11 추가
+   → 리빌드
+
+5. 불필요 영어 제거 (~2분)
+   → grep으로 불필요 영어 패턴 검색
+   → 자동 치환 또는 수동 수정
+
+6. 최종 12-Point Review (~2분)
+   → 전 항목 PASS 확인
+   → 10차원 18점+ 체크리스트 확인
+
+총 소요: ~30분 (대부분 에이전트 병렬 작업)
+```
+
+### 22-9. 종목별 HS 코드 참조
+
+```
+보고서 종목에 따라 trade_korea_exports에 사용할 HS 코드:
+  - 라면/즉석면: 1902.30
+  - 반도체: 8541/8542
+  - 자동차: 8703
+  - 배터리: 8507
+  - 의약품: 3004
+  - 화장품: 3304
+  - 철강: 7208~7210
+  - 조선: 8901
+  (종목에 따라 관세청 HS 코드 조회 후 사용)
+```
