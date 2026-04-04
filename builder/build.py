@@ -795,6 +795,21 @@ def build_footer(cfg: ModuleType) -> str:
 #  메인 빌드 함수
 # ============================================================
 
+def _load_custom_sections(config_path: str) -> ModuleType | None:
+    """config.py 옆에 sections.py가 있으면 로드. 없으면 None."""
+    config_dir = Path(config_path).resolve().parent
+    sections_path = config_dir / "sections.py"
+    if not sections_path.exists():
+        return None
+    spec = importlib.util.spec_from_file_location("custom_sections", sections_path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    # components를 sections에서도 쓸 수 있도록 주입 (exec 후, C=None 덮어쓰기 대응)
+    mod.C = C
+    print(f"Custom sections loaded: {sections_path}")
+    return mod
+
+
 def build_report(config_path: str) -> str:
     """config.py를 읽어 완전한 HTML 보고서를 생성한다."""
     cfg = load_config(config_path)
@@ -808,21 +823,37 @@ def build_report(config_path: str) -> str:
     name = cfg.COMPANY_NAME
     code = cfg.TICKER
 
+    # 커스텀 sections 로더: config.py 옆에 sections.py가 있으면 사용
+    custom = _load_custom_sections(config_path)
+
+    # 자동 생성 fallback 맵
+    auto_builders = {
+        1: lambda: build_sec1_overview(cfg),
+        2: lambda: build_sec2_industry(cfg),
+        3: lambda: build_sec_ip(cfg, 0),
+        4: lambda: build_sec_ip(cfg, 1),
+        5: lambda: build_sec_ip(cfg, 2),
+        6: lambda: build_sec6_financial(cfg),
+        7: lambda: build_sec7_peer(cfg),
+        8: lambda: build_sec8_estimates(cfg),
+        9: lambda: build_sec9_valuation(cfg),
+        10: lambda: build_sec10_risk(cfg),
+        11: lambda: build_sec11_appendix(cfg),
+    }
+
+    def _sec(num: int) -> str:
+        """커스텀 섹션이 있으면 우선, 없으면 자동 생성."""
+        func_name = f"gen_section{num}"
+        if custom and hasattr(custom, func_name):
+            return getattr(custom, func_name)()
+        return auto_builders[num]()
+
     # 각 섹션 빌드
     sections = [
         build_cover(cfg),
         build_toc(cfg),
-        build_sec1_overview(cfg),
-        build_sec2_industry(cfg),
-        build_sec_ip(cfg, 0),   # IP ①
-        build_sec_ip(cfg, 1),   # IP ②
-        build_sec_ip(cfg, 2),   # IP ③
-        build_sec6_financial(cfg),
-        build_sec7_peer(cfg),
-        build_sec8_estimates(cfg),
-        build_sec9_valuation(cfg),
-        build_sec10_risk(cfg),
-        build_sec11_appendix(cfg),
+        _sec(1), _sec(2), _sec(3), _sec(4), _sec(5),
+        _sec(6), _sec(7), _sec(8), _sec(9), _sec(10), _sec(11),
         build_footer(cfg),
     ]
 
