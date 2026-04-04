@@ -9,7 +9,6 @@ Usage:
 from __future__ import annotations
 
 import importlib.util
-import os
 import sys
 from pathlib import Path
 from types import ModuleType
@@ -413,21 +412,25 @@ def build_sec1_overview(cfg: ModuleType) -> str:
 {_esc(listing)}에 상장하였으며, 현재 시가총액은 {_fmt(cfg.MARKET_CAP)}억원이다.</p>
 """
 
-    # 제품 라인업 테이블
+    # 제품 라인업 테이블 — 헤더를 config의 PRODUCT_HEADERS에서 동적으로 결정
     prod_html = ""
     if products:
-        headers = ["제품명", "유형", "단수", "높이(m)", "탑재중량(kg)", "엔진", "상태"]
-        rows = []
-        for p in products:
-            rows.append([
-                p.get("name", ""),
-                p.get("type", ""),
-                str(p.get("stages", "")),
-                _fmt(p.get("height_m")) if p.get("height_m") else "-",
-                _fmt(p.get("payload_kg")) if p.get("payload_kg") else "-",
-                p.get("engine", "")[:30],
-                p.get("status", "")[:25],
-            ])
+        default_headers = ["제품명", "유형", "상태"]
+        prod_headers = getattr(cfg, "PRODUCT_HEADERS", None)
+        if prod_headers:
+            headers = prod_headers
+            rows = []
+            for p in products:
+                row = [p.get(h, "-") if isinstance(p.get(h), str) else str(p.get(h, "-")) for h in headers]
+                rows.append(row)
+        else:
+            # 자동 감지: products[0]의 키를 헤더로 사용
+            first = products[0]
+            headers = [k for k in first.keys() if k != "note"]
+            rows = []
+            for p in products:
+                row = [str(p.get(h, "-"))[:30] for h in headers]
+                rows.append(row)
         prod_html = C.table(headers, rows, sec=1, title="제품 라인업")
 
     # 대주주
@@ -466,19 +469,17 @@ def build_sec2_industry(cfg: ModuleType) -> str:
         ("한국 우주예산", f"{_fmt(industry.get('korea_space_budget_2026'))}억"),
     ]
 
+    ind_name = industry.get("name", "해당 산업")
+    tam = industry.get("tam", "N/A")
+    tam_cagr = industry.get("cagr", industry.get("slv_cagr", "N/A"))
+
     text = f"""
-<p><strong>소형발사체(SLV) 시장은 {industry.get('slv_market_2024', 0)}B에서 {industry.get('slv_market_2030', 0)}B으로
-CAGR {industry.get('slv_cagr', 0)}%의 고성장이 전망된다.</strong>
-LEO 소형위성이 {_fmt(industry.get('leo_satellites_2030'))}기를 넘어서면서
-전용 소형발사체 수요가 급증하고 있다.</p>
+<p><strong>{ind_name} 시장은 높은 성장세를 보이고 있다.</strong>
+TAM {tam}, CAGR {tam_cagr}%로 구조적 성장이 전망되며,
+동사는 이 시장의 핵심 참여자로 포지셔닝하고 있다.</p>
 
-<p><strong>한국 우주예산은 2026년 {_fmt(industry.get('korea_space_budget_2026'))}억원으로 처음 1조원을 돌파했다.</strong>
-전년 대비 {industry.get('korea_space_budget_yoy', 0)}% 증가로, 정부의 우주 산업 육성 의지가 뚜렷하다.
-동사는 한국 유일의 민간 소형발사체 기업으로, 이 예산의 직접 수혜자다.</p>
-
-<p><strong>다만 SpaceX Transporter가 소형위성 발사의 {industry.get('rideshare_market_share', 80)}%를 장악하고 있다.</strong>
-가격 경쟁에서 rideshare 대비 10배 이상 비싸지만, 전용 발사체는 특수궤도·신속발사·보안 니치에서 수요가 존재한다.
-서방 진영에서 실제로 운용 중인 소형발사체는 Electron과 Alpha 단 {industry.get('operating_western_slv', 2)}종뿐이다.</p>
+<p><strong>산업 내 경쟁 구도와 진입장벽이 동사의 포지셔닝을 결정짓는다.</strong>
+주요 경쟁자와의 기술·시장·규제 차별점을 분석하여 동사의 경쟁 우위를 평가한다.</p>
 """
 
     # 시장 규모 차트
@@ -596,8 +597,8 @@ def build_sec6_financial(cfg: ModuleType) -> str:
     text = f"""
 <p><strong>동사의 재무 구조는 전형적인 Pre-revenue 우주기업 패턴을 보인다.</strong>
 매출은 미미하나 R&D 투자가 매출의 수십 배에 달하며, 영업적자가 지속되고 있다.
-다만 현금 {_fmt(cash.get(years[-1]) if years else 0)}억원과 진행중인 유상증자 825억원으로
-최소 2027년까지의 운영자금은 확보될 전망이다.</p>
+현금 {_fmt(cash.get(years[-1]) if years else 0)}억원을 보유 중이며,
+향후 운영자금 확보 여부가 핵심 모니터링 포인트다.</p>
 """
 
     content = C.sidebar_wrap(sidebar_kv, text + metrics + tbl + charts)
@@ -634,9 +635,8 @@ def build_sec7_peer(cfg: ModuleType) -> str:
     chart = C.svg_hbar("PSR 비교", names, psrs, sec=7)
 
     text = f"""
-<p><strong>동사의 PSR은 Peer 대비 높은 수준이나, Pre-revenue 단계를 감안해야 한다.</strong>
-Rocket Lab은 84회 발사 실적과 Neutron 개발로 PSR 58배를 정당화하고 있으며,
-Firefly는 Alpha 7회 발사로 PSR 29배에 거래중이다.</p>
+<p><strong>동사의 밸류에이션 멀티플은 Peer 대비 높은 수준이나, 성장 단계 차이를 감안해야 한다.</strong>
+각 Peer의 사업 성숙도, 매출 규모, 기술 검증 수준에 따라 멀티플 격차가 정당화될 수 있다.</p>
 """
 
     content = C.sidebar_wrap(
@@ -676,9 +676,9 @@ def build_sec8_estimates(cfg: ModuleType) -> str:
         chart = ""
 
     text = f"""
-<p><strong>본서는 동사의 매출을 발사 횟수 × 발사 단가 기반 P×Q 모델로 추정한다.</strong>
-증권사 컨센서스 매출 {_fmt(consensus.get('revenue_2026E'))}억원(2026E)은
-6회 발사 성공을 전제하나, 본서는 보수적으로 2회 성공을 가정하였다.</p>
+<p><strong>본서는 동사의 매출을 P(가격) × Q(수량) 모델로 추정한다.</strong>
+증권사 컨센서스 매출 {_fmt(consensus.get('revenue_2026E'))}억원(2026E) 대비
+본서는 핵심 가정을 보수적으로 적용하여 독자적 추정치를 산출하였다.</p>
 """
 
     # 컨센서스 vs CUFA 비교
@@ -709,8 +709,9 @@ def build_sec9_valuation(cfg: ModuleType) -> str:
     ]
 
     text = f"""
-<p><strong>동사는 적자 기업으로 PER/PBR 밸류에이션이 적합하지 않으며, PSR(매출 기반)과 Peer 비교를 주요 방법론으로 사용한다.</strong>
-Pre-revenue 우주기업은 발사 성공률과 수주잔고가 밸류에이션의 핵심 드라이버다.</p>
+<p><strong>동사의 밸류에이션은 사업 특성에 적합한 방법론을 선택하여 적용한다.</strong>
+적자/흑자 여부, 자산 구조, Peer 비교 가능성을 종합적으로 고려하여
+PSR/PER/PBR/DCF 중 최적 방법론을 채택한다.</p>
 """
 
     # 시나리오 그리드

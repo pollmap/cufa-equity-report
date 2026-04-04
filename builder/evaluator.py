@@ -4,7 +4,6 @@ HARD_MIN + SMIC 문체 + 할루시네이션 탐지 + 섹션별 글자수 검증
 """
 import re
 import sys
-from typing import Optional
 
 
 # ── 섹션별 최소 글자수 ──────────────────────────────────────

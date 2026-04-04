@@ -5,6 +5,9 @@ __pycache__/
 config_secret.py
 output/*.html
 output/*.xlsx
+output/*.yaml
+output/*.json
+examples/**/*.html
 data/*.csv
 data/*.json
 node_modules/

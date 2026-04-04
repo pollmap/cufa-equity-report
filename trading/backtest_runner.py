@@ -12,12 +12,13 @@ Prerequisites:
 from __future__ import annotations
 
 import json
+import os
 import sys
 from pathlib import Path
 from urllib.error import URLError
 from urllib.request import Request, urlopen
 
-KIS_MCP_URL = "http://127.0.0.1:3846"
+KIS_MCP_URL = os.environ.get("KIS_MCP_URL", "http://127.0.0.1:3846")
 TIMEOUT_SEC = 60
 
 
