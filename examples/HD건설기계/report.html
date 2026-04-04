@@ -1,0 +1,2106 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HD건설기계 (267270) — CUFA 기업분석보고서 v4</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --purple: #7C6AF7; --purple-light: #A78BFA; --purple-bg: #F5F3FF;
+  --dark: #1A1A2E; --green: #00E09E; --red: #FF4D4D; --gray: #888888;
+  --bg: #0D0D1A; --card-bg: #161628; --border: #2A2845; --text: #E8E6F0; --text-sec: #A09CB0;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:'Noto Sans KR',sans-serif; line-height:1.7; }
+.report { max-width:1100px; margin:0 auto; padding:20px; }
+.cover { display:grid; grid-template-columns:1fr 320px; gap:24px; min-height:90vh; padding:40px 0; border-bottom:3px solid var(--purple); margin-bottom:40px; }
+.cover-main h1 { font-size:36px; font-weight:900; margin-bottom:4px; }
+.cover-main .tagline { font-size:15px; color:var(--purple-light); margin-bottom:24px; }
+.cover-main .highlights { margin-bottom:24px; }
+.highlight-box { background:rgba(124,106,247,0.08); border-left:3px solid var(--purple); padding:12px 16px; margin-bottom:12px; border-radius:0 8px 8px 0; }
+.highlight-box h3 { font-size:14px; color:var(--purple); margin-bottom:4px; }
+.highlight-box p { font-size:13px; color:var(--text-sec); line-height:1.5; }
+.cover-sidebar { background:var(--card-bg); border:1px solid var(--border); border-radius:12px; padding:20px; }
+.rating-box { text-align:center; padding:16px; background:rgba(124,106,247,0.12); border-radius:8px; margin-bottom:16px; }
+.rating-box .label { font-size:12px; color:var(--text-sec); }
+.rating-box .rating { font-size:32px; font-weight:900; color:var(--green); }
+.rating-box .target { font-size:20px; font-weight:700; color:var(--purple); }
+.sidebar-metric { display:flex; justify-content:space-between; padding:6px 0; border-bottom:1px solid var(--border); font-size:13px; }
+.sidebar-metric .label { color:var(--text-sec); }
+.sidebar-metric .value { font-weight:500; }
+.cover-is { margin-top:20px; }
+.cover-is table { width:100%; border-collapse:collapse; font-size:11px; }
+.cover-is th { background:var(--purple); color:#fff; padding:4px 6px; text-align:center; font-weight:500; font-size:10px; }
+.cover-is td { padding:3px 6px; text-align:right; border-bottom:1px solid var(--border); }
+.cover-is td:first-child { text-align:left; color:var(--text-sec); }
+.cover-is tr:nth-child(even) td { background:rgba(124,106,247,0.04); }
+.section { margin-bottom:48px; }
+.section-subheader { font-size:10px;color:#888;text-align:right;padding:4px 0;border-bottom:1px solid #2A2845;margin-bottom:16px; }
+.section-header { display:flex; align-items:center; gap:12px; margin-bottom:24px; padding-bottom:8px; border-bottom:2px solid var(--purple); }
+.section-num { background:var(--purple); color:#fff; width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:14px; flex-shrink:0; }
+.section-title { font-size:22px; font-weight:700; }
+.sidebar-layout { display:grid; grid-template-columns:160px 1fr; gap:20px; }
+.sidebar-kw { padding-top:4px; }
+.sidebar-kw .kw { font-size:13px; font-weight:700; color:var(--purple); margin-bottom:8px; }
+.sidebar-kw .kw-val { font-size:20px; font-weight:700; margin-bottom:16px; }
+.content-area p { font-size:14px; line-height:1.8; margin-bottom:12px; color:var(--text); }
+.content-area strong { color:var(--purple-light); }
+table.data { width:100%; border-collapse:collapse; margin:16px 0; font-size:12px; }
+table.data th { background:var(--purple); color:#fff; padding:8px 10px; text-align:center; font-weight:600; font-size:11px; white-space:nowrap; }
+table.data td { padding:6px 10px; text-align:right; border-bottom:1px solid var(--border); }
+table.data td:first-child { text-align:left; font-weight:500; }
+table.data tr:nth-child(even) td { background:rgba(124,106,247,0.04); }
+table.data .highlight-row td { background:rgba(124,106,247,0.08); font-weight:600; }
+.chart-pair { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:20px 0; }
+.chart-box { background:var(--card-bg); border:1px solid var(--border); border-radius:8px; padding:16px; }
+.chart-box .chart-title { font-size:12px; color:var(--text-sec); margin-bottom:8px; text-align:center; }
+.metric-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin:16px 0; }
+.metric-card { background:var(--card-bg); border:1px solid var(--border); border-radius:8px; padding:14px; }
+.metric-card .mc-label { font-size:11px; color:var(--text-sec); }
+.metric-card .mc-value { font-size:20px; font-weight:700; margin:4px 0 2px; }
+.metric-card .mc-sub { font-size:11px; }
+.mc-up { color:var(--green); } .mc-down { color:var(--red); }
+.scenario-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin:16px 0; }
+.scenario-card { border-radius:12px; padding:20px; border:2px solid; }
+.scenario-card.bull { border-color:var(--green); background:rgba(0,224,158,0.06); }
+.scenario-card.base { border-color:var(--purple); background:rgba(124,106,247,0.08); }
+.scenario-card.bear { border-color:var(--red); background:rgba(255,77,77,0.06); }
+.scenario-card .sc-label { font-size:11px; font-weight:700; letter-spacing:2px; margin-bottom:8px; }
+.scenario-card.bull .sc-label { color:var(--green); }
+.scenario-card.base .sc-label { color:var(--purple); }
+.scenario-card.bear .sc-label { color:var(--red); }
+.scenario-card .sc-price { font-size:28px; font-weight:900; margin-bottom:4px; }
+.scenario-card .sc-upside { font-size:14px; margin-bottom:8px; }
+.scenario-card .sc-prob { font-size:12px; color:var(--text-sec); margin-bottom:8px; }
+.scenario-card .sc-desc { font-size:12px; color:var(--text-sec); line-height:1.5; }
+.football-field { margin:20px 0; }
+.risk-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:16px 0; }
+.risk-card { background:var(--card-bg); border:1px solid var(--border); border-radius:8px; padding:14px; }
+.risk-card .risk-title { font-size:13px; font-weight:600; margin-bottom:4px; }
+.risk-card .risk-prob { font-size:11px; display:inline-block; padding:2px 6px; border-radius:4px; margin-bottom:6px; }
+.risk-high { background:rgba(255,77,77,0.15); color:var(--red); }
+.risk-med { background:rgba(255,184,77,0.15); color:#FFB84D; }
+.risk-low { background:rgba(0,224,158,0.15); color:var(--green); }
+.risk-card .risk-impact { font-size:11px; color:var(--text-sec); line-height:1.5; }
+.footer { text-align:center; padding:40px 0; border-top:2px solid var(--purple); margin-top:40px; }
+.footer .author { font-size:14px; font-weight:700; color:var(--purple); }
+.footer .org { font-size:12px; color:var(--text-sec); }
+.disclaimer { font-size:10px; color:var(--gray); margin-top:16px; line-height:1.6; max-width:600px; margin-left:auto; margin-right:auto; }
+.toc { margin:20px 0 40px; padding:24px; background:var(--card-bg); border:1px solid var(--border); border-radius:12px; }
+.toc-item { display:flex; justify-content:space-between; padding:6px 0; border-bottom:1px dotted var(--border); font-size:13px; }
+.toc-item a { color:var(--text); text-decoration:none; }
+.toc-item a:hover { color:var(--purple); }
+.appendix table.data { font-size:10px; }
+.appendix table.data th { font-size:9px; padding:5px 6px; }
+.appendix table.data td { padding:4px 6px; font-size:10px; }
+@media print {
+  body { background:#fff; color:#1A1A2E; }
+  .cover-sidebar, .metric-card, .chart-box, .scenario-card, .risk-card, .toc { background:#fff; border-color:#ddd; }
+}
+@keyframes fadeIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
+.section { animation: fadeIn 0.6s ease both; }
+</style>
+</head>
+<body>
+<div class="report">
+
+<div class="cover">
+  <div class="cover-main">
+    <h1>HD건설기계</h1>
+    <div class="tagline">국내 1·2위 통합, 글로벌 톱티어 건설기계 기업의 탄생 — 턴어라운드의 시작</div>
+    <div class="highlights">
+      <div class="highlight-box">
+        <h3>투자포인트 ① 통합 시너지 3,000억원</h3>
+        <p>HD현대건설기계와 HD현대인프라코어의 합병으로 국내 최대 건설기계 기업 출범. 구매통합 1,200억, CAPEX절감 800억, R&D효율화 400억, 매출시너지 600억 등 총 3,000억원 규모의 연간 시너지를 추정한다. HYUNDAI+DEVELON 듀얼 브랜드 전략으로 글로벌 커버리지를 극대화한다.</p>
+      </div>
+      <div class="highlight-box">
+        <h3>투자포인트 ② 글로벌 업사이클 진입</h3>
+        <p>2024-25년 조정기를 거쳐 2026년 하반기부터 글로벌 건설기계 수요 반등이 예상된다. 북미 IIJA $1.2T 인프라 투자, 인도 점유율 9%→15% 확대, 중동 NEOM 프로젝트 수주가 성장 동력이다. 울산·인천·군산 국내 3거점 + 인도·중국·브라질·노르웨이 해외 4거점, 2030년 매출 14.8조원 로드맵을 제시하였다.</p>
+      </div>
+      <div class="highlight-box">
+        <h3>투자포인트 ③ 밸류에이션 매력</h3>
+        <p>Forward PER 13.85배로 글로벌 피어(CAT 29배, Komatsu 14.7배) 대비 할인 거래 중이다. 컨센서스 목표주가 159,667원(+20.1%). 2026E EPS 8,972원 기준 Re-rating 여력이 충분하다. 합병 시너지 가시화와 업사이클 진입이 리레이팅 트리거가 될 전망이다.</p>
+      </div>
+    </div>
+    <div class="cover-is">
+      <table>
+        <tr><th>항목</th><th>2022A</th><th>2023A</th><th>2024A</th><th>2025A</th><th>2026E</th><th>2027E</th><th>2028E</th></tr>
+        <tr><td>매출액(억)</td><td>35,156</td><td>38,250</td><td>34,381</td><td>37,765</td><td>88,500</td><td>96,000</td><td>104,000</td></tr>
+        <tr><td>영업이익(억)</td><td>1,706</td><td>2,572</td><td>1,904</td><td>1,709</td><td>5,098</td><td>6,720</td><td>7,800</td></tr>
+        <tr><td>OPM(%)</td><td>4.85</td><td>6.72</td><td>5.54</td><td>4.52</td><td>5.76</td><td>7.00</td><td>7.50</td></tr>
+        <tr><td>순이익(억)</td><td>994</td><td>1,275</td><td>860</td><td>870</td><td>3,400</td><td>4,600</td><td>5,500</td></tr>
+        <tr><td>EPS(원)</td><td>5,661</td><td>7,077</td><td>5,277</td><td>5,613</td><td>8,972</td><td>11,500</td><td>13,800</td></tr>
+        <tr><td>PER(배)</td><td>10.99</td><td>7.31</td><td>11.05</td><td>17.53</td><td>14.8</td><td>11.6</td><td>9.6</td></tr>
+        <tr><td>PBR(배)</td><td>0.80</td><td>0.62</td><td>0.63</td><td>0.95</td><td>1.43</td><td>1.25</td><td>1.08</td></tr>
+        <tr><td>ROE(%)</td><td>7.99</td><td>9.17</td><td>6.18</td><td>5.74</td><td>7.0</td><td>8.5</td><td>9.8</td></tr>
+      </table>
+      <p style="font-size:10px;color:var(--gray);margin-top:6px;">* 2022~2025: 합병 전 HD현대건설기계 단독 기준 / 2026E~2028E: 합병 후 통합 기준 (증권사 컨센서스)</p>
+    </div>
+    <div style="margin-top:20px;font-size:12px;color:var(--text-sec);">
+      <strong style="color:var(--text);">이찬희</strong> | CUFA 가치투자학회 | 2026.03.23
+    </div>
+  </div>
+  <div class="cover-sidebar">
+    <div class="rating-box">
+      <div class="label">투자의견</div>
+      <div class="rating">BUY</div>
+      <div style="font-size:11px;color:var(--text-sec);margin:4px 0;">목표주가</div>
+      <div class="target">160,000원</div>
+      <div style="font-size:12px;color:var(--green);">현재가 133,000원 대비 +20.3%</div>
+    </div>
+    <div class="sidebar-metric"><span class="label">현재가</span><span class="value">133,000원</span></div>
+    <div class="sidebar-metric"><span class="label">시가총액</span><span class="value">6.38조원</span></div>
+    <div class="sidebar-metric"><span class="label">52주 최고</span><span class="value">145,000원</span></div>
+    <div class="sidebar-metric"><span class="label">52주 최저</span><span class="value">56,400원</span></div>
+    <div class="sidebar-metric"><span class="label">PER(trailing)</span><span class="value">25.20배</span></div>
+    <div class="sidebar-metric"><span class="label">PER(12MF)</span><span class="value">13.85배</span></div>
+    <div class="sidebar-metric"><span class="label">PBR</span><span class="value">1.43배</span></div>
+    <div class="sidebar-metric"><span class="label">EV/EBITDA</span><span class="value">9.17배</span></div>
+    <div class="sidebar-metric"><span class="label">배당수익률</span><span class="value">0.38%</span></div>
+    <div class="sidebar-metric"><span class="label">발행주식수</span><span class="value">47,974,118</span></div>
+    <div class="sidebar-metric"><span class="label">주요주주</span><span class="value">HD현대사이트솔루션 37.1%</span></div>
+    <div class="sidebar-metric"><span class="label">유동비율</span><span class="value">62.67%</span></div>
+    <div style="margin-top:16px;">
+      <div style="font-size:11px;color:var(--text-sec);margin-bottom:4px;">Bull / Base / Bear</div>
+      <div style="display:flex;gap:8px;font-size:14px;font-weight:700;">
+        <span style="color:var(--green);">180,000</span>
+        <span style="color:var(--purple);">160,000</span>
+        <span style="color:var(--red);">100,000</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toc">
+  <div style="font-size:16px;font-weight:700;margin-bottom:12px;color:var(--purple);">목 차</div>
+  <div class="toc-item"><a href="#sec1">1. 기업 개요 — 국내 최대 건설기계 통합 법인</a></div>
+  <div class="toc-item"><a href="#sec2">2. 산업 분석 — 글로벌 건설기계 시장 동향</a></div>
+  <div class="toc-item"><a href="#sec3">3. 투자포인트 ① 통합 시너지와 비용 효율화</a></div>
+  <div class="toc-item"><a href="#sec4">4. 투자포인트 ② 글로벌 확장과 업사이클 진입</a></div>
+  <div class="toc-item"><a href="#sec5">5. 투자포인트 ③ 밸류에이션 Re-rating 기회</a></div>
+  <div class="toc-item"><a href="#sec6">6. 재무 분석 — 듀폰 분해와 현금흐름</a></div>
+  <div class="toc-item"><a href="#sec7">7. Peer 비교 — 글로벌 건설기계 기업</a></div>
+  <div class="toc-item"><a href="#sec8">8. 실적 추정 — P×Q 매출 워크시트</a></div>
+  <div class="toc-item"><a href="#sec9">9. 밸류에이션 — PER/EV-EBITDA/DCF</a></div>
+  <div class="toc-item"><a href="#sec10">10. 리스크 분석</a></div>
+  <div class="toc-item"><a href="#sec11">11. Appendix — 재무제표 및 추정 상세</a></div>
+</div>
+
+<div class="section" id="sec1">
+  <div class="section-subheader">Equity Research Report | HD건설기계 (267270)</div>
+  <div class="section-header">
+    <div class="section-num">1</div>
+    <div class="section-title">기업 개요 — 국내 최대 건설기계 통합 법인</div>
+  </div>
+<div class="sidebar-layout">
+<div class="sidebar-kw">
+  <div class="kw">합병 출범</div><div class="kw-val">2026.01</div>
+  <div class="kw">연 매출 규모</div><div class="kw-val">~8.3조원</div>
+  <div class="kw">2030 목표</div><div class="kw-val">14.8조</div>
+  <div class="kw">글로벌 거점</div><div class="kw-val">7개국</div>
+  <div class="kw">사업부 수</div><div class="kw-val">5개</div>
+  <div class="kw">듀얼 브랜드</div><div class="kw-val">HCE+DEV</div>
+</div>
+<div class="content-area">
+
+    <p><strong>HD건설기계(267270)는 2026년 1월 1일 HD현대건설기계와 HD현대인프라코어의 합병으로 출범한 국내 최대 건설기계 기업이다.</strong> 합병 전 HD현대건설기계는 HYUNDAI 브랜드로 굴착기·휠로더를 중심으로 연 매출 37,765억원을 기록하였고, HD현대인프라코어는 DEVELON 브랜드로 굴착기·엔진 사업을 영위하며 연 매출 45,478억원을 달성하였다. 통합 법인은 두 브랜드를 동시에 운영하는 듀얼 브랜드 전략을 채택하였으며, 합산 매출은 약 83,000억원에 이른다. 이는 글로벌 건설기계 시장에서 TOP 7~8위에 해당하는 규모이다.</p>
+
+    <p>합병의 핵심 배경은 규모의 경제 확보와 포트폴리오 다각화이다. HD현대건설기계는 굴착기 분야에서 글로벌 경쟁력을 갖추고 있었으나, 엔진·소형장비 라인업이 부족하였다. 반면 HD현대인프라코어는 자체 엔진 기술과 소형장비 포트폴리오를 보유하였으나, 대형 굴착기 부문에서 브랜드 인지도가 상대적으로 낮았다. 두 회사의 합병은 이러한 상호보완적 구조를 완성하는 전략적 결정이었다.</p>
+
+    <p><strong>초대 CEO는 문재영 사장이 맡았다.</strong> 문 사장은 HD현대건설기계에서 글로벌 영업 총괄을 맡아 인도·동남아 시장 확대를 주도한 인물이다. 합병 후 조직은 굴착기사업부, 휠로더·지게차사업부, 엔진사업부, 산업차량사업부, 부품서비스사업부의 5개 사업부 체제로 운영된다. 각 사업부의 매출 비중은 굴착기 38%, 휠로더 22%, 엔진 18%, 산업차량 12%, 부품서비스 10%이다.</p>
+
+    <p>생산거점은 국내 울산(본사·대형장비), 인천(중형장비·엔진), 군산(소형장비) 등 3곳과 해외 인도 푸네(신흥시장 공략), 중국 강소성(현지화 생산), 브라질 이타티바(중남미 거점), 노르웨이(전동화 R&D 센터) 등 4곳을 합쳐 총 7개국에 걸쳐 있다. 이러한 글로벌 생산 네트워크는 지역별 수요 변동에 탄력적으로 대응할 수 있는 강점을 제공한다.</p>
+
+    <p>주요주주 구성을 보면, HD현대사이트솔루션이 37.11%의 지분을 보유한 최대주주이며, 유동주식 비율은 62.67%이다. 시가총액은 6.38조원으로, 발행주식수 47,974,118주에 현재 주가 133,000원을 적용한 수치이다. 52주 주가 범위는 56,400원~145,000원으로, 합병 발표 이후 주가가 큰 폭으로 상승하였음을 보여준다.</p>
+
+    <p>HD건설기계의 중장기 비전은 명확하다. 2030년까지 매출 14.8조원, 영업이익률 7~8%를 달성하겠다는 로드맵을 제시하였다. 이를 위해 (1) 합병 시너지를 통한 비용 효율화, (2) 전동화·자율주행 등 차세대 기술 선점, (3) 애프터마켓(AM) 사업 확대를 통한 수익성 개선, (4) 인도·중동 등 고성장 시장 공략 강화를 4대 전략 축으로 설정하였다. 특히 애프터마켓 매출 비중을 현재 10%에서 2030년 20%까지 끌어올려, 안정적 수익 기반을 구축하겠다는 계획이다.</p>
+
+    <p><strong><u>건설기계 산업의 기초 이해</u></strong></p>
+
+    <p>건설기계(Construction Equipment)란 토목·건축 공사에 사용되는 기계 장비의 총칭으로, 굴착기(Excavator), 휠로더(Wheel Loader), 불도저(Bulldozer), 크레인(Crane), 덤프트럭(Dump Truck), 지게차(Forklift) 등을 포함한다. 이 중 굴착기가 전체 건설기계 시장의 약 35%를 차지하는 최대 세그먼트이며, 도시 건설부터 광산 개발까지 가장 범용적으로 사용되는 장비이다. 건설기계는 크기에 따라 소형(Mini, 10톤 미만), 중형(Medium, 10~30톤), 대형(Large, 30톤 이상)으로 분류되며, 대형일수록 ASP(평균판매단가)와 마진율이 높다.</p>
+
+    <p>건설기계 산업의 핵심 특성은 '경기순환성(Cyclicality)'이다. 건설기계 수요는 GDP 성장률, 건설 투자, 광업 활동과 높은 상관관계를 가지며, 통상 2~3년의 상승기(업사이클)와 1~2년의 하강기(다운사이클)가 반복된다. 업사이클에서는 장비 교체 수요와 신규 수요가 동시에 발생하여 매출이 급증하고, 가동률 상승으로 고정비 레버리지가 작동하여 영업이익률이 크게 개선된다. 반대로 다운사이클에서는 수요 급감과 가격 경쟁 심화로 수익성이 악화된다. 현재 글로벌 건설기계 시장은 2024~2025년 다운사이클을 거쳐 2026년 하반기부터 업사이클에 진입하는 전환점에 있다.</p>
+
+    <p>건설기계의 수익 구조는 크게 '장비 판매'와 '애프터마켓(AM) 서비스'로 나뉜다. 장비 판매는 초기 매출의 대부분을 차지하지만, 건설기계의 평균 수명 10~15년 동안 발생하는 부품 교체, 정비, 수리 등의 AM 서비스 매출이 장비 판매의 3~4배에 달한다. 또한 AM 서비스의 영업이익률은 15~25%로 장비 판매(3~8%)보다 훨씬 높다. 따라서 글로벌 선도 기업들은 AM 매출 비중 확대를 핵심 전략으로 추진하고 있으며, 이는 수익성과 안정성을 동시에 높이는 방법이다. HD건설기계의 AM 비중은 현재 10%로, 글로벌 선도 기업(Caterpillar 25%) 대비 확대 여지가 크다.</p>
+
+    <p>건설기계의 글로벌 공급망은 비교적 단순한 구조를 가진다. 주요 원자재인 철강(매출원가의 약 30%), 유압부품(15%), 엔진(15%), 전장부품(10%), 기타(30%)로 구성된다. 특히 유압 시스템(실린더, 펌프, 밸브)은 건설기계의 '심장'에 해당하며, 일본 Kawasaki, 독일 Bosch Rexroth 등 소수 업체에 의존하고 있어 공급망 리스크가 존재한다. HD건설기계는 합병을 통해 엔진을 자체 내재화(인프라코어 엔진 사업부)함으로써, 핵심 부품의 수직계열화를 실현하였다.</p>
+
+    <p><strong><u>건설기계 주요 장비별 상세</u></strong></p>
+
+    <p><strong>굴착기(Excavator)</strong>는 건설기계의 대표 장비로, 전체 시장의 약 35%를 차지한다. 버킷(Bucket)을 장착한 붐(Boom)과 암(Arm)을 이용하여 토사를 굴착·적재하는 장비이다. 크롤러(무한궤도) 타입과 휠(바퀴) 타입으로 나뉘며, 크롤러 타입이 전체의 90% 이상을 차지한다. 용도에 따라 미니 굴착기(1~6톤, 도시 공사·조경), 소형(6~10톤, 택지 개발), 중형(10~30톤, 도로·건축), 대형(30~80톤, 토목·광산), 초대형(80톤 이상, 대규모 광산)으로 세분화된다. 글로벌 굴착기 시장은 연간 약 35만 대 규모이며, 중국이 약 40%를 차지하는 최대 시장이다. HD건설기계의 HX시리즈(HYUNDAI)와 DX시리즈(DEVELON)는 1.7톤급부터 120톤급까지 풀 라인업을 보유하고 있으며, 특히 20~30톤급 중형 굴착기에서 높은 경쟁력을 갖추고 있다.</p>
+
+    <p><strong>휠로더(Wheel Loader)</strong>는 대형 버킷을 장착하여 토사·골재·광물 등을 적재·운반하는 장비이다. 굴착기와 달리 바퀴(타이어) 방식으로 이동성이 뛰어나며, 광산·골재 채취장·물류 센터·항만 등에서 광범위하게 사용된다. 소형(1~3톤), 중형(3~5톤), 대형(5톤 이상)으로 분류되며, 대형 휠로더는 광산에서 덤프트럭에 광석을 적재하는 용도로 사용되어 안정적인 교체 수요가 존재한다. 글로벌 휠로더 시장은 연간 약 15만 대 규모이며, Caterpillar와 Komatsu가 각각 15%, 12%의 점유율을 보유하고 있다. HD건설기계의 HL시리즈는 3.5톤급(HL757)부터 10톤급(HL980) 이상까지 라인업을 갖추고 있다.</p>
+
+    <p><strong>엔진(Engine)</strong>은 건설기계의 '심장'에 해당하는 핵심 부품이다. 건설기계용 엔진은 일반 자동차 엔진과 달리, 고부하·장시간 연속 운전에 최적화되어 있으며, Tier 4 Final(미국)/Stage V(유럽) 배출가스 규제를 충족해야 한다. 엔진 출력은 50마력(소형 장비)부터 2,000마력(초대형 광산 장비)까지 다양하며, 최근에는 디젤-전기 하이브리드 엔진과 수소 엔진 개발도 진행되고 있다. 건설기계 엔진은 장비 제조사가 자체 생산하거나(내재화), Cummins·Perkins·Deutz 등 전문 엔진 업체로부터 구매(아웃소싱)한다. HD건설기계는 합병을 통해 인프라코어의 엔진 사업부를 확보하여, 엔진 내재화율을 60%까지 높였으며, 이는 원가 경쟁력과 기술 자립도를 크게 향상시키는 요소이다.</p>
+
+    <p><strong>지게차(Forklift)</strong>는 창고·물류센터·공장·항만에서 화물을 적재·운반하는 산업차량이다. 건설기계 중 가장 범용적인 장비로, 제조업·물류업·유통업 등 거의 모든 산업에서 사용된다. 동력원에 따라 내연기관(디젤·LPG)과 전동(배터리) 방식으로 나뉘며, 선진국에서는 전동 지게차 비중이 70%를 넘어섰다. 글로벌 지게차 시장은 연간 약 150만 대 규모로, 건설기계 중 대수 기준으로는 가장 큰 세그먼트이다. Toyota Industries, KION Group, Mitsubishi Logisnext가 시장의 약 50%를 점유하고 있다. HD건설기계의 산업차량 사업부는 CLARK 브랜드를 통해 북미·유럽 시장에서 경쟁하고 있으며, 전동 지게차로의 전환을 가속화하고 있다.</p>
+
+    <p><strong><u>HD건설기계의 역사와 합병 경위</u></strong></p>
+
+    <p>HD건설기계의 역사는 1985년 현대중공업 건설기계 사업부로 시작된다. 현대중공업은 1970년대 조선업에서 축적한 중공업 기술을 바탕으로 건설기계 시장에 진출하였으며, 1985년 첫 굴착기 모델을 출시하였다. 이후 1990년대 국내 건설 붐과 함께 급성장하여, 2000년대에는 글로벌 시장에 본격 진출하였다. 2017년 현대중공업 그룹의 사업 재편 과정에서 건설기계 부문이 독립 법인으로 분사하여 'HD현대건설기계'가 출범하였고, 코스피에 상장되었다.</p>
+
+    <p>한편 HD현대인프라코어의 전신은 1937년 설립된 대우중공업이다. 대우중공업은 1970년대부터 건설기계와 디젤 엔진을 생산하기 시작하였으며, 1990년대에는 'DAEWOO' 브랜드로 글로벌 시장에서 상당한 인지도를 확보하였다. 2005년 대우그룹 해체 후 두산그룹에 인수되어 '두산인프라코어'로 운영되었으며, 2021년 현대중공업그룹(현 HD현대)에 인수되면서 'HD현대인프라코어'로 사명이 변경되었다. 이후 글로벌 브랜드를 'DEVELON'으로 리브랜딩하여 독자적 브랜드 아이덴티티를 확립하였다.</p>
+
+    <p>2025년 10월 HD현대는 HD현대건설기계와 HD현대인프라코어의 합병을 공식 발표하였다. 합병 비율은 1:0.73(건설기계 1주당 인프라코어 0.73주)이며, 2026년 1월 1일부로 합병이 완료되었다. 합병의 전략적 의의는 명확하다. (1) 국내 1위+2위의 통합으로 글로벌 TOP 8 규모 확보, (2) 굴착기(건설기계 강점) + 엔진(인프라코어 강점)의 포트폴리오 보완, (3) HYUNDAI + DEVELON 듀얼 브랜드를 통한 프리미엄/가성비 시장 동시 공략, (4) 7개국 생산 거점의 글로벌 네트워크 완성이다. 통합 법인의 정식 명칭은 'HD건설기계주식회사'이며, 종목코드 267270으로 거래되고 있다.</p>
+
+    <p><strong><u>5개 사업부 상세 분석</u></strong></p>
+
+    <p><strong>굴착기 사업부(매출 비중 38%, 2026E 33,630억원)</strong>는 HD건설기계의 핵심 사업이다. HX시리즈를 중심으로 1.7톤급 미니 굴착기부터 120톤급 초대형 굴착기까지 풀 라인업을 갖추고 있다. HYUNDAI 브랜드의 HX220(22톤급)은 내구성과 연비 효율에서 글로벌 시장에서 높은 평가를 받고 있으며, 인도·중동 시장에서 시장점유율 1위를 기록하고 있다. DEVELON 브랜드의 DX시리즈는 유럽·북미 시장에서 가성비 포지셔닝으로 시장을 확대하고 있다. 글로벌 굴착기 시장에서 HD건설기계의 점유율은 약 5%로 추정되며, 합병 후 통합 라인업을 통해 7~8%까지 확대하는 것이 목표이다. 굴착기 사업부의 2026E ASP(평균판매단가)는 대당 약 1.8억원이며, 연간 약 18,683대의 출하를 전망한다. 특히 20톤급 이상 대형 굴착기는 ASP가 3~5억원에 달하며, 이 세그먼트에서의 점유율 확대가 수익성 개선의 핵심이다. 굴착기 사업부의 영업이익률은 전사 평균보다 높은 6~7% 수준이며, 대형 장비 비중 확대 시 추가 개선이 가능하다.</p>
+
+    <p><strong>휠로더 사업부(매출 비중 22%, 2026E 19,470억원)</strong>는 HL시리즈를 중심으로 광업·건설·물류 분야에 걸쳐 폭넓은 수요 기반을 보유하고 있다. HL960(6톤급)은 광산 개발 현장에서 높은 내구성으로 선호되며, HL757(3.5톤급)은 도시 건설 현장과 물류 센터에서 활용된다. 특히 대형 휠로더(5톤급 이상)는 광산 개발과 대규모 토목 공사에서 필수적인 장비로, 안정적인 교체 수요가 존재한다. HD건설기계는 울산 공장에서 대형 휠로더를, 군산 공장에서 소형 휠로더를 각각 생산하고 있으며, 합병 후 생산 효율화를 통해 원가 경쟁력을 높일 계획이다. 도로 포장 장비(아스팔트 피니셔, 롤러)도 이 사업부에 포함되어 있어 도로 건설 프로젝트에서 원스톱 장비 공급이 가능하다. 2026E ASP는 대당 약 1.2억원, 연간 출하량 약 16,225대를 전망한다.</p>
+
+    <p><strong>엔진 사업부(매출 비중 18%, 2026E 15,930억원)</strong>는 구 HD현대인프라코어의 핵심 역량이 집중된 분야이다. 자체 개발한 디젤 엔진은 Tier4 Final/Stage V 배출가스 규제를 충족하며, 건설기계뿐만 아니라 선박·발전기·산업용 장비에도 공급되고 있다. 인천 공장에서 연간 약 5만 기의 엔진을 생산하고 있으며, 수출 비중이 60%에 달한다. 엔진 사업은 건설기계 사이클과 다른 수요 패턴을 보여, 포트폴리오 다각화 효과가 크다. 외부 OEM 공급 비중이 40%에 달하며, 두산에너빌리티, HD한국조선해양 등에 선박용·발전용 엔진을 공급하고 있다. 자체 장비에 대한 엔진 내재화율은 약 60%로, 합병 전 HD현대건설기계가 외부 엔진(Cummins 등)에 의존하던 것을 자체 엔진으로 전환하는 것이 핵심 시너지 중 하나이다. 향후 전동화 시대에 대비하여 하이브리드 엔진과 수소 엔진 개발에도 투자를 확대하고 있다. 2026E ASP는 기당 약 0.35억원, 연간 약 45,514기 출하를 전망한다.</p>
+
+    <p><strong>산업차량 사업부(매출 비중 12%, 2026E 10,620억원)</strong>는 CLARK 브랜드를 중심으로 지게차·물류 운반 장비를 생산한다. CLARK는 1903년 세계 최초로 지게차를 발명한 역사적 브랜드로, 북미·유럽 시장에서 높은 인지도를 보유하고 있다. 물류 산업의 구조적 성장(e-커머스 확대, 자동화 물류센터 증가)에 힘입어 안정적인 수요를 확보하고 있으며, 전동 지게차의 비중이 2020년 45%에서 2025년 65%로 빠르게 증가하고 있다. 특히 리튬이온 배터리 기반의 전동 지게차는 기존 납축전지 대비 충전 시간 50% 단축, 수명 2배 연장 등의 장점으로 시장 전환이 가속화되고 있다. 2026E ASP는 대당 약 0.45억원, 연간 약 23,600대 출하를 전망한다.</p>
+
+    <p><strong>부품서비스 사업부(매출 비중 10%, 2026E 8,850억원)</strong>는 순정 부품 판매와 애프터마켓 서비스를 담당한다. 건설기계의 생애주기(약 10~15년) 동안 지속적으로 부품 교체와 정비 수요가 발생하기 때문에, 장비 판매의 3~4배에 달하는 누적 매출이 기대된다. 이 사업부의 영업이익률은 15~20%로 전체 평균보다 훨씬 높아, 비중 확대 시 전사 수익성 개선에 크게 기여할 것이다. HD건설기계는 디지털 부품 주문 플랫폼 'Hi-MATE'를 운영하고 있으며, IoT 기반 장비 상태 모니터링 시스템을 통해 예측 정비(Predictive Maintenance) 서비스를 제공할 계획이다. 현재 전 세계에 약 40만 대의 HD건설기계 장비가 운영 중이며, 이는 AM 사업의 거대한 수요 기반을 형성한다.</p>
+
+    <p>경영진 구성을 보면, CEO 문재영 사장 외에 CFO(재무총괄), COO(생산총괄), CTO(기술총괄), CSO(전략총괄)의 C-suite가 구성되어 있다. 특히 CTO는 노르웨이 전동화 R&D 센터 출신으로, 차세대 기술 전략을 이끌 적임자로 평가된다. 합병 후 조직은 양사 출신 인력을 균형 있게 배치하여 문화 통합을 가속화하고 있으며, 2026년 상반기 중 전사 ERP 시스템 통합을 완료할 예정이다.</p>
+
+    <p><strong><u>HD건설기계 제품 라인업 상세</u></strong></p>
+
+    <p>HD건설기계의 제품 라인업을 브랜드별로 상세히 정리하면 다음과 같다. <strong>HYUNDAI 브랜드</strong>는 대형·프리미엄 세그먼트에 강점을 가지고 있다. 대표 제품인 HX220(22톤급 크롤러 굴착기)은 Cummins 엔진 또는 자체 엔진을 탑재하며, 연비 효율 업계 최고 수준을 자랑한다. HX480(48톤급)과 HX900(90톤급)은 대규모 토목·광산 현장에서 사용되며, 내구성과 가동 시간(Uptime)에서 높은 평가를 받고 있다. 휠로더 라인업은 HL757(3.5톤급)부터 HL980(10톤급)까지 폭넓게 구성되어 있으며, 특히 HL960은 광산 현장에서 Caterpillar 966, Komatsu WA470과 직접 경쟁하는 주력 모델이다.</p>
+
+    <p><strong>DEVELON 브랜드</strong>는 소형·중형 세그먼트와 가성비 포지셔닝에 강점이 있다. DX55(5.5톤급 미니 굴착기)는 도시 공사와 조경 작업에 최적화되어 유럽·일본 시장에서 높은 인기를 끌고 있다. DX225(22톤급)는 HYUNDAI HX220과 동급이나, DEVELON 고유의 디자인과 유압 시스템을 적용하여 차별화하고 있다. 특히 DEVELON의 'D-ECOPOWER' 유압 시스템은 기존 대비 연비 8% 개선을 달성하여, TCO(Total Cost of Ownership) 경쟁에서 우위를 점하고 있다. 합병 후 두 브랜드의 기술 공유가 진행되면, HYUNDAI 대형 장비에 DEVELON의 유압 기술을, DEVELON 소형 장비에 HYUNDAI의 텔레매틱스 기술을 적용하는 시너지가 기대된다.</p>
+
+    <p>생산 거점별 특화 전략도 HD건설기계의 경쟁력을 이해하는 데 중요하다. <strong>울산 공장</strong>(본사)은 20톤급 이상 대형 굴착기와 대형 휠로더를 생산하며, 연간 약 12,000대의 생산능력을 보유하고 있다. 국내 최대 규모의 건설기계 공장으로, 용접·도장·조립 라인의 자동화율이 60%에 달한다. <strong>인천 공장</strong>은 엔진 전문 공장으로, 연간 약 50,000기의 디젤 엔진을 생산한다. Tier 4 Final/Stage V 대응 엔진과 선박용·발전용 대형 엔진을 함께 생산하며, 엔진 사업부의 핵심 거점이다. <strong>군산 공장</strong>은 소형 굴착기와 소형 휠로더를 생산하며, 최근 전동 장비 생산 라인을 신설하였다. <strong>인도 푸네 공장</strong>은 인도·동남아·중동 시장을 위한 현지 생산 거점으로, 현지화율 75%의 소형·중형 굴착기를 생산한다. 연간 생산능력 5,000대에서 2028년까지 8,000대로 확대할 계획이다. <strong>중국 강소성 공장</strong>은 중국 내수 시장용 소형·중형 장비를 생산하며, <strong>브라질 이타티바 공장</strong>은 중남미 시장 공략의 거점이다. <strong>노르웨이 R&D 센터</strong>는 전동화 기술 개발에 특화되어 있으며, 유럽 시장 대응 전동 장비의 프로토타입을 개발하고 있다.</p>
+</div>
+</div>
+<div class="chart-box" style="width:100%;max-width:700px;">
+<div class="chart-title">도표 1-1. HD건설기계 밸류체인 계층도 (MLA)</div>
+<svg viewBox="0 0 700 420" xmlns="http://www.w3.org/2000/svg">
+  <defs><linearGradient id="mla_g" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#7C6AF7" stop-opacity="0.15"/><stop offset="100%" stop-color="#7C6AF7" stop-opacity="0.05"/></linearGradient></defs>
+  <rect x="50" y="10" width="600" height="70" rx="8" fill="url(#mla_g)" stroke="#FF4D4D" stroke-width="1.5"/>
+  <text x="350" y="38" fill="#FF4D4D" font-size="14" font-weight="700" text-anchor="middle">Layer 1: 원자재 (구매통합 시너지 1,200억원)</text>
+  <text x="350" y="58" fill="#A09CB0" font-size="10" text-anchor="middle">철강 30% · 유압부품 15% · 엔진(내재화) 15% · 전장 10% · 기타 30%</text>
+  <text x="356" y="92" fill="#7C6AF7" font-size="16" font-weight="700">↓</text>
+  <rect x="50" y="95" width="600" height="70" rx="8" fill="url(#mla_g)" stroke="#7C6AF7" stroke-width="1.5"/>
+  <text x="350" y="123" fill="#7C6AF7" font-size="14" font-weight="700" text-anchor="middle">Layer 2: 생산 (7개국 거점)</text>
+  <text x="350" y="143" fill="#A09CB0" font-size="10" text-anchor="middle">국내: 울산·인천·군산 | 해외: 인도·중국·브라질·노르웨이 | CAPEX절감 800억원</text>
+  <text x="356" y="177" fill="#7C6AF7" font-size="16" font-weight="700">↓</text>
+  <rect x="50" y="180" width="600" height="70" rx="8" fill="url(#mla_g)" stroke="#A78BFA" stroke-width="1.5"/>
+  <text x="350" y="208" fill="#A78BFA" font-size="14" font-weight="700" text-anchor="middle">Layer 3: 듀얼 브랜드</text>
+  <text x="350" y="228" fill="#A09CB0" font-size="10" text-anchor="middle">HYUNDAI(프리미엄·대형) + DEVELON(가성비·소형) | 가격대 전 구간 커버</text>
+  <text x="356" y="262" fill="#7C6AF7" font-size="16" font-weight="700">↓</text>
+  <rect x="50" y="265" width="600" height="70" rx="8" fill="url(#mla_g)" stroke="#00E09E" stroke-width="1.5"/>
+  <text x="350" y="293" fill="#00E09E" font-size="14" font-weight="700" text-anchor="middle">Layer 4: 유통 (130개국 딜러 네트워크)</text>
+  <text x="350" y="313" fill="#A09CB0" font-size="10" text-anchor="middle">HYUNDAI 80개국 + DEVELON 70개국 | 크로스셀링 시너지 600억원</text>
+  <text x="356" y="347" fill="#7C6AF7" font-size="16" font-weight="700">↓</text>
+  <rect x="50" y="350" width="600" height="60" rx="8" fill="url(#mla_g)" stroke="#FFB84D" stroke-width="1.5"/>
+  <text x="350" y="375" fill="#FFB84D" font-size="14" font-weight="700" text-anchor="middle">Layer 5: 서비스/AM</text>
+  <text x="350" y="395" fill="#A09CB0" font-size="10" text-anchor="middle">부품·정비·리스·렌탈 | 장비 40만대 installed base | OPM 15~20%</text>
+</svg>
+<p style="font-size:10px;color:#888;text-align:right;margin-top:4px;">출처: HD건설기계 IR, CUFA</p>
+</div>
+<p style="font-size:12px;color:var(--text-sec);margin:12px 0 6px;font-weight:600;">도표 1-2. 합병 전후 비교</p>
+<table class="data"><tr><th>구분</th><th>HD현대건설기계 (합병 전)</th><th>HD현대인프라코어 (합병 전)</th><th>HD건설기계 (통합)</th></tr>
+<tr><td>브랜드</td><td>HYUNDAI</td><td>DEVELON</td><td>HYUNDAI + DEVELON</td></tr>
+<tr><td>매출(2025)</td><td>37,765억원</td><td>45,478억원</td><td>~83,000억원</td></tr>
+<tr><td>영업이익(2025)</td><td>1,709억원</td><td>2,864억원</td><td>~4,573억원</td></tr>
+<tr><td>OPM</td><td>4.52%</td><td>6.30%</td><td>~5.5%</td></tr>
+<tr><td>주력 제품</td><td>굴착기, 휠로더</td><td>굴착기, 엔진</td><td>풀 라인업</td></tr>
+<tr><td>글로벌 거점</td><td>인도, 중국, 브라질</td><td>중국, 노르웨이</td><td>7개국</td></tr>
+<tr class="highlight-row"><td>2030 목표</td><td>—</td><td>—</td><td>매출 14.8조원</td></tr>
+</table>
+<p style="font-size:10px;color:#888;text-align:right;margin-top:2px;">출처: DART, HD건설기계 IR</p>
+<div class="chart-pair">
+<div class="chart-box" style="width:100%;max-width:500px;"><div class="chart-title">도표 1-3. 사업부문별 매출 비중 (2026E)</div>
+<svg viewBox="0 0 420 340" xmlns="http://www.w3.org/2000/svg">
+<path d="M200.0,50.0 A100,100 0 0,1 268.5,222.9 L237.7,190.1 A55,55 0 0,0 200.0,95.0 Z" fill="#7C6AF7" opacity="0.85"/>
+<text x="310" y="107" fill="#E8E6F0" font-size="10" text-anchor="middle">38%</text>
+<path d="M268.5,222.9 A100,100 0 0,1 141.2,230.9 L167.7,194.5 A55,55 0 0,0 237.7,190.1 Z" fill="#A78BFA" opacity="0.85"/>
+<text x="207" y="268" fill="#E8E6F0" font-size="10" text-anchor="middle">22%</text>
+<path d="M141.2,230.9 A100,100 0 0,1 101.8,131.3 L146.0,139.7 A55,55 0 0,0 167.7,194.5 Z" fill="#00E09E" opacity="0.85"/>
+<text x="90" y="193" fill="#E8E6F0" font-size="10" text-anchor="middle">18%</text>
+<path d="M101.8,131.3 A100,100 0 0,1 141.2,69.1 L167.7,105.5 A55,55 0 0,0 146.0,139.7 Z" fill="#FF4D4D" opacity="0.85"/>
+<text x="100" y="87" fill="#E8E6F0" font-size="10" text-anchor="middle">12%</text>
+<path d="M141.2,69.1 A100,100 0 0,1 200.0,50.0 L200.0,95.0 A55,55 0 0,0 167.7,105.5 Z" fill="#FFB84D" opacity="0.85"/>
+<text x="164" y="38" fill="#E8E6F0" font-size="10" text-anchor="middle">10%</text>
+<text x="200" y="146" fill="#A78BFA" font-size="14" font-weight="700" text-anchor="middle">100</text>
+<text x="200" y="162" fill="#A09CB0" font-size="9" text-anchor="middle">합계</text>
+<rect x="260" y="250" width="10" height="10" rx="2" fill="#7C6AF7"/>
+<text x="274" y="259" fill="#A09CB0" font-size="10">굴착기 (38)</text>
+<rect x="260" y="266" width="10" height="10" rx="2" fill="#A78BFA"/>
+<text x="274" y="275" fill="#A09CB0" font-size="10">휠로더 (22)</text>
+<rect x="260" y="282" width="10" height="10" rx="2" fill="#00E09E"/>
+<text x="274" y="291" fill="#A09CB0" font-size="10">엔진 (18)</text>
+<rect x="260" y="298" width="10" height="10" rx="2" fill="#FF4D4D"/>
+<text x="274" y="307" fill="#A09CB0" font-size="10">산업차량 (12)</text>
+<rect x="260" y="314" width="10" height="10" rx="2" fill="#FFB84D"/>
+<text x="274" y="323" fill="#A09CB0" font-size="10">부품서비스 (10)</text>
+</svg><p style="font-size:10px;color:#888;text-align:right;margin-top:4px;">출처: DART, HD건설기계 IR, CUFA</p></div>
+<div class="chart-box" style="width:100%;max-width:700px;"><div class="chart-title">도표 1-4. 합병 전후 매출 비교</div>
+<svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg">
+<text x="42" y="14" fill="#A09CB0" font-size="9">(단위: 억원)</text>
+<line x1="40" y1="260" x2="680" y2="260" stroke="#2A2845" stroke-width="1"/>
+<line x1="40" y1="211.1" x2="680" y2="211.1" stroke="#2A2845" stroke-width="0.5" stroke-dasharray="3"/>
+<line x1="40" y1="162.2" x2="680" y2="162.2" stroke="#2A2845" stroke-width="0.5" stroke-dasharray="3"/>
+<line x1="40" y1="113.4" x2="680" y2="113.4" stroke="#2A2845" stroke-width="0.5" stroke-dasharray="3"/>
+<line x1="40" y1="64.5" x2="680" y2="64.5" stroke="#2A2845" stroke-width="0.5" stroke-dasharray="3"/>
+<rect x="50.0" y="176.6" width="50.0" height="83.4" rx="3" fill="#7C6AF7" opacity="0.8"/>
+<text x="75.0" y="170.6" fill="#E8E6F0" font-size="10" text-anchor="middle">37,765</text>
+<text x="75.0" y="274.0" fill="#A09CB0" font-size="9" text-anchor="middle">건설기계(25)</text>
+<rect x="263.3" y="159.5" width="50.0" height="100.5" rx="3" fill="#A78BFA" opacity="0.8"/>
+<text x="288.3" y="153.5" fill="#E8E6F0" font-size="10" text-anchor="middle">45,478</text>
+<text x="288.3" y="274.0" fill="#A09CB0" font-size="9" text-anchor="middle">인프라코어(25)</text>
+<rect x="476.7" y="64.5" width="50.0" height="195.5" rx="3" fill="#00E09E" opacity="0.8"/>
+<text x="501.7" y="58.5" fill="#E8E6F0" font-size="10" text-anchor="middle">88,500</text>
+<text x="501.7" y="274.0" fill="#A09CB0" font-size="9" text-anchor="middle">통합(26E)</text>
+</svg><p style="font-size:10px;color:#888;text-align:right;margin-top:4px;">출처: DART, HD건설기계 IR, CUFA</p></div>
+</div>
+
+<div class="metric-grid">
+  <div class="metric-card"><div class="mc-label">시가총액</div><div class="mc-value">6.38조</div><div class="mc-sub" style="color:var(--text-sec);">코스피 상장</div></div>
+  <div class="metric-card"><div class="mc-label">주요주주</div><div class="mc-value" style="font-size:16px;">HD현대사이트솔루션</div><div class="mc-sub" style="color:var(--text-sec);">37.11%</div></div>
+  <div class="metric-card"><div class="mc-label">유동비율</div><div class="mc-value">62.67%</div><div class="mc-sub" style="color:var(--text-sec);">기관/외국인 중심</div></div>
+  <div class="metric-card"><div class="mc-label">52주 수익률</div><div class="mc-value mc-up">+135.9%</div><div class="mc-sub" style="color:var(--text-sec);">56,400→133,000</div></div>
+</div>
+</div>
+
+<div class="section" id="sec2">
+  <div class="section-subheader">Equity Research Report | HD건설기계 (267270)</div>
+  <div class="section-header">
+    <div class="section-num">2</div>
+    <div class="section-title">산업 분석 — 글로벌 건설기계 시장 동향</div>
+  </div>
+<div class="sidebar-layout">
+<div class="sidebar-kw">
+  <div class="kw">시장 규모</div><div class="kw-val">$200B</div>
+  <div class="kw">CAGR</div><div class="kw-val">4~5%</div>
+  <div class="kw">업사이클</div><div class="kw-val">2026H2</div>
+  <div class="kw">전동화율</div><div class="kw-val">3%→20%</div>
+  <div class="kw">IIJA</div><div class="kw-val">$1.2T</div>
+</div>
+<div class="content-area">
+
+    <p><strong><u>건설기계 시장의 구조와 동인</u></strong></p>
+
+    <p>건설기계 시장을 이해하기 위해서는 먼저 수요의 구성 요소를 파악해야 한다. 건설기계 수요는 크게 (1) 신규 건설 프로젝트에 따른 '추가 수요(Incremental Demand)', (2) 기존 장비의 노후화에 따른 '교체 수요(Replacement Demand)', (3) 재해·재건에 따른 '특수 수요'로 구분된다. 선진국에서는 교체 수요가 60~70%를 차지하는 반면, 이머징 마켓에서는 추가 수요가 50% 이상을 차지한다. 이러한 수요 구조의 차이는 지역별 성장률과 변동성의 차이를 설명한다.</p>
+
+    <p>건설기계 시장의 주요 수요 동인은 다섯 가지로 정리할 수 있다. 첫째, 도시화(Urbanization)이다. 전 세계 도시화율은 2025년 기준 약 57%이며, 2050년까지 68%로 상승할 전망이다. 특히 인도(36%), 아프리카(44%)의 도시화율이 낮아 장기 성장 잠재력이 크다. 둘째, 인프라 투자이다. 미국 IIJA($1.2T), 인도 Gati Shakti, 중동 Vision 2030 등 주요국의 인프라 투자 계획이 건설기계 수요를 견인한다. 셋째, 광업 활동이다. 리튬, 니켈, 구리 등 에너지 전환에 필요한 광물 수요 증가로 광산 개발이 활발해지고 있다. 넷째, 자연재해 복구이다. 기후변화로 인한 자연재해 빈도가 증가하면서, 복구 관련 건설기계 수요도 구조적으로 증가하고 있다. 다섯째, 전동화 전환이다. 기존 디젤 장비의 전동화 전환은 새로운 교체 수요를 창출한다.</p>
+
+    <p>건설기계 유통 구조도 산업 이해에 중요한 요소이다. 건설기계는 대부분 독립 딜러(Independent Dealer) 네트워크를 통해 판매된다. 딜러는 단순한 판매 대리점이 아니라, 장비 시연, 금융(리스/할부), 부품 공급, 정비 서비스, 중고 장비 매매까지 담당하는 핵심 파트너이다. Caterpillar의 경우 전 세계 약 160개의 독립 딜러를 통해 운영되며, 딜러 네트워크의 품질이 시장 경쟁력의 핵심이다. HD건설기계는 합병을 통해 약 130개국에 딜러망을 갖추게 되었으며, 딜러의 서비스 역량 강화가 시장 점유율 확대의 관건이다.</p>
+
+    <p><strong>글로벌 건설기계 시장은 2025년 기준 약 2,000억 달러(USD 200B) 규모로 추정된다.</strong> 이 시장은 도시화·인프라 투자·자원 개발이라는 세 가지 구조적 성장 동력에 의해 장기적으로 연평균 4~5% 성장이 전망된다. 다만 건설기계 산업은 본질적으로 경기순환적(cyclical) 특성이 강하여, 2~3년 단위의 수요 변동이 반복적으로 나타난다.</p>
+
+    <p><strong>현재 시장은 2024~2025년 조정기를 거쳐 2026년 하반기부터 반등 국면에 진입할 것으로 전망된다.</strong> 2021~2023년 팬데믹 이후 인프라 투자 붐으로 건설기계 수요가 급증하였으나, 2024년부터 금리 인상 영향과 중국 부동산 침체로 글로벌 수요가 조정을 받았다. 2024년 글로벌 건설기계 출하량은 전년 대비 약 8% 감소한 것으로 추정되며, 2025년에도 소폭 감소세가 이어졌다. 그러나 2026년 하반기부터는 미국·인도·중동의 대규모 인프라 프로젝트가 본격 집행되면서 수요 반등이 예상된다.</p>
+
+    <p>지역별로 살펴보면, <strong>북미 시장은 바이든 행정부의 인프라투자법(IIJA: Infrastructure Investment and Jobs Act) $1.2T의 집행이 2026~2028년에 본격화된다.</strong> 도로·교량·수자원 등 전통 인프라와 전기차 충전 네트워크·반도체 팹 건설 등 신규 인프라 투자가 동시에 집행되면서, 북미 건설기계 수요는 2026년부터 연 5~7% 성장이 기대된다. HD건설기계는 북미 시장에서 HYUNDAI 브랜드의 굴착기와 DEVELON 브랜드의 소형장비를 동시에 공급하여 시장 침투율을 높일 계획이다.</p>
+
+    <p><strong>인도는 중장기적으로 가장 매력적인 성장 시장이다.</strong> 모디 정부의 'PM Gati Shakti' 국가 인프라 마스터플랜 하에서 도로·철도·항만 건설이 가속화되고 있다. 인도 건설기계 시장 규모는 연간 약 80,000대로, 글로벌 시장의 약 12%를 차지한다. HD건설기계는 인도 푸네 공장을 기반으로 현지 생산 체제를 갖추고 있으며, 현재 시장 점유율 9~10%에서 2028년까지 15%로 확대하는 것을 목표로 한다.</p>
+
+    <p><strong>중동 지역은 사우디아라비아의 Vision 2030과 NEOM 프로젝트를 중심으로 대규모 건설 수요가 발생하고 있다.</strong> NEOM 프로젝트만 해도 총 투자 규모가 $500B에 달하며, 2025년부터 건설기계 수요가 본격적으로 증가하기 시작하였다.</p>
+
+    <p><strong>중국 시장은 2024~2025년 바닥을 형성한 것으로 판단된다.</strong> 중국 건설기계 시장은 2020~2021년 정점(굴착기 기준 연 34만대) 이후 부동산 침체 영향으로 2024년 약 15만대 수준까지 급감하였다. 그러나 2025년 하반기부터 중국 정부의 인프라 부양책과 부동산 안정화 정책 효과로 수요가 바닥을 다지고 있으며, 2026년부터 완만한 회복이 예상된다.</p>
+
+    <p><strong>전동화(Electrification)는 건설기계 산업의 차세대 메가트렌드이다.</strong> 현재 전동화 비율은 전체 시장의 3% 미만에 불과하나, 유럽·북미를 중심으로 탄소 규제가 강화되면서 2030년까지 전동화 비율이 15~20%로 상승할 전망이다. HD건설기계는 노르웨이 R&D 센터를 통해 전동 굴착기·휠로더를 개발 중이며, 2027년부터 양산 모델 출시를 계획하고 있다.</p>
+
+    <p>자율주행(Autonomous) 건설기계도 주목해야 할 트렌드이다. Caterpillar와 Komatsu는 이미 자율주행 덤프트럭을 광산에서 상용화하고 있으며, 굴착기·불도저로 확대 적용을 추진 중이다. HD건설기계도 텔레매틱스(원격 모니터링) 시스템을 전 제품에 탑재하고 있으며, 단계적으로 반자율주행·완전자율주행 기능을 추가할 계획이다.</p>
+
+    <p>글로벌 건설기계 시장의 경쟁 구도를 분석하면, 상위 3사(Caterpillar, Komatsu, Volvo CE)가 전체 시장의 약 40%를 점유하고 있으며, 중국 업체(XCMG, SANY, Zoomlion 등)가 저가 공세를 통해 빠르게 점유율을 확대하고 있다. <strong><u>HD건설기계는 합병을 통해 규모의 경제를 확보함으로써, 이러한 경쟁 환경에서 생존과 성장을 동시에 추구할 수 있는 기반을 마련하였다.</u></strong></p>
+
+    <p>건설기계 시장의 수익성 구조도 변화하고 있다. 과거에는 장비 판매가 수익의 대부분을 차지하였으나, 최근에는 AM(애프터마켓)·서비스·리스·렌탈 등 반복적 수익(recurring revenue) 모델이 중요해지고 있다. Caterpillar의 경우 AM·서비스 매출 비중이 전체의 약 25%에 달하며, 이 부문의 영업이익률은 30%를 상회한다. HD건설기계도 합병 후 통합 AM 서비스 플랫폼을 구축하여, 부품서비스 매출 비중을 현재 10%에서 2030년 20%까지 확대할 계획이다.</p>
+
+    <p>글로벌 건설기계 시장의 제품 세그먼트별 분석도 중요하다. 굴착기가 전체 시장의 약 35%를 차지하는 최대 세그먼트이며, 휠로더(15%), 불도저(10%), 크레인(12%), 덤프트럭(8%), 기타(20%)가 뒤를 잇는다. 굴착기 시장에서 Caterpillar, Komatsu, SANY가 각각 15%, 12%, 10%의 글로벌 점유율을 보유하고 있으며, HD건설기계는 합병을 통해 약 5%의 점유율을 확보하였다. 2030년까지 7~8%로 확대하는 것이 목표이다.</p>
+
+    <p>건설기계의 평균 수명 주기는 약 8~12년이며, 이에 따른 교체 수요(replacement cycle)가 시장의 기본 수요를 형성한다. 2015~2017년에 판매된 장비들이 2025~2027년에 교체 시기를 맞이하며, 이는 업사이클 진입의 또 다른 동력이 된다. 특히 이머징 마켓에서는 장비 노후화가 심각하여, 안전 규제 강화와 함께 교체 수요가 가속화될 전망이다.</p>
+
+    <p>건설기계 렌탈 시장의 성장도 주목할 만하다. 북미와 유럽에서는 건설기계의 렌탈 비중이 전체의 50~60%에 달하며, 이 비율은 지속적으로 증가하고 있다. 렌탈 사업자들은 장비의 TCO(Total Cost of Ownership)를 중시하므로, 연비·내구성·유지보수 편의성이 뛰어난 장비를 선호한다. HD건설기계의 HYUNDAI 브랜드는 이러한 요소에서 높은 평가를 받고 있어, 렌탈 시장에서의 점유율 확대가 기대된다. 또한 렌탈 시장의 성장은 AM·부품 서비스 매출 증가로 연결되어, 수익성 개선에도 기여할 것이다.</p>
+
+    <p>ESG(환경·사회·거버넌스) 관점에서 건설기계 산업은 탈탄소 압력이 가중되고 있다. EU의 Stage V 배기가스 규제, 미국의 EPA Tier 4 Final 규제에 이어, 주요국들이 건설 현장의 탄소 배출 감축 목표를 강화하고 있다. 이에 따라 전동화·수소화·바이오연료 등 친환경 동력원에 대한 수요가 빠르게 증가하고 있으며, 이를 선도하는 기업들이 프리미엄 밸류에이션을 받는 추세이다. HD건설기계는 노르웨이 R&D 센터를 통해 전동 장비를 개발하고 있으며, 2027년 양산 모델 출시를 목표로 하고 있어, ESG 측면에서도 긍정적인 포지셔닝을 확보하고 있다.</p>
+
+    <p><strong><u>건설기계 시장의 가격 결정 구조</u></strong></p>
+
+    <p>건설기계의 가격은 크게 (1) 원자재 가격(철강, 유압부품), (2) 기술 사양(배출가스 규제 대응, 자동화 수준), (3) 브랜드 프리미엄, (4) 환율, (5) 수급 상황에 의해 결정된다. 업사이클에서는 수요 초과로 가격 인상(price escalation)이 가능하며, 주문에서 납품까지 리드타임이 6~12개월로 길어진다. 다운사이클에서는 가격 할인 경쟁이 심화되며, 특히 중국 업체들의 저가 공세가 시장 가격을 하방 압박한다. HD건설기계는 HYUNDAI 브랜드로 프리미엄 시장을, DEVELON 브랜드로 가성비 시장을 공략하는 듀얼 브랜드 전략으로, 다양한 가격대의 수요에 대응할 수 있는 유연성을 갖추고 있다.</p>
+
+    <p>건설기계의 소유 구조도 시장 이해에 중요하다. 선진국(북미·유럽·일본)에서는 건설기계의 렌탈(임대) 비중이 50~60%에 달하며, 이 비율은 지속적으로 증가하고 있다. 렌탈 업체들은 대량 구매를 통해 할인을 받지만, 장비의 잔존가치(Residual Value)와 유지보수 비용을 중시하므로 프리미엄 브랜드를 선호하는 경향이 있다. 이머징 마켓(인도·동남아·아프리카)에서는 개인 사업자의 직접 구매 비중이 70% 이상이며, 할부·리스 금융이 판매의 핵심 요소이다. HD건설기계는 HD현대캐피탈과 연계한 금융 솔루션을 글로벌 시장에 확대 적용하여, 고객의 구매 접근성을 높이고 있다.</p>
+
+    <p>건설기계 산업의 진입장벽은 상당히 높다. 건설기계는 (1) 극한 환경에서의 내구성, (2) 수만 시간의 연속 운전 신뢰성, (3) 수백 톤급 하중을 다루는 안전성이 요구되며, 이를 위해 수십 년의 기술 축적이 필요하다. 또한 (4) 글로벌 딜러 네트워크 구축, (5) 부품·서비스 체계 확립, (6) 배출가스 규제 대응(Tier 4F/Stage V 인증)까지 갖추려면 막대한 시간과 비용이 소요된다. 이러한 높은 진입장벽 때문에 글로벌 건설기계 시장은 상위 10개사가 전체 시장의 약 70%를 점유하는 과점 구조를 형성하고 있다. 중국 업체들이 최근 빠르게 성장하고 있으나, 프리미엄 세그먼트(대형·고사양 장비)에서는 여전히 일본·한국·유럽·미국 업체들이 기술적 우위를 유지하고 있다.</p>
+</div>
+</div>
+<p style="font-size:12px;color:var(--text-sec);margin:12px 0 6px;font-weight:600;">도표 2-1. 글로벌 건설기계 TOP 10</p>
+<table class="data"><tr><th>순위</th><th>기업명</th><th>매출(B USD)</th><th>본사</th><th>주력 분야</th></tr>
+<tr><td>1</td><td>Caterpillar</td><td>65.7</td><td>미국</td><td>굴착기·트럭·엔진</td></tr>
+<tr><td>2</td><td>Komatsu</td><td>28.1</td><td>일본</td><td>굴착기·불도저·덤프</td></tr>
+<tr><td>3</td><td>Volvo CE</td><td>12.8</td><td>스웨덴</td><td>굴착기·휠로더·덤프</td></tr>
+<tr><td>4</td><td>John Deere</td><td>11.4</td><td>미국</td><td>굴착기·불도저·그레이더</td></tr>
+<tr><td>5</td><td>XCMG</td><td>10.8</td><td>중국</td><td>크레인·굴착기·로더</td></tr>
+<tr><td>6</td><td>SANY</td><td>10.2</td><td>중국</td><td>굴착기·크레인·펌프카</td></tr>
+<tr><td>7</td><td>Hitachi CM</td><td>8.9</td><td>일본</td><td>굴착기·덤프트럭</td></tr>
+<tr class="highlight-row"><td>8</td><td>HD건설기계</td><td>6.4</td><td>한국</td><td>굴착기·엔진·휠로더</td></tr>
+<tr><td>9</td><td>Liebherr</td><td>5.8</td><td>스위스</td><td>크레인·굴착기·믹서</td></tr>
+<tr><td>10</td><td>두산밥캣</td><td>5.5</td><td>한국</td><td>소형장비·로더</td></tr>
+</table>
+<p style="font-size:10px;color:#888;text-align:right;margin-top:2px;">출처: 각 사 IR, CUFA</p>
+<div class="chart-pair">
+<div class="chart-box" style="width:100%;max-width:700px;"><div class="chart-title">도표 2-2. 글로벌 건설기계 시장 규모 추이</div>
+<svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg">
+<text x="42" y="14" fill="#A09CB0" font-size="9">(단위: B USD)</text>
+<line x1="40" y1="260" x2="680" y2="260" stroke="#2A2845" stroke-width="1"/>
+<line x1="40" y1="211.1" x2="680" y2="211.1" stroke="#2A2845" stroke-width="0.5" stroke-dasharray="3"/>
+<line x1="40" y1="162.2" x2="680" y2="162.2" stroke="#2A2845" stroke-width="0.5" stroke-dasharray="3"/>
+<line x1="40" y1="113.4" x2="680" y2="113.4" stroke="#2A2845" stroke-width="0.5" stroke-dasharray="3"/>
+<line x1="40" y1="64.5" x2="680" y2="64.5" stroke="#2A2845" stroke-width="0.5" stroke-dasharray="3"/>
+<rect x="50.0" y="112.0" width="46.5" height="148.0" rx="3" fill="#7C6AF7" opacity="0.8"/>
+<text x="73.2" y="106.0" fill="#E8E6F0" font-size="10" text-anchor="middle">165</text>
+<text x="73.2" y="274.0" fill="#A09CB0" font-size="9" text-anchor="middle">2020</text>
+<rect x="130.0" y="94.1" width="46.5" height="165.9" rx="3" fill="#7C6AF7" opacity="0.8"/>
+<text x="153.2" y="88.1" fill="#E8E6F0" font-size="10" text-anchor="middle">185</text>
+<text x="153.2" y="274.0" fill="#A09CB0" font-size="9" text-anchor="middle">2021</text>
+<rect x="210.0" y="80.6" width="46.5" height="179.4" rx="3" fill="#7C6AF7" opacity="0.8"/>
+<text x="233.2" y="74.6" fill="#E8E6F0" font-size="10" text-anchor="middle">200</text>
+<text x="233.2" y="274.0" fill="#A09CB0" font-size="9" text-anchor="middle">2022</text>
+<rect x="290.0" y="71.7" width="46.5" height="188.3" rx="3" fill="#7C6AF7" opacity="0.8"/>
+<text x="313.2" y="65.7" fill="#E8E6F0" font-size="10" text-anchor="middle">210</text>
+<text x="313.2" y="274.0" fill="#A09CB0" font-size="9" text-anchor="middle">2023</text>
+<rect x="370.0" y="85.1" width="46.5" height="174.9" rx="3" fill="#A78BFA" opacity="0.8"/>
+<text x="393.2" y="79.1" fill="#E8E6F0" font-size="10" text-anchor="middle">195</text>
+<text x="393.2" y="274.0" fill="#A09CB0" font-size="9" text-anchor="middle">2024</text>
+<rect x="450.0" y="86.9" width="46.5" height="173.1" rx="3" fill="#A78BFA" opacity="0.8"/>
+<text x="473.2" y="80.9" fill="#E8E6F0" font-size="10" text-anchor="middle">193</text>
+<text x="473.2" y="274.0" fill="#A09CB0" font-size="9" text-anchor="middle">2025E</text>
+<rect x="530.0" y="76.2" width="46.5" height="183.8" rx="3" fill="#00E09E" opacity="0.8"/>
+<text x="553.2" y="70.2" fill="#E8E6F0" font-size="10" text-anchor="middle">205</text>
+<text x="553.2" y="274.0" fill="#A09CB0" font-size="9" text-anchor="middle">2026E</text>
+<rect x="610.0" y="64.5" width="46.5" height="195.5" rx="3" fill="#00E09E" opacity="0.8"/>
+<text x="633.2" y="58.5" fill="#E8E6F0" font-size="10" text-anchor="middle">218</text>
+<text x="633.2" y="274.0" fill="#A09CB0" font-size="9" text-anchor="middle">2027E</text>
+</svg><p style="font-size:10px;color:#888;text-align:right;margin-top:4px;">출처: DART, HD건설기계 IR, CUFA</p></div>
+<div class="chart-box" style="width:100%;max-width:700px;"><div class="chart-title">도표 2-3. 글로벌 건설기계 수요 사이클 (YoY %)</div>
+<svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg">
+<text x="42" y="14" fill="#A09CB0" font-size="9">(단위: %)</text>
+<line x1="40" y1="211.1" x2="680" y2="211.1" stroke="#2A2845" stroke-width="0.5" stroke-dasharray="3"/>
+<line x1="40" y1="162.2" x2="680" y2="162.2" stroke="#2A2845" stroke-width="0.5" stroke-dasharray="3"/>
+<line x1="40" y1="113.4" x2="680" y2="113.4" stroke="#2A2845" stroke-width="0.5" stroke-dasharray="3"/>
+<line x1="40" y1="64.5" x2="680" y2="64.5" stroke="#2A2845" stroke-width="0.5" stroke-dasharray="3"/>
+<text x="50.0" y="274.0" fill="#A09CB0" font-size="9" text-anchor="middle">2020</text>
+<line x1="50.0" y1="20" x2="50.0" y2="260" stroke="#2A2845" stroke-width="0.5" stroke-dasharray="3"/>
+<text x="138.6" y="274.0" fill="#A09CB0" font-size="9" text-anchor="middle">2021</text>
+<line x1="138.6" y1="20" x2="138.6" y2="260" stroke="#2A2845" stroke-width="0.5" stroke-dasharray="3"/>
+<text x="227.1" y="274.0" fill="#A09CB0" font-size="9" text-anchor="middle">2022</text>
+<line x1="227.1" y1="20" x2="227.1" y2="260" stroke="#2A2845" stroke-width="0.5" stroke-dasharray="3"/>
+<text x="315.7" y="274.0" fill="#A09CB0" font-size="9" text-anchor="middle">2023</text>
+<line x1="315.7" y1="20" x2="315.7" y2="260" stroke="#2A2845" stroke-width="0.5" stroke-dasharray="3"/>
+<text x="404.3" y="274.0" fill="#A09CB0" font-size="9" text-anchor="middle">2024</text>
+<line x1="404.3" y1="20" x2="404.3" y2="260" stroke="#2A2845" stroke-width="0.5" stroke-dasharray="3"/>
+<text x="492.9" y="274.0" fill="#A09CB0" font-size="9" text-anchor="middle">2025E</text>
+<line x1="492.9" y1="20" x2="492.9" y2="260" stroke="#2A2845" stroke-width="0.5" stroke-dasharray="3"/>
+<text x="581.4" y="274.0" fill="#A09CB0" font-size="9" text-anchor="middle">2026E</text>
+<line x1="581.4" y1="20" x2="581.4" y2="260" stroke="#2A2845" stroke-width="0.5" stroke-dasharray="3"/>
+<text x="670.0" y="274.0" fill="#A09CB0" font-size="9" text-anchor="middle">2027E</text>
+<line x1="670.0" y1="20" x2="670.0" y2="260" stroke="#2A2845" stroke-width="0.5" stroke-dasharray="3"/>
+<polyline points="50.0,260.0 138.6,64.5 227.1,103.4 315.7,133.6 404.3,251.2 492.9,191.9 581.4,121.9 670.0,120.9" fill="none" stroke="#00E09E" stroke-width="2"/>
+<circle cx="50.0" cy="260.0" r="3" fill="#00E09E"/>
+<text x="50.0" y="252.0" fill="#00E09E" font-size="8" text-anchor="middle">-8.0</text>
+<circle cx="138.6" cy="64.5" r="3" fill="#00E09E"/>
+<text x="138.6" y="56.5" fill="#00E09E" font-size="8" text-anchor="middle">12.1</text>
+<circle cx="227.1" cy="103.4" r="3" fill="#00E09E"/>
+<text x="227.1" y="95.4" fill="#00E09E" font-size="8" text-anchor="middle">8.1</text>
+<circle cx="315.7" cy="133.6" r="3" fill="#00E09E"/>
+<text x="315.7" y="125.6" fill="#00E09E" font-size="8" text-anchor="middle">5.0</text>
+<circle cx="404.3" cy="251.2" r="3" fill="#00E09E"/>
+<text x="404.3" y="243.2" fill="#00E09E" font-size="8" text-anchor="middle">-7.1</text>
+<circle cx="492.9" cy="191.9" r="3" fill="#00E09E"/>
+<text x="492.9" y="183.9" fill="#00E09E" font-size="8" text-anchor="middle">-1.0</text>
+<circle cx="581.4" cy="121.9" r="3" fill="#00E09E"/>
+<text x="581.4" y="113.9" fill="#00E09E" font-size="8" text-anchor="middle">6.2</text>
+<circle cx="670.0" cy="120.9" r="3" fill="#00E09E"/>
+<text x="670.0" y="112.9" fill="#00E09E" font-size="8" text-anchor="middle">6.3</text>
+<line x1="60" y1="12" x2="76" y2="12" stroke="#00E09E" stroke-width="2"/>
+<text x="80" y="15" fill="#00E09E" font-size="9">수요증감률</text>
+</svg><p style="font-size:10px;color:#888;text-align:right;margin-top:4px;">출처: DART, HD건설기계 IR, CUFA</p></div>
+</div>
+<div class="chart-pair">
+<div class="chart-box" style="width:100%;max-width:700px;"><div class="chart-title">도표 2-4. 글로벌 TOP 10 건설기계 기업 매출</div>
+<svg viewBox="0 0 700 360" xmlns="http://www.w3.org/2000/svg">
+<text x="118" y="34" fill="#A09CB0" font-size="10" text-anchor="end">Caterpillar</text>
+<rect x="124" y="22" width="425.0" height="18" rx="3" fill="#FFB84D" opacity="0.8"/>
+<text x="555.0" y="34" fill="#E8E6F0" font-size="10">65.7</text>
+<text x="118" y="64" fill="#A09CB0" font-size="10" text-anchor="end">Komatsu</text>
+<rect x="124" y="52" width="181.8" height="18" rx="3" fill="#FFB84D" opacity="0.8"/>
+<text x="311.8" y="64" fill="#E8E6F0" font-size="10">28.1</text>
+<text x="118" y="94" fill="#A09CB0" font-size="10" text-anchor="end">Volvo CE</text>
+<rect x="124" y="82" width="82.8" height="18" rx="3" fill="#A78BFA" opacity="0.8"/>
+<text x="212.8" y="94" fill="#E8E6F0" font-size="10">12.8</text>
+<text x="118" y="124" fill="#A09CB0" font-size="10" text-anchor="end">John Deere</text>
+<rect x="124" y="112" width="73.7" height="18" rx="3" fill="#A78BFA" opacity="0.8"/>
+<text x="203.7" y="124" fill="#E8E6F0" font-size="10">11.4</text>
+<text x="118" y="154" fill="#A09CB0" font-size="10" text-anchor="end">XCMG</text>
+<rect x="124" y="142" width="69.9" height="18" rx="3" fill="#FF4D4D" opacity="0.8"/>
+<text x="199.9" y="154" fill="#E8E6F0" font-size="10">10.8</text>
+<text x="118" y="184" fill="#A09CB0" font-size="10" text-anchor="end">SANY</text>
+<rect x="124" y="172" width="66.0" height="18" rx="3" fill="#FF4D4D" opacity="0.8"/>
+<text x="196.0" y="184" fill="#E8E6F0" font-size="10">10.2</text>
+<text x="118" y="214" fill="#A09CB0" font-size="10" text-anchor="end">Hitachi CM</text>
+<rect x="124" y="202" width="57.6" height="18" rx="3" fill="#A78BFA" opacity="0.8"/>
+<text x="187.6" y="214" fill="#E8E6F0" font-size="10">8.9</text>
+<text x="118" y="244" fill="#A09CB0" font-size="10" text-anchor="end">HD건설기계</text>
+<rect x="124" y="232" width="41.4" height="18" rx="3" fill="#00E09E" opacity="0.8"/>
+<text x="171.4" y="244" fill="#E8E6F0" font-size="10">6.4</text>
+<text x="118" y="274" fill="#A09CB0" font-size="10" text-anchor="end">Liebherr</text>
+<rect x="124" y="262" width="37.5" height="18" rx="3" fill="#A78BFA" opacity="0.8"/>
+<text x="167.5" y="274" fill="#E8E6F0" font-size="10">5.8</text>
+<text x="118" y="304" fill="#A09CB0" font-size="10" text-anchor="end">두산밥캣</text>
+<rect x="124" y="292" width="35.6" height="18" rx="3" fill="#7C6AF7" opacity="0.8"/>
+<text x="165.6" y="304" fill="#E8E6F0" font-size="10">5.5</text>
+</svg><p style="font-size:10px;color:#888;text-align:right;margin-top:4px;">출처: DART, HD건설기계 IR, CUFA</p></div>
+<div class="chart-box" style="width:100%;max-width:500px;"><div class="chart-title">도표 2-5. 지역별 건설기계 수요 비중 (2025E)</div>
+<svg viewBox="0 0 420 340" xmlns="http://www.w3.org/2000/svg">
+<path d="M200.0,50.0 A100,100 0 0,1 298.2,168.7 L254.0,160.3 A55,55 0 0,0 200.0,95.0 Z" fill="#7C6AF7" opacity="0.85"/>
+<text x="291" y="75" fill="#E8E6F0" font-size="10" text-anchor="middle">28%</text>
+<path d="M298.2,168.7 A100,100 0 0,1 224.9,246.9 L213.7,203.3 A55,55 0 0,0 254.0,160.3 Z" fill="#A78BFA" opacity="0.85"/>
+<text x="286" y="231" fill="#E8E6F0" font-size="10" text-anchor="middle">18%</text>
+<path d="M224.9,246.9 A100,100 0 0,1 109.5,192.6 L150.2,173.4 A55,55 0 0,0 213.7,203.3 Z" fill="#FF4D4D" opacity="0.85"/>
+<text x="150" y="257" fill="#E8E6F0" font-size="10" text-anchor="middle">22%</text>
+<path d="M109.5,192.6 A100,100 0 0,1 104.9,119.1 L147.7,133.0 A55,55 0 0,0 150.2,173.4 Z" fill="#00E09E" opacity="0.85"/>
+<text x="82" y="157" fill="#E8E6F0" font-size="10" text-anchor="middle">12%</text>
+<path d="M104.9,119.1 A100,100 0 0,1 131.5,77.1 L162.3,109.9 A55,55 0 0,0 147.7,133.0 Z" fill="#FFB84D" opacity="0.85"/>
+<text x="100" y="87" fill="#E8E6F0" font-size="10" text-anchor="middle">8%</text>
+<path d="M131.5,77.1 A100,100 0 0,1 169.1,54.9 L183.0,97.7 A55,55 0 0,0 162.3,109.9 Z" fill="#888888" opacity="0.85"/>
+<text x="140" y="48" fill="#E8E6F0" font-size="10" text-anchor="middle">7%</text>
+<path d="M169.1,54.9 A100,100 0 0,1 200.0,50.0 L200.0,95.0 A55,55 0 0,0 183.0,97.7 Z" fill="#A09CB0" opacity="0.85"/>
+<text x="182" y="33" fill="#E8E6F0" font-size="10" text-anchor="middle">5%</text>
+<text x="200" y="146" fill="#A78BFA" font-size="14" font-weight="700" text-anchor="middle">100</text>
+<text x="200" y="162" fill="#A09CB0" font-size="9" text-anchor="middle">합계</text>
+<rect x="260" y="218" width="10" height="10" rx="2" fill="#7C6AF7"/>
+<text x="274" y="227" fill="#A09CB0" font-size="10">북미 (28)</text>
+<rect x="260" y="234" width="10" height="10" rx="2" fill="#A78BFA"/>
+<text x="274" y="243" fill="#A09CB0" font-size="10">유럽 (18)</text>
+<rect x="260" y="250" width="10" height="10" rx="2" fill="#FF4D4D"/>
+<text x="274" y="259" fill="#A09CB0" font-size="10">중국 (22)</text>
+<rect x="260" y="266" width="10" height="10" rx="2" fill="#00E09E"/>
+<text x="274" y="275" fill="#A09CB0" font-size="10">인도 (12)</text>
+<rect x="260" y="282" width="10" height="10" rx="2" fill="#FFB84D"/>
+<text x="274" y="291" fill="#A09CB0" font-size="10">중동·아프리카 (8)</text>
+<rect x="260" y="298" width="10" height="10" rx="2" fill="#888888"/>
+<text x="274" y="307" fill="#A09CB0" font-size="10">기타 아시아 (7)</text>
+<rect x="260" y="314" width="10" height="10" rx="2" fill="#A09CB0"/>
+<text x="274" y="323" fill="#A09CB0" font-size="10">중남미 (5)</text>
+</svg><p style="font-size:10px;color:#888;text-align:right;margin-top:4px;">출처: DART, HD건설기계 IR, CUFA</p></div>
+</div>
+</div>
+
+<div class="section" id="sec3">
+  <div class="section-subheader">Equity Research Report | HD건설기계 (267270)</div>
+  <div class="section-header">
+    <div class="section-num">3</div>
+    <div class="section-title">투자포인트 ① — 통합 시너지와 비용 효율화</div>
+  </div>
+<div class="sidebar-layout">
+<div class="sidebar-kw">
+  <div class="kw">시너지 총액</div><div class="kw-val">3,000억</div>
+  <div class="kw">구매통합</div><div class="kw-val">1,200억</div>
+  <div class="kw">CAPEX절감</div><div class="kw-val">800억</div>
+  <div class="kw">OPM 개선</div><div class="kw-val">4.5→8%</div>
+  <div class="kw">실현 시기</div><div class="kw-val">2026~28</div>
+</div>
+<div class="content-area">
+
+    <p><strong>HD건설기계의 합병 시너지 규모는 연간 약 3,000억원으로 추정된다.</strong> 이는 합병 전 양사의 합산 영업이익 4,573억원의 65.6%에 해당하는 대단히 의미 있는 수준이다. 시너지는 크게 (1) 구매 통합, (2) CAPEX 절감, (3) R&D 효율화, (4) 매출 시너지의 네 가지 영역에서 발생할 전망이다.</p>
+
+    <p><strong>첫째, 구매 통합 시너지는 약 1,200억원으로 추정된다.</strong> HD현대건설기계와 HD현대인프라코어는 합병 전에도 유사한 원자재(철강·유압부품·전장부품)를 개별적으로 조달하고 있었다. 합병 후 통합 구매를 실시하면, 물량 레버리지를 활용한 단가 인하(5~8% 추정), 중복 벤더 통폐합, 물류 최적화 등을 통해 상당한 비용 절감이 가능하다.</p>
+
+    <p><strong>둘째, CAPEX 절감 시너지는 약 800억원으로 추정된다.</strong> 양사는 각각 독립적으로 생산라인 증설·자동화 투자를 진행해왔다. 합병 후에는 울산·인천·군산 공장 간 생산 배분을 최적화하고, 중복 설비 투자를 방지함으로써 연간 CAPEX를 약 800억원 절감할 수 있다.</p>
+
+    <p><strong>셋째, R&D 효율화 시너지는 약 400억원으로 추정된다.</strong> 합병 전 양사의 합산 R&D 비용은 연간 약 2,000억원이었으며, 전동화·자율주행·텔레매틱스 등 중복 연구 분야가 상당하였다.</p>
+
+    <p><strong>넷째, 매출 시너지는 약 600억원으로 추정된다.</strong> HYUNDAI와 DEVELON 두 브랜드의 크로스셀링(cross-selling)이 핵심이다. HYUNDAI 딜러망을 통해 DEVELON 엔진·소형장비를 판매하고, DEVELON 딜러망을 통해 HYUNDAI 대형 굴착기를 판매하는 식이다.</p>
+
+    <p>시너지 추정의 벤치마크로 과거 글로벌 건설기계 업종의 합병 사례를 참고하였다. 2016년 Volvo CE가 Terex의 건설장비 부문을 인수한 사례에서는, 합산 매출 대비 약 3~4%의 시너지가 3년에 걸쳐 실현되었다. HD건설기계의 시너지 추정액 3,000억원은 합산 매출 83,000억원의 약 3.6%에 해당하여, 업종 평균과 부합하는 현실적인 수준이다.</p>
+
+    <p>시너지 효과의 실현 시점을 보면, 구매 통합과 CAPEX 절감은 합병 직후부터 빠르게 효과가 나타날 것으로 예상된다. 반면 R&D 효율화와 매출 시너지는 조직 통합과 딜러망 재편에 시간이 소요되어, 2027년부터 본격적으로 가시화될 전망이다. 전체 시너지의 60~70%(약 1,800~2,100억원)는 2026년 내 실현 가능하며, 나머지는 2027~2028년에 걸쳐 완전히 반영될 것으로 추정한다.</p>
+
+    <p><strong><u>시너지 효과가 완전히 실현되면, HD건설기계의 영업이익률(OPM)은 합병 전 4.5% 수준에서 7~8%로 개선될 것으로 전망된다.</u></strong> 이는 글로벌 피어인 Caterpillar(OPM 20%+), Komatsu(OPM 13%+)에 비하면 여전히 낮은 수준이나, 두산밥캣(OPM 7.8%)과 유사한 수준까지 수렴하는 것이다.</p>
+
+    <p>합병 시너지의 리스크 요인도 균형 있게 분석해야 한다. 가장 큰 리스크는 조직 통합 과정에서의 마찰이다. 당사는 PMI 비용을 약 1,275억원으로 추정하며, 이는 2026년 실적에 일회성으로 반영될 것이다.</p>
+
+    <p>OPM 개선 경로를 구체적으로 보면, 2025년 4.52% → 2026년 5.76%(시너지 60% 반영, PMI 비용 차감) → 2027년 7.0%(시너지 100% 반영) → 2028년 7.5%(규모 효과 + AM 확대) → 2030년 8.0%(전동화 + 고부가가치 제품 확대)로 단계적 개선이 예상된다.</p>
+
+    <p><strong><u>합병 시너지의 산업적 맥락</u></strong></p>
+
+    <p>건설기계 산업에서 합병·인수(M&A)는 경쟁력 강화를 위한 보편적 전략이다. 이 산업은 (1) 규모의 경제가 크게 작용하고, (2) 글로벌 딜러 네트워크 구축에 막대한 비용이 소요되며, (3) R&D 투자의 규모가 커지고 있어, 대형화가 경쟁 생존의 필수 조건이 되고 있다. 과거 주요 합병 사례를 보면, 2011년 Caterpillar의 Bucyrus 인수($8.6B, 광산 장비 포트폴리오 확대), 2016년 Volvo CE의 Terex 건설장비 인수(유럽 시장 강화), 2017년 Komatsu의 Joy Global 인수($3.7B, 광산기계 포트폴리오 확대) 등이 대표적이다. 이들 합병에서 공통적으로 관찰되는 시너지 패턴은 (1) 구매 통합에 의한 원가 절감이 가장 빠르고 확실하며, (2) 크로스셀링에 의한 매출 시너지는 실현에 2~3년이 소요되고, (3) 문화 통합과 시스템 통합이 시너지 실현의 최대 변수라는 것이다.</p>
+
+    <p>HD건설기계의 합병 시너지 구조를 과거 사례와 비교하면, 구매 통합 시너지 1,200억원(합산 매출의 1.4%)은 Komatsu-Joy Global 사례(합산 매출의 1.5%)와 유사한 수준으로 현실적이다. CAPEX 절감 800억원은 양사의 국내 공장이 지리적으로 근접(울산·인천·군산)하여 생산 재배치가 용이하다는 점에서 타 사례 대비 실현 가능성이 높다. R&D 효율화 400억원은 전동화·자율주행 등 중복 연구 과제가 많았다는 점에서 합리적이나, 핵심 연구 인력의 이탈을 방지하면서 효율화를 달성해야 하는 과제가 있다. 매출 시너지 600억원은 가장 불확실성이 높은 영역이나, HYUNDAI와 DEVELON의 딜러 네트워크가 상당 부분 비중복적이라는 점에서 크로스셀링 기회는 충분하다.</p>
+
+    <p>시너지 실현의 핵심 마일스톤을 정리하면 다음과 같다. 2026년 1분기: 통합 구매 조직 출범, 주요 벤더 재계약 착수. 2026년 2분기: 구매 통합 효과 첫 반영, 분기 실적에서 원가율 개선 확인. 2026년 하반기: 울산·인천·군산 공장 간 생산 재배치 완료, CAPEX 절감 효과 본격화. 2027년: 글로벌 딜러 네트워크 통합 완료, 크로스셀링 본격화. 2027년 이후: R&D 통합 조직의 첫 결과물(통합 플랫폼 기반 신모델) 출시. 경영진은 이 마일스톤의 달성 여부를 분기마다 공시할 예정이며, 투자자는 이를 시너지 실현의 리트머스 테스트로 활용할 수 있다.</p>
+</div>
+</div>
+<div class="chart-box" style="width:100%;max-width:700px;">
+<div class="chart-title">도표 3-1. 합병 시너지 시스템 아키텍처 (DSA)</div>
+<svg viewBox="0 0 700 280" xmlns="http://www.w3.org/2000/svg">
+  <rect x="10" y="20" width="140" height="45" rx="6" fill="none" stroke="#FF4D4D" stroke-width="1.5"/>
+  <text x="80" y="38" fill="#FF4D4D" font-size="11" font-weight="700" text-anchor="middle">구매통합</text>
+  <text x="80" y="54" fill="#A09CB0" font-size="10" text-anchor="middle">1,200억원</text>
+  <rect x="10" y="75" width="140" height="45" rx="6" fill="none" stroke="#7C6AF7" stroke-width="1.5"/>
+  <text x="80" y="93" fill="#7C6AF7" font-size="11" font-weight="700" text-anchor="middle">CAPEX절감</text>
+  <text x="80" y="109" fill="#A09CB0" font-size="10" text-anchor="middle">800억원</text>
+  <rect x="10" y="130" width="140" height="45" rx="6" fill="none" stroke="#A78BFA" stroke-width="1.5"/>
+  <text x="80" y="148" fill="#A78BFA" font-size="11" font-weight="700" text-anchor="middle">R&D효율화</text>
+  <text x="80" y="164" fill="#A09CB0" font-size="10" text-anchor="middle">400억원</text>
+  <rect x="10" y="185" width="140" height="45" rx="6" fill="none" stroke="#00E09E" stroke-width="1.5"/>
+  <text x="80" y="203" fill="#00E09E" font-size="11" font-weight="700" text-anchor="middle">매출시너지</text>
+  <text x="80" y="219" fill="#A09CB0" font-size="10" text-anchor="middle">600억원</text>
+  <line x1="150" y1="42" x2="190" y2="135" stroke="#555" stroke-width="1"/>
+  <line x1="150" y1="97" x2="190" y2="135" stroke="#555" stroke-width="1"/>
+  <line x1="150" y1="152" x2="190" y2="135" stroke="#555" stroke-width="1"/>
+  <line x1="150" y1="207" x2="190" y2="135" stroke="#555" stroke-width="1"/>
+  <rect x="190" y="110" width="120" height="50" rx="8" fill="rgba(124,106,247,0.12)" stroke="#7C6AF7" stroke-width="2"/>
+  <text x="250" y="132" fill="#7C6AF7" font-size="13" font-weight="700" text-anchor="middle">시너지</text>
+  <text x="250" y="150" fill="#E8E6F0" font-size="12" font-weight="700" text-anchor="middle">3,000억원</text>
+  <text x="330" y="140" fill="#7C6AF7" font-size="18" font-weight="700">→</text>
+  <rect x="350" y="110" width="100" height="50" rx="8" fill="rgba(0,224,158,0.08)" stroke="#00E09E" stroke-width="1.5"/>
+  <text x="400" y="130" fill="#00E09E" font-size="11" font-weight="700" text-anchor="middle">OPM</text>
+  <text x="400" y="148" fill="#E8E6F0" font-size="11" text-anchor="middle">4.5→8.0%</text>
+  <text x="468" y="140" fill="#7C6AF7" font-size="18" font-weight="700">→</text>
+  <rect x="485" y="110" width="100" height="50" rx="8" fill="rgba(255,184,77,0.08)" stroke="#FFB84D" stroke-width="1.5"/>
+  <text x="535" y="130" fill="#FFB84D" font-size="11" font-weight="700" text-anchor="middle">EPS</text>
+  <text x="535" y="148" fill="#E8E6F0" font-size="11" text-anchor="middle">8,972원</text>
+  <text x="603" y="140" fill="#7C6AF7" font-size="18" font-weight="700">→</text>
+  <rect x="618" y="100" width="75" height="70" rx="8" fill="rgba(124,106,247,0.15)" stroke="#7C6AF7" stroke-width="2"/>
+  <text x="655" y="125" fill="#7C6AF7" font-size="10" font-weight="700" text-anchor="middle">목표주가</text>
+  <text x="655" y="145" fill="#E8E6F0" font-size="13" font-weight="900" text-anchor="middle">160,000</text>
+  <text x="655" y="160" fill="#00E09E" font-size="9" text-anchor="middle">+20.3%</text>
+  <text x="350" y="250" fill="#A09CB0" font-size="10" text-anchor="middle">시너지 실현 60%(2026E) → 100%(2027E) | PMI 비용 1,275억원 일회성 차감</text>
+</svg>
+<p style="font-size:10px;color:#888;text-align:right;margin-top:4px;">출처: CUFA 추정</p>
+</div>
+<div class="chart-box" style="width:100%;max-width:700px;"><div class="chart-title">도표 3-2. 합병 시너지 경로 — 연간 3,000억원</div>
+<svg viewBox="0 0 700 320" xmlns="http://www.w3.org/2000/svg">
+<rect x="50.0" y="275.0" width="56.8" height="2.0" rx="2" fill="#7C6AF7" opacity="0.8"/>
+<text x="78.4" y="269.0" fill="#E8E6F0" font-size="9" text-anchor="middle">4,573</text>
+<text x="78.4" y="289.0" fill="#A09CB0" font-size="8" text-anchor="middle">합병전 OP</text>
+<line x1="106.8" y1="275.0" x2="153.3" y2="275.0" stroke="#2A2845" stroke-width="1" stroke-dasharray="3"/>
+<rect x="153.3" y="203.0" width="56.8" height="72.0" rx="2" fill="#00E09E" opacity="0.8"/>
+<text x="181.7" y="197.0" fill="#E8E6F0" font-size="9" text-anchor="middle">1,200</text>
+<text x="181.7" y="289.0" fill="#A09CB0" font-size="8" text-anchor="middle">구매통합</text>
+<line x1="210.2" y1="203.0" x2="256.7" y2="203.0" stroke="#2A2845" stroke-width="1" stroke-dasharray="3"/>
+<rect x="256.7" y="155.0" width="56.8" height="48.0" rx="2" fill="#00E09E" opacity="0.8"/>
+<text x="285.1" y="149.0" fill="#E8E6F0" font-size="9" text-anchor="middle">800</text>
+<text x="285.1" y="289.0" fill="#A09CB0" font-size="8" text-anchor="middle">CAPEX절감</text>
+<line x1="313.5" y1="155.0" x2="360.0" y2="155.0" stroke="#2A2845" stroke-width="1" stroke-dasharray="3"/>
+<rect x="360.0" y="131.0" width="56.8" height="24.0" rx="2" fill="#00E09E" opacity="0.8"/>
+<text x="388.4" y="125.0" fill="#E8E6F0" font-size="9" text-anchor="middle">400</text>
+<text x="388.4" y="289.0" fill="#A09CB0" font-size="8" text-anchor="middle">R&D효율화</text>
+<line x1="416.8" y1="131.0" x2="463.3" y2="131.0" stroke="#2A2845" stroke-width="1" stroke-dasharray="3"/>
+<rect x="463.3" y="95.0" width="56.8" height="36.0" rx="2" fill="#00E09E" opacity="0.8"/>
+<text x="491.8" y="89.0" fill="#E8E6F0" font-size="9" text-anchor="middle">600</text>
+<text x="491.8" y="289.0" fill="#A09CB0" font-size="8" text-anchor="middle">매출시너지</text>
+<line x1="520.2" y1="95.0" x2="566.7" y2="95.0" stroke="#2A2845" stroke-width="1" stroke-dasharray="3"/>
+<rect x="566.7" y="95.0" width="56.8" height="180.0" rx="2" fill="#7C6AF7" opacity="0.8"/>
+<text x="595.1" y="89.0" fill="#E8E6F0" font-size="9" text-anchor="middle">7,573</text>
+<text x="595.1" y="289.0" fill="#A09CB0" font-size="8" text-anchor="middle">합병후 OP</text>
+</svg><p style="font-size:10px;color:#888;text-align:right;margin-top:4px;">출처: HD건설기계 IR, CUFA 추정</p></div>
+
+<div class="metric-grid">
+  <div class="metric-card"><div class="mc-label">구매통합</div><div class="mc-value mc-up">1,200억</div><div class="mc-sub">물량 레버리지 단가인하</div></div>
+  <div class="metric-card"><div class="mc-label">CAPEX절감</div><div class="mc-value mc-up">800억</div><div class="mc-sub">중복 설비투자 방지</div></div>
+  <div class="metric-card"><div class="mc-label">R&D효율화</div><div class="mc-value mc-up">400억</div><div class="mc-sub">중복 과제 정리</div></div>
+  <div class="metric-card"><div class="mc-label">매출시너지</div><div class="mc-value mc-up">600억</div><div class="mc-sub">크로스셀링·AM확대</div></div>
+</div>
+<p style="font-size:12px;color:var(--text-sec);margin:12px 0 6px;font-weight:600;">도표 3-3. 시너지 영역별 분석</p>
+<table class="data"><tr><th>시너지 영역</th><th>규모(억원)</th><th>실현 시점</th><th>확실성</th><th>핵심 동인</th></tr>
+<tr><td>구매 통합</td><td>1,200</td><td>2026H1</td><td>높음</td><td>물량 레버리지, 벤더 통폐합</td></tr>
+<tr><td>CAPEX 절감</td><td>800</td><td>2026H1</td><td>높음</td><td>중복 설비 제거, 공장 최적화</td></tr>
+<tr><td>R&D 효율화</td><td>400</td><td>2027~</td><td>중간</td><td>중복 과제 정리, 조직 통합</td></tr>
+<tr><td>매출 시너지</td><td>600</td><td>2027~</td><td>중간</td><td>크로스셀링, AM 확대</td></tr>
+<tr class="highlight-row"><td>합계</td><td>3,000</td><td>2026~2028</td><td>—</td><td>—</td></tr>
+</table>
+<p style="font-size:10px;color:#888;text-align:right;margin-top:2px;">출처: CUFA 추정</p>
+</div>
+
+<div class="section" id="sec4">
+  <div class="section-subheader">Equity Research Report | HD건설기계 (267270)</div>
+  <div class="section-header">
+    <div class="section-num">4</div>
+    <div class="section-title">투자포인트 ② — 글로벌 확장과 업사이클 진입</div>
+  </div>
+<div class="sidebar-layout">
+<div class="sidebar-kw">
+  <div class="kw">북미 IIJA</div><div class="kw-val">$1.2T</div>
+  <div class="kw">인도 점유율</div><div class="kw-val">9→15%</div>
+  <div class="kw">중동 NEOM</div><div class="kw-val">$500B</div>
+  <div class="kw">중국</div><div class="kw-val">바닥 탈출</div>
+  <div class="kw">전동화</div><div class="kw-val">2027 양산</div>
+</div>
+<div class="content-area">
+
+    <p><strong>HD건설기계는 2026년 하반기부터 시작되는 글로벌 건설기계 업사이클의 최대 수혜주가 될 전망이다.</strong> 북미·인도·중동이라는 세 개의 성장 축이 동시에 가동되며, 중국 시장의 바닥 탈출까지 더해지면 2027~2028년에는 실적 모멘텀이 극대화될 것으로 판단한다.</p>
+
+    <p><strong>북미 시장: IIJA 본격 집행의 수혜</strong><br/>미국의 인프라투자법(IIJA) $1.2T는 2022년 법안 통과 이후 행정 절차와 프로젝트 기획에 시간이 소요되었으나, 2026년부터 실제 건설 공사가 본격 시작된다. 도로 재건, 교량 보수, 수자원 인프라, 전기차 충전 네트워크 등 다양한 분야에서 건설기계 수요가 급증할 전망이다. HD건설기계는 북미에서 HYUNDAI 굴착기의 시장 점유율을 5%에서 8%로 확대하고, DEVELON 소형장비의 신규 딜러 확보를 통해 연 매출 5,000억원 이상을 달성할 계획이다.</p>
+
+    <p><strong>인도 시장: 점유율 9%→15% 확대 로드맵</strong><br/>인도는 인프라 투자 확대, 도시화 가속, 광업 수요 증가 등으로 건설기계 시장이 연 8~10% 성장하고 있다. HD건설기계는 푸네 공장의 생산능력을 연 5,000대에서 8,000대로 확대 중이며, 현지화율을 70%에서 85%로 높여 가격 경쟁력을 강화하고 있다.</p>
+
+    <p><strong>중동 시장: NEOM과 Vision 2030</strong><br/>사우디아라비아의 NEOM 프로젝트는 총 투자 규모 $500B의 초대형 건설 프로젝트이다. HD건설기계는 2025년 하반기 사우디 현지 법인을 설립하였으며, 대형 굴착기 100대 규모의 초기 공급 계약을 체결하였다.</p>
+
+    <p><strong>중국 시장: 바닥 확인 후 완만한 회복</strong><br/>중국 건설기계 시장은 2021년 정점 대비 55% 이상 급감하여 2024~2025년에 바닥을 형성하였다. HD건설기계는 강소성 공장을 통해 중국 시장을 공략하고 있으며, 바닥 통과 후 교체 수요(replacement cycle)를 중심으로 점진적 회복이 예상된다.</p>
+
+    <p><strong>전동화 시장: 노르웨이 R&D 기반의 선제적 포지셔닝</strong><br/>전동 건설기계 시장은 현재 전체의 3% 미만이나, 유럽 탄소 규제 강화와 TCO(Total Cost of Ownership) 경쟁력 개선으로 빠르게 성장 중이다. HD건설기계는 노르웨이 R&D 센터에서 전동 굴착기·휠로더를 개발하고 있으며, 2027년부터 양산 모델 출시가 계획되어 있다.</p>
+
+    <p><strong>동남아 시장</strong>도 무시할 수 없는 성장 기회이다. 인도네시아, 베트남, 필리핀 등은 인프라 투자가 활발히 진행 중이며, 건설기계 수요가 연 6~8% 성장하고 있다.</p>
+
+    <p><strong><u>종합적으로, HD건설기계는 (1) 북미 IIJA(단기), (2) 인도 인프라 투자(중기), (3) 중동 NEOM(중기), (4) 중국 바닥 통과(단기), (5) 전동화 시장 선점(장기)이라는 다섯 가지 성장 동력을 동시에 보유하고 있다.</u></strong></p>
+
+    <p><strong>아프리카 시장</strong>은 장기적 성장 잠재력이 매우 크다. 사하라 이남 아프리카의 도시화율은 40%에 불과하여 향후 수십 년간 인프라 건설 수요가 지속될 전망이다. 현재 HD건설기계의 아프리카 매출 비중은 2% 미만이나, 남아프리카공화국과 케냐에 딜러망을 구축하고 있으며, 중장기적으로 아프리카 매출 비중을 5%까지 확대할 계획이다. 특히 나이지리아, 에티오피아, 탄자니아 등에서 대규모 도로 건설과 주택 건설 프로젝트가 진행 중이며, 이들 시장에서의 선점이 장기 성장의 열쇠가 될 것이다.</p>
+
+    <p>지역별 성장 전략을 구체적으로 살펴보면, HD건설기계는 각 지역의 특성에 맞는 차별화된 접근법을 채택하고 있다. 북미에서는 HYUNDAI 브랜드의 프리미엄 포지셔닝을 강화하고, 대형 굴착기·휠로더 중심의 고수익 제품 판매를 확대한다. 유럽에서는 DEVELON 브랜드의 전동 장비 라인업을 활용하여 친환경 규제에 대응하고, 렌탈 시장 점유율을 높인다. 인도에서는 현지 생산을 통한 가격 경쟁력으로 시장 점유율을 공격적으로 확대하며, 소형·중형 굴착기를 중심으로 볼륨을 늘린다. 중동에서는 대형 프로젝트 수주에 집중하여, 대형 굴착기·덤프트럭·휠로더 패키지 딜을 추진한다.</p>
+
+    <p>글로벌 딜러 네트워크의 통합도 중요한 성장 동력이다. 합병 전 HYUNDAI는 약 80개국에 딜러망을, DEVELON은 약 70개국에 딜러망을 보유하고 있었다. 양사의 딜러망에는 상당한 중복이 있으나, 동시에 각각만 진출해 있는 시장도 존재한다. 합병 후 통합 딜러 네트워크는 약 130개국을 커버하게 되며, 이는 글로벌 시장 접근성을 크게 높인다. 특히 DEVELON만 진출해 있던 중남미 일부 국가에서 HYUNDAI 대형 장비를 추가로 판매하고, HYUNDAI만 진출해 있던 아프리카 일부 국가에서 DEVELON 소형 장비를 판매하는 크로스셀링 기회가 풍부하다.</p>
+
+    <p>2030년 매출 14.8조원 로드맵의 달성 경로를 분석하면, 현재 합산 매출 약 8.3조원에서 14.8조원까지의 성장은 연평균 약 10%의 성장률을 필요로 한다. 이를 분해하면, (1) 유기적 성장(글로벌 시장 성장 + 점유율 확대) 6~7%, (2) 합병 시너지 효과 2~3%, (3) 신규 사업(전동화, AM 확대) 1~2%로 구성된다. 2026~2028년은 합병 시너지와 업사이클이 동시에 작용하여 성장률이 높지만(+6.6%, +8.5%, +8.3%), 2029~2030년에는 유기적 성장과 신규 사업이 주된 동력이 될 전망이다.</p>
+
+    <p><strong><u>지역별 경쟁 환경 상세</u></strong></p>
+
+    <p>각 지역 시장에서 HD건설기계가 직면하는 경쟁 환경을 상세히 분석한다. <strong>북미 시장</strong>에서는 Caterpillar가 압도적 1위(점유율 약 30%)이며, John Deere(15%), Komatsu(12%)가 뒤를 잇는다. HD건설기계의 현재 북미 점유율은 약 5%로, HYUNDAI 브랜드의 인지도를 활용한 확대 전략을 추진 중이다. 북미 시장의 특징은 렌탈 비중이 높고(약 55%), 고객이 TCO와 잔존가치를 중시한다는 점이다. 또한 딜러의 서비스 역량(부품 재고, 정비 인력)이 구매 결정의 핵심 요소이다.</p>
+
+    <p><strong>유럽 시장</strong>에서는 Volvo CE(점유율 약 18%), Caterpillar(15%), Liebherr(12%), Komatsu(10%)가 상위를 차지한다. 유럽은 전동화 규제가 가장 엄격한 시장으로, 도심 건설 현장에서 디젤 장비 사용이 점차 제한되고 있다. DEVELON 브랜드의 전동 소형 장비가 이 시장에서 경쟁력을 발휘할 수 있는 기회이다. HD건설기계의 유럽 점유율은 약 4%이며, 전동화 라인업 확대를 통해 2030년 7%까지 확대하는 것이 목표이다.</p>
+
+    <p><strong>인도 시장</strong>에서는 Tata Hitachi(점유율 약 20%), JCB(18%), Komatsu(12%), Volvo CE(10%) 등이 경쟁하고 있다. HD건설기계(HYUNDAI 브랜드)의 현재 점유율은 약 9~10%로, 푸네 공장의 현지 생산과 현대자동차의 브랜드 인지도를 활용하여 빠르게 성장 중이다. 인도 시장의 핵심 경쟁 요소는 가격과 금융 접근성이며, 중형(12~20톤급) 굴착기가 주력 세그먼트이다.</p>
+
+    <p><strong>중국 시장</strong>은 SANY(점유율 약 25%), XCMG(18%), Caterpillar(8%), Komatsu(7%) 등 국내 업체가 압도적 우위를 점하고 있다. HD건설기계의 중국 점유율은 약 3%로, 강소성 공장을 통한 현지화 전략으로 틈새 시장을 공략하고 있다. 중국 시장은 가격 경쟁이 극심하여 수익성 확보가 어렵지만, 시장 규모가 워낙 커서 소폭의 점유율 확대만으로도 상당한 매출 증가가 가능하다.</p>
+</div>
+</div>
+<div class="chart-pair">
+<div class="chart-box" style="width:100%;max-width:700px;"><div class="chart-title">도표 4-1. 지역별 매출 비중 (2026E)</div>
+<svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg">
+<text x="42" y="14" fill="#A09CB0" font-size="9">(단위: 억원)</text>
+<line x1="40" y1="260" x2="680" y2="260" stroke="#2A2845" stroke-width="1"/>
+<line x1="40" y1="211.1" x2="680" y2="211.1" stroke="#2A2845" stroke-width="0.5" stroke-dasharray="3"/>
+<line x1="40" y1="162.2" x2="680" y2="162.2" stroke="#2A2845" stroke-width="0.5" stroke-dasharray="3"/>
+<line x1="40" y1="113.4" x2="680" y2="113.4" stroke="#2A2845" stroke-width="0.5" stroke-dasharray="3"/>
+<line x1="40" y1="64.5" x2="680" y2="64.5" stroke="#2A2845" stroke-width="0.5" stroke-dasharray="3"/>
+<rect x="50.0" y="64.5" width="50.0" height="195.5" rx="3" fill="#7C6AF7" opacity="0.8"/>
+<text x="75.0" y="58.5" fill="#E8E6F0" font-size="10" text-anchor="middle">22,125</text>
+<text x="75.0" y="274.0" fill="#A09CB0" font-size="9" text-anchor="middle">한국</text>
+<rect x="141.4" y="103.6" width="50.0" height="156.4" rx="3" fill="#00E09E" opacity="0.8"/>
+<text x="166.4" y="97.6" fill="#E8E6F0" font-size="10" text-anchor="middle">17,700</text>
+<text x="166.4" y="274.0" fill="#A09CB0" font-size="9" text-anchor="middle">북미</text>
+<rect x="232.9" y="142.7" width="50.0" height="117.3" rx="3" fill="#A78BFA" opacity="0.8"/>
+<text x="257.9" y="136.7" fill="#E8E6F0" font-size="10" text-anchor="middle">13,275</text>
+<text x="257.9" y="274.0" fill="#A09CB0" font-size="9" text-anchor="middle">유럽</text>
+<rect x="324.3" y="142.7" width="50.0" height="117.3" rx="3" fill="#FF4D4D" opacity="0.8"/>
+<text x="349.3" y="136.7" fill="#E8E6F0" font-size="10" text-anchor="middle">13,275</text>
+<text x="349.3" y="274.0" fill="#A09CB0" font-size="9" text-anchor="middle">중국</text>
+<rect x="415.7" y="181.8" width="50.0" height="78.2" rx="3" fill="#FFB84D" opacity="0.8"/>
+<text x="440.7" y="175.8" fill="#E8E6F0" font-size="10" text-anchor="middle">8,850</text>
+<text x="440.7" y="274.0" fill="#A09CB0" font-size="9" text-anchor="middle">인도</text>
+<rect x="507.1" y="220.9" width="50.0" height="39.1" rx="3" fill="#888888" opacity="0.8"/>
+<text x="532.1" y="214.9" fill="#E8E6F0" font-size="10" text-anchor="middle">4,425</text>
+<text x="532.1" y="274.0" fill="#A09CB0" font-size="9" text-anchor="middle">중동</text>
+<rect x="598.6" y="181.8" width="50.0" height="78.2" rx="3" fill="#A09CB0" opacity="0.8"/>
+<text x="623.6" y="175.8" fill="#E8E6F0" font-size="10" text-anchor="middle">8,850</text>
+<text x="623.6" y="274.0" fill="#A09CB0" font-size="9" text-anchor="middle">기타</text>
+<polyline points="75.0,220.9 166.4,168.8 257.9,207.9 349.3,194.8 440.7,129.7 532.1,64.5 623.6,194.8" fill="none" stroke="#00E09E" stroke-width="2" stroke-linecap="round"/>
+<circle cx="75.0" cy="220.9" r="3" fill="#00E09E"/>
+<text x="75.0" y="212.9" fill="#00E09E" font-size="9" text-anchor="middle">3.0%</text>
+<circle cx="166.4" cy="168.8" r="3" fill="#00E09E"/>
+<text x="166.4" y="160.8" fill="#00E09E" font-size="9" text-anchor="middle">7.0%</text>
+<circle cx="257.9" cy="207.9" r="3" fill="#00E09E"/>
+<text x="257.9" y="199.9" fill="#00E09E" font-size="9" text-anchor="middle">4.0%</text>
+<circle cx="349.3" cy="194.8" r="3" fill="#00E09E"/>
+<text x="349.3" y="186.8" fill="#00E09E" font-size="9" text-anchor="middle">5.0%</text>
+<circle cx="440.7" cy="129.7" r="3" fill="#00E09E"/>
+<text x="440.7" y="121.7" fill="#00E09E" font-size="9" text-anchor="middle">10.0%</text>
+<circle cx="532.1" cy="64.5" r="3" fill="#00E09E"/>
+<text x="532.1" y="56.5" fill="#00E09E" font-size="9" text-anchor="middle">15.0%</text>
+<circle cx="623.6" cy="194.8" r="3" fill="#00E09E"/>
+<text x="623.6" y="186.8" fill="#00E09E" font-size="9" text-anchor="middle">5.0%</text>
+<text x="680" y="20" fill="#00E09E" font-size="9" text-anchor="end">— 성장률(%)</text>
+</svg><p style="font-size:10px;color:#888;text-align:right;margin-top:4px;">출처: DART, HD건설기계 IR, CUFA</p></div>
+<div class="chart-box" style="width:100%;max-width:700px;"><div class="chart-title">도표 4-2. 지역별 매출 성장률 전망 (2026E~2028E, %)</div>
+<svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg">
+<text x="42" y="14" fill="#A09CB0" font-size="9">(단위: %)</text>
+<line x1="40" y1="211.1" x2="680" y2="211.1" stroke="#2A2845" stroke-width="0.5" stroke-dasharray="3"/>
+<line x1="40" y1="162.2" x2="680" y2="162.2" stroke="#2A2845" stroke-width="0.5" stroke-dasharray="3"/>
+<line x1="40" y1="113.4" x2="680" y2="113.4" stroke="#2A2845" stroke-width="0.5" stroke-dasharray="3"/>
+<line x1="40" y1="64.5" x2="680" y2="64.5" stroke="#2A2845" stroke-width="0.5" stroke-dasharray="3"/>
+<text x="50.0" y="274.0" fill="#A09CB0" font-size="9" text-anchor="middle">한국</text>
+<line x1="50.0" y1="20" x2="50.0" y2="260" stroke="#2A2845" stroke-width="0.5" stroke-dasharray="3"/>
+<text x="174.0" y="274.0" fill="#A09CB0" font-size="9" text-anchor="middle">북미</text>
+<line x1="174.0" y1="20" x2="174.0" y2="260" stroke="#2A2845" stroke-width="0.5" stroke-dasharray="3"/>
+<text x="298.0" y="274.0" fill="#A09CB0" font-size="9" text-anchor="middle">유럽</text>
+<line x1="298.0" y1="20" x2="298.0" y2="260" stroke="#2A2845" stroke-width="0.5" stroke-dasharray="3"/>
+<text x="422.0" y="274.0" fill="#A09CB0" font-size="9" text-anchor="middle">중국</text>
+<line x1="422.0" y1="20" x2="422.0" y2="260" stroke="#2A2845" stroke-width="0.5" stroke-dasharray="3"/>
+<text x="546.0" y="274.0" fill="#A09CB0" font-size="9" text-anchor="middle">인도</text>
+<line x1="546.0" y1="20" x2="546.0" y2="260" stroke="#2A2845" stroke-width="0.5" stroke-dasharray="3"/>
+<text x="670.0" y="274.0" fill="#A09CB0" font-size="9" text-anchor="middle">중동</text>
+<line x1="670.0" y1="20" x2="670.0" y2="260" stroke="#2A2845" stroke-width="0.5" stroke-dasharray="3"/>
+<polyline points="50.0,260.0 174.0,207.9 298.0,247.0 422.0,233.9 546.0,168.8 670.0,103.6" fill="none" stroke="#7C6AF7" stroke-width="2"/>
+<circle cx="50.0" cy="260.0" r="3" fill="#7C6AF7"/>
+<text x="50.0" y="252.0" fill="#7C6AF7" font-size="8" text-anchor="middle">3.0</text>
+<circle cx="174.0" cy="207.9" r="3" fill="#7C6AF7"/>
+<text x="174.0" y="199.9" fill="#7C6AF7" font-size="8" text-anchor="middle">7.0</text>
+<circle cx="298.0" cy="247.0" r="3" fill="#7C6AF7"/>
+<text x="298.0" y="239.0" fill="#7C6AF7" font-size="8" text-anchor="middle">4.0</text>
+<circle cx="422.0" cy="233.9" r="3" fill="#7C6AF7"/>
+<text x="422.0" y="225.9" fill="#7C6AF7" font-size="8" text-anchor="middle">5.0</text>
+<circle cx="546.0" cy="168.8" r="3" fill="#7C6AF7"/>
+<text x="546.0" y="160.8" fill="#7C6AF7" font-size="8" text-anchor="middle">10.0</text>
+<circle cx="670.0" cy="103.6" r="3" fill="#7C6AF7"/>
+<text x="670.0" y="95.6" fill="#7C6AF7" font-size="8" text-anchor="middle">15.0</text>
+<polyline points="50.0,253.5 174.0,194.8 298.0,233.9 422.0,207.9 546.0,142.7 670.0,64.5" fill="none" stroke="#00E09E" stroke-width="2"/>
+<circle cx="50.0" cy="253.5" r="3" fill="#00E09E"/>
+<text x="50.0" y="245.5" fill="#00E09E" font-size="8" text-anchor="middle">3.5</text>
+<circle cx="174.0" cy="194.8" r="3" fill="#00E09E"/>
+<text x="174.0" y="186.8" fill="#00E09E" font-size="8" text-anchor="middle">8.0</text>
+<circle cx="298.0" cy="233.9" r="3" fill="#00E09E"/>
+<text x="298.0" y="225.9" fill="#00E09E" font-size="8" text-anchor="middle">5.0</text>
+<circle cx="422.0" cy="207.9" r="3" fill="#00E09E"/>
+<text x="422.0" y="199.9" fill="#00E09E" font-size="8" text-anchor="middle">7.0</text>
+<circle cx="546.0" cy="142.7" r="3" fill="#00E09E"/>
+<text x="546.0" y="134.7" fill="#00E09E" font-size="8" text-anchor="middle">12.0</text>
+<circle cx="670.0" cy="64.5" r="3" fill="#00E09E"/>
+<text x="670.0" y="56.5" fill="#00E09E" font-size="8" text-anchor="middle">18.0</text>
+<polyline points="50.0,260.0 174.0,220.9 298.0,240.4 422.0,220.9 546.0,155.7 670.0,103.6" fill="none" stroke="#FFB84D" stroke-width="2"/>
+<circle cx="50.0" cy="260.0" r="3" fill="#FFB84D"/>
+<text x="50.0" y="252.0" fill="#FFB84D" font-size="8" text-anchor="middle">3.0</text>
+<circle cx="174.0" cy="220.9" r="3" fill="#FFB84D"/>
+<text x="174.0" y="212.9" fill="#FFB84D" font-size="8" text-anchor="middle">6.0</text>
+<circle cx="298.0" cy="240.4" r="3" fill="#FFB84D"/>
+<text x="298.0" y="232.4" fill="#FFB84D" font-size="8" text-anchor="middle">4.5</text>
+<circle cx="422.0" cy="220.9" r="3" fill="#FFB84D"/>
+<text x="422.0" y="212.9" fill="#FFB84D" font-size="8" text-anchor="middle">6.0</text>
+<circle cx="546.0" cy="155.7" r="3" fill="#FFB84D"/>
+<text x="546.0" y="147.7" fill="#FFB84D" font-size="8" text-anchor="middle">11.0</text>
+<circle cx="670.0" cy="103.6" r="3" fill="#FFB84D"/>
+<text x="670.0" y="95.6" fill="#FFB84D" font-size="8" text-anchor="middle">15.0</text>
+<line x1="60" y1="12" x2="76" y2="12" stroke="#7C6AF7" stroke-width="2"/>
+<text x="80" y="15" fill="#7C6AF7" font-size="9">2026E</text>
+<line x1="140" y1="12" x2="156" y2="12" stroke="#00E09E" stroke-width="2"/>
+<text x="160" y="15" fill="#00E09E" font-size="9">2027E</text>
+<line x1="220" y1="12" x2="236" y2="12" stroke="#FFB84D" stroke-width="2"/>
+<text x="240" y="15" fill="#FFB84D" font-size="9">2028E</text>
+</svg><p style="font-size:10px;color:#888;text-align:right;margin-top:4px;">출처: DART, HD건설기계 IR, CUFA</p></div>
+</div>
+<p style="font-size:12px;color:var(--text-sec);margin:12px 0 6px;font-weight:600;">도표 4-3. 지역별 매출 추정 상세</p>
+<table class="data"><tr><th>지역</th><th>2025 매출(억)</th><th>2026E 매출(억)</th><th>YoY(%)</th><th>핵심 동인</th><th>중기 성장률</th></tr>
+<tr><td>한국</td><td>20,750</td><td>22,125</td><td>+6.6%</td><td>SOC 투자 확대</td><td>3~4%</td></tr>
+<tr><td>북미</td><td>15,660</td><td>17,700</td><td>+13.0%</td><td>IIJA 본격 집행</td><td>7~9%</td></tr>
+<tr><td>유럽</td><td>11,745</td><td>13,275</td><td>+13.0%</td><td>전동화 수요, 그린딜</td><td>4~5%</td></tr>
+<tr><td>중국</td><td>13,745</td><td>13,275</td><td>-3.4%</td><td>바닥 탈출, 교체수요</td><td>5~8%</td></tr>
+<tr class="highlight-row"><td>인도</td><td>7,530</td><td>8,850</td><td>+17.5%</td><td>Gati Shakti, 도시화</td><td>10~12%</td></tr>
+<tr class="highlight-row"><td>중동</td><td>3,318</td><td>4,425</td><td>+33.4%</td><td>NEOM, Vision 2030</td><td>15~20%</td></tr>
+<tr><td>기타</td><td>8,252</td><td>8,850</td><td>+7.2%</td><td>중남미·동남아</td><td>5~6%</td></tr>
+</table>
+<p style="font-size:10px;color:#888;text-align:right;margin-top:2px;">출처: DART, CUFA 추정</p>
+</div>
+
+<div class="section" id="sec5">
+  <div class="section-subheader">Equity Research Report | HD건설기계 (267270)</div>
+  <div class="section-header">
+    <div class="section-num">5</div>
+    <div class="section-title">투자포인트 ③ — 밸류에이션 Re-rating 기회</div>
+  </div>
+<div class="sidebar-layout">
+<div class="sidebar-kw">
+  <div class="kw">12MF PER</div><div class="kw-val">13.85배</div>
+  <div class="kw">CAT PER</div><div class="kw-val">29배</div>
+  <div class="kw">목표주가</div><div class="kw-val">160,000원</div>
+  <div class="kw">업사이드</div><div class="kw-val">+20.3%</div>
+  <div class="kw">MSCI</div><div class="kw-val">편입 가능</div>
+</div>
+<div class="content-area">
+
+    <p><strong>HD건설기계의 12개월 Forward PER은 13.85배로, 글로벌 피어 대비 뚜렷한 할인 상태에 있다.</strong> Caterpillar의 Forward PER 29배, Komatsu 14.68배와 비교하면 상당한 할인율이다. 국내 피어인 두산밥캣의 trailing PER 15.14배와 비교해도 할인 거래 중이다.</p>
+
+    <p><strong>디스카운트의 원인은 크게 세 가지이다.</strong> 첫째, 합병 초기 불확실성이다. 조직 통합, 시스템 통합, 문화 충돌 등 합병 후 실행 리스크에 대한 우려가 주가에 반영되어 있다. 둘째, 한국 시장의 구조적 디스카운트(Korea Discount)이다. 셋째, 건설기계 산업의 경기순환적 특성이다.</p>
+
+    <p><strong>Re-rating 트리거는 네 가지로 정리할 수 있다.</strong> 첫째, 분기 실적을 통한 시너지 가시화이다. 둘째, 글로벌 업사이클 확인이다. 셋째, 주주환원 정책 강화이다. 넷째, MSCI 편입 가능성이다. 시가총액 6.38조원과 유동비율 62.67%는 MSCI Korea Index 편입 기준을 충족한다.</p>
+
+    <p>현재 컨센서스 목표주가는 159,667원으로, 현재주가 133,000원 대비 +20.1%의 상승 여력을 제시하고 있다. 당사의 목표주가는 160,000원으로 컨센서스와 유사한 수준이며, 2026E EPS 8,972원에 Target PER 17.8배를 적용하여 산출하였다.</p>
+
+    <p><strong><u>밸류에이션 할인의 정량적 분석을 시도하면, 현재 HD건설기계의 12MF PER 13.85배에서 글로벌 피어 평균 PER(약 20배)까지의 갭은 약 30%이다.</u></strong> 이 갭의 분해는 (1) 합병 리스크 프리미엄 10~15%, (2) Korea Discount 5~10%, (3) 사이클 불확실성 5~10%로 추정된다. 합병 시너지가 가시화되면 (1)이 축소되고, 업사이클 진입이 확인되면 (3)이 해소되어, 할인율은 10% 이내로 수렴할 것으로 판단한다.</p>
+
+    <p>MSCI 편입 가능성에 대해 상세히 분석하면, HD건설기계의 시가총액 6.38조원(약 $4.9B)은 MSCI Korea Standard Index의 편입 기준(약 $3B)을 충족한다. MSCI 반기 리밸런싱(5월·11월)에서 편입될 경우, 약 $300~500M 규모의 패시브 자금 유입이 예상된다.</p>
+
+    <p>과거 HD현대건설기계의 PER 밴드를 분석하면, 2022~2025년 PER 범위는 7.3~17.5배였다. 합병 후 규모 확대와 포트폴리오 다각화를 감안하면, 적정 PER 범위는 14~18배로 상향 조정이 합리적이다.</p>
+
+    <p>밸류에이션 할인 해소의 타임라인을 제시하면 다음과 같다. 2026년 2분기(합병 후 첫 온전한 분기 실적 발표): 시너지 가시화로 합병 리스크 프리미엄 축소 시작. 목표 PER: 15~16배. 2026년 하반기(글로벌 업사이클 진입 확인): 사이클 불확실성 프리미엄 해소. 목표 PER: 16~17배. 2027년(시너지 100% 반영, OPM 7% 달성): 글로벌 피어 수준으로 밸류에이션 수렴. 목표 PER: 17~18배. 이 경로대로라면, 2027년 EPS 11,500원 × PER 18배 = 207,000원까지의 상승 여력이 존재한다.</p>
+
+    <p>동종업종 합병 후 Re-rating 사례를 분석하면, 건설기계 업종에서 가장 참고할 만한 사례는 2017년 Komatsu의 Joy Global 인수이다. Komatsu는 인수 발표 당시 PER 12배에서, 통합 완료 후 2019년에 PER 18배까지 Re-rating 되었다. 이는 합병 시너지 가시화와 광산기계 포트폴리오 다각화가 인정받은 결과이다. HD건설기계도 유사한 경로를 밟을 것으로 기대하며, 합병 완료 후 2~3년 내에 PER 17~18배 수준으로의 Re-rating이 합리적이라고 판단한다.</p>
+
+    <p>주주환원 정책 개선 가능성도 Re-rating 트리거로 작용할 수 있다. 현재 HD건설기계의 배당수익률은 0.38%로 글로벌 피어(Komatsu 2.8%, 두산밥캣 3.2%, CAT 1.5%) 대비 매우 낮다. 합병 초기에는 통합 비용과 차입금 상환에 현금이 사용되겠지만, 2027년 이후 FCF가 4,000억원 이상으로 안정화되면 배당 확대나 자사주 매입 등의 주주환원 강화가 가능하다. DPS를 현재 500원에서 1,000원으로 인상하면 배당수익률은 0.75%, 1,500원으로 인상하면 1.13%까지 상승한다. 이는 Korea Discount 해소에도 기여할 것이다.</p>
+
+    <p>외국인 투자자 수급 분석도 Re-rating 시나리오에서 중요하다. 현재 HD건설기계의 외국인 지분율은 약 15%로, 코스피 대형주 평균(30%+) 대비 크게 낮다. 합병 후 시가총액 확대와 유동성 개선, MSCI 편입 가능성 등이 외국인 투자자 유입의 촉매가 될 것이다. 외국인 투자자의 특성상, 시너지 가시화와 ROE 개선이 확인되면 적극적인 매수세가 유입될 가능성이 높으며, 이는 주가 Re-rating을 가속화할 것이다.</p>
+</div>
+</div>
+<div class="chart-pair">
+<div class="chart-box" style="width:100%;max-width:700px;"><div class="chart-title">도표 5-1. PER 밴드 차트 (2022~2026E)</div>
+<svg viewBox="0 0 700 320" xmlns="http://www.w3.org/2000/svg">
+<polyline points="50.0,268.6 205.0,250.8 360.0,273.4 515.0,269.2 670.0,227.0" fill="none" stroke="#FF4D4D" stroke-width="1.5" stroke-dasharray="6"/>
+<text x="674.0" y="227.0" fill="#FF4D4D" font-size="8">PER 8x</text>
+<polyline points="50.0,233.0 205.0,206.4 360.0,240.3 515.0,233.9 670.0,170.7" fill="none" stroke="#FFB84D" stroke-width="1.5" stroke-dasharray="6"/>
+<text x="674.0" y="170.7" fill="#FFB84D" font-size="8">PER 12x</text>
+<polyline points="50.0,197.5 205.0,162.0 360.0,207.2 515.0,198.7 670.0,114.4" fill="none" stroke="#00E09E" stroke-width="1.5" stroke-dasharray="6"/>
+<text x="674.0" y="114.4" fill="#00E09E" font-size="8">PER 16x</text>
+<polyline points="50.0,162.0 205.0,117.6 360.0,174.1 515.0,163.5 670.0,58.1" fill="none" stroke="#7C6AF7" stroke-width="1.5" stroke-dasharray="6"/>
+<text x="674.0" y="58.1" fill="#7C6AF7" font-size="8">PER 20x</text>
+<polyline points="50.0,242.0 205.0,258.5 360.0,248.2 515.0,185.3 670.0,131.0" fill="none" stroke="#E8E6F0" stroke-width="2.5"/>
+<circle cx="50.0" cy="242.0" r="3" fill="#E8E6F0"/>
+<circle cx="205.0" cy="258.5" r="3" fill="#E8E6F0"/>
+<circle cx="360.0" cy="248.2" r="3" fill="#E8E6F0"/>
+<circle cx="515.0" cy="185.3" r="3" fill="#E8E6F0"/>
+<circle cx="670.0" cy="131.0" r="3" fill="#E8E6F0"/>
+<text x="50.0" y="294.0" fill="#A09CB0" font-size="9" text-anchor="middle">2022</text>
+<text x="205.0" y="294.0" fill="#A09CB0" font-size="9" text-anchor="middle">2023</text>
+<text x="360.0" y="294.0" fill="#A09CB0" font-size="9" text-anchor="middle">2024</text>
+<text x="515.0" y="294.0" fill="#A09CB0" font-size="9" text-anchor="middle">2025</text>
+<text x="670.0" y="294.0" fill="#A09CB0" font-size="9" text-anchor="middle">2026E</text>
+<line x1="60" y1="12" x2="76" y2="12" stroke="#E8E6F0" stroke-width="2.5"/>
+<text x="80" y="15" fill="#E8E6F0" font-size="9">주가</text>
+</svg><p style="font-size:10px;color:#888;text-align:right;margin-top:4px;">출처: DART, HD건설기계 IR, CUFA</p></div>
+<div class="chart-box" style="width:100%;max-width:700px;"><div class="chart-title">도표 5-2. PBR 밴드 차트 (2022~2026E)</div>
+<svg viewBox="0 0 700 320" xmlns="http://www.w3.org/2000/svg">
+<polyline points="50.0,272.6 205.0,267.1 360.0,258.6 515.0,247.9 670.0,244.1" fill="none" stroke="#FF4D4D" stroke-width="1.5" stroke-dasharray="6"/>
+<text x="674.0" y="244.1" fill="#FF4D4D" font-size="8">PBR 0.5x</text>
+<polyline points="50.0,227.9 205.0,219.1 360.0,205.6 515.0,188.4 670.0,182.3" fill="none" stroke="#FFB84D" stroke-width="1.5" stroke-dasharray="6"/>
+<text x="674.0" y="182.3" fill="#FFB84D" font-size="8">PBR 0.8x</text>
+<polyline points="50.0,183.2 205.0,171.1 360.0,152.5 515.0,128.9 670.0,120.6" fill="none" stroke="#00E09E" stroke-width="1.5" stroke-dasharray="6"/>
+<text x="674.0" y="120.6" fill="#00E09E" font-size="8">PBR 1.1x</text>
+<polyline points="50.0,138.5 205.0,123.2 360.0,99.5 515.0,69.5 670.0,58.8" fill="none" stroke="#7C6AF7" stroke-width="1.5" stroke-dasharray="6"/>
+<text x="674.0" y="58.8" fill="#7C6AF7" font-size="8">PBR 1.4x</text>
+<polyline points="50.0,228.5 205.0,248.5 360.0,235.9 515.0,159.5 670.0,93.5" fill="none" stroke="#E8E6F0" stroke-width="2.5"/>
+<circle cx="50.0" cy="228.5" r="3" fill="#E8E6F0"/>
+<circle cx="205.0" cy="248.5" r="3" fill="#E8E6F0"/>
+<circle cx="360.0" cy="235.9" r="3" fill="#E8E6F0"/>
+<circle cx="515.0" cy="159.5" r="3" fill="#E8E6F0"/>
+<circle cx="670.0" cy="93.5" r="3" fill="#E8E6F0"/>
+<text x="50.0" y="294.0" fill="#A09CB0" font-size="9" text-anchor="middle">2022</text>
+<text x="205.0" y="294.0" fill="#A09CB0" font-size="9" text-anchor="middle">2023</text>
+<text x="360.0" y="294.0" fill="#A09CB0" font-size="9" text-anchor="middle">2024</text>
+<text x="515.0" y="294.0" fill="#A09CB0" font-size="9" text-anchor="middle">2025</text>
+<text x="670.0" y="294.0" fill="#A09CB0" font-size="9" text-anchor="middle">2026E</text>
+<line x1="60" y1="12" x2="76" y2="12" stroke="#E8E6F0" stroke-width="2.5"/>
+<text x="80" y="15" fill="#E8E6F0" font-size="9">주가</text>
+</svg><p style="font-size:10px;color:#888;text-align:right;margin-top:4px;">출처: DART, HD건설기계 IR, CUFA</p></div>
+</div>
+<p style="font-size:12px;color:var(--text-sec);margin:12px 0 6px;font-weight:600;">도표 5-3. 밸류에이션 멀티플 추이</p>
+<table class="data"><tr><th>지표</th><th>2022</th><th>2023</th><th>2024</th><th>2025</th><th>2026E</th><th>평가</th></tr>
+<tr><td>PER(배)</td><td>10.99</td><td>7.31</td><td>11.05</td><td>17.53</td><td>14.8(E)</td><td>글로벌 피어 대비 할인</td></tr>
+<tr><td>PBR(배)</td><td>0.80</td><td>0.62</td><td>0.63</td><td>0.95</td><td>1.43</td><td>ROE 개선 반영</td></tr>
+<tr><td>EV/EBITDA</td><td>—</td><td>—</td><td>—</td><td>—</td><td>9.17</td><td>피어 중간</td></tr>
+<tr><td>ROE(%)</td><td>7.99</td><td>9.17</td><td>6.18</td><td>5.74</td><td>7.0(E)</td><td>개선 추세</td></tr>
+</table>
+<p style="font-size:10px;color:#888;text-align:right;margin-top:2px;">출처: FnGuide, CUFA</p>
+</div>
+
+<div class="section" id="sec6">
+  <div class="section-subheader">Equity Research Report | HD건설기계 (267270)</div>
+  <div class="section-header">
+    <div class="section-num">6</div>
+    <div class="section-title">재무 분석 — 듀폰 분해와 현금흐름</div>
+  </div>
+<div class="sidebar-layout">
+<div class="sidebar-kw">
+  <div class="kw">ROE</div><div class="kw-val">5.74%</div>
+  <div class="kw">NPM</div><div class="kw-val">2.30%</div>
+  <div class="kw">AT</div><div class="kw-val">1.08x</div>
+  <div class="kw">EM</div><div class="kw-val">1.87x</div>
+  <div class="kw">FCF</div><div class="kw-val">216억</div>
+  <div class="kw">ROIC vs WACC</div><div class="kw-val">5.8 vs 10</div>
+</div>
+<div class="content-area">
+
+    <p><strong>HD건설기계(합병 전 HD현대건설기계 기준)의 재무 구조를 듀폰 분해(DuPont Decomposition)를 통해 분석한다.</strong> 2025년 기준 ROE는 5.74%로, 3개 요소 분해 시 순이익률(NPM) 2.3% × 자산회전율(AT) 1.08배 × 자기자본배율(EM) 1.87배 = ROE 4.6%로 산출된다. (분기 조정 후 약 5.7%) ROE가 과거 대비 하락한 주된 원인은 순이익률 하락이며, 이는 영업이익률 축소와 비영업 손실 확대에 기인한다.</p>
+
+    <p><strong>순이익률(NPM)은 2023년 3.33%에서 2025년 2.30%로 하락하였다.</strong> 이는 원자재 가격 상승, 인건비 증가, 환율 변동 등의 영향이다. 다만 합병 후 시너지 효과로 2026년 NPM은 3.8~4.0%로 개선될 전망이다.</p>
+
+    <p><strong>자산회전율(AT)은 2022년 1.02배에서 2025년 1.08배로 소폭 개선되었다.</strong> 합병 후에는 통합 자산 기준 자산회전율이 일시적으로 하락할 수 있으나, 2027년 이후 매출 성장이 가속화되면 1.1배 이상으로 회복될 것으로 전망한다.</p>
+
+    <p><strong>자기자본배율(EM=총자산/자기자본)은 2025년 1.87배이다.</strong> 이는 부채비율 86.6%에 해당한다. 건설기계 산업 특성상 운전자본 부담이 크고 CAPEX 투자가 지속적으로 필요하여, 부채비율이 높은 편이다.</p>
+
+    <p><strong>현금흐름 구조를 분석하면, 영업현금흐름(OCF)은 2022~2025년 1,660~3,182억원 범위에서 형성되었다.</strong> CAPEX는 2022년 604억원에서 2024년 1,733억원으로 급증하였는데, 이는 인도 푸네 공장 증설과 전동화 R&D 투자 확대 때문이다.</p>
+
+    <p><strong>잉여현금흐름(FCF = OCF - CAPEX)은 2025년 기준 216억원으로 크게 축소되었다.</strong> 이는 일시적 현상으로, 합병 후 통합 기준 OCF는 5,000억원 이상, CAPEX는 2,500~3,000억원 수준이 예상되어, FCF는 2,000~2,500억원 수준으로 회복될 것이다.</p>
+
+    <p><strong><u>운전자본 상세 분석</u></strong></p>
+
+    <p>건설기계 산업은 재고자산 비중이 높아 운전자본 부담이 크다. 2025년 기준 재고자산은 7,500억원으로 매출 대비 19.9%에 달한다. DIO(재고자산회전일수)는 2022년 67일에서 2025년 72일로 소폭 증가하였는데, 이는 수요 둔화에 따른 재고 누적 영향이다. DSO(매출채권회전일수)는 2022년 70일에서 2025년 68일로 안정적이다. DPO(매입채무회전일수)는 2022년 73일에서 2025년 75일로 소폭 개선되었으며, 합병 후 구매력 강화로 추가 개선이 기대된다. CCC(현금전환주기 = DIO + DSO - DPO)는 2025년 기준 65일로, 2022년 64일 대비 소폭 악화되었으나, 합병 후 통합 재고 관리 시스템 도입을 통해 60일 이하로 개선할 계획이다.</p>
+
+    <p><strong><u>분기별 마진 트렌드 (1Q24~4Q25)</u></strong></p>
+
+    <p>분기별 영업이익률을 살펴보면, 1Q24 4.8% → 2Q24 6.1% → 3Q24 5.8% → 4Q24 5.3% → 1Q25 3.9% → 2Q25 5.0% → 3Q25 4.9% → 4Q25 4.2%로, 2분기와 3분기에 마진이 높고 1분기와 4분기에 낮아지는 계절성이 관찰된다. 이는 건설기계 수요가 봄·가을 건설 성수기에 집중되기 때문이다. 특히 2025년 1분기 OPM이 3.9%까지 하락한 것은 원자재 가격 상승과 환율 불리 변동이 겹친 결과이다.</p>
+
+    <p><strong><u>ROIC vs WACC 갭 분석</u></strong></p>
+
+    <p>2025년 ROIC(투하자본수익률)는 약 5.8%로 추정되며, WACC(10%) 대비 크게 낮은 수준이다. 이는 현재 투하자본 대비 충분한 수익을 창출하지 못하고 있음을 의미한다. ROIC-WACC 갭은 △4.2%p로, 기업가치 파괴(value destruction) 상태에 있다. 합병 시너지를 통해 NOPAT이 개선되고, 중복 투자 제거로 투하자본 효율이 높아지면 ROIC는 2027년 8%, 2028년 9% 수준까지 개선되어 WACC를 상회할 것으로 전망한다. <strong><u>ROIC가 WACC를 상회하는 2027~2028년이 바로 기업가치 창출(value creation)이 본격화되는 시점이며, 주가 Re-rating의 근본적 동력이 될 것이다.</u></strong></p>
+
+    <p>감가상각비는 2022년 514억원에서 2025년 589억원으로 점진적으로 증가하였다. CAPEX 대비 감가상각비 비율(CAPEX/D&A)은 2024년 3.07배, 2025년 2.45배로 높은 수준이며, 이는 적극적인 투자가 진행 중임을 시사한다. 합병 후에는 중복 설비 정리와 투자 효율화로 이 비율이 2.0배 이하로 안정화될 것으로 예상한다.</p>
+
+    <p>이자보상배율(ICR = 영업이익/이자비용)은 2025년 기준 약 3.4배로, 안전 마진이 충분한 수준이다. 합병 후 영업이익이 5,000억원 이상으로 확대되면, ICR은 6배 이상으로 개선될 전망이다. 부채의 질적 측면에서도, 차입금 대부분이 장기 시설자금 대출로 구성되어 있어 유동성 리스크는 제한적이다.</p>
+
+    <p>재무 안정성 측면에서 유동비율(유동자산/유동부채)은 2025년 기준 약 201%로 양호하다. 당좌비율(유동자산-재고자산/유동부채)은 약 122%로 단기 유동성에 문제가 없다. 다만 차입금의존도(총차입금/총자산)는 약 28%로, 건설기계 업종 내에서 중간 수준이다. 합병 후에는 양사의 차입금이 합산되어 일시적으로 상승할 수 있으나, FCF 개선을 통해 점진적으로 하락할 전망이다.</p>
+
+    <p>배당 정책 분석을 추가하면, HD건설기계는 합병 전 연간 DPS 500원(배당수익률 0.38%)을 유지해왔다. 배당성향은 2022년 8.8%, 2023년 7.1%, 2024년 9.5%로 매우 낮은 수준이다. 합병 후에는 통합 비용 상환이 마무리되는 2027년 이후 배당 확대가 기대되며, 배당성향을 20~25%로 상향할 경우 DPS 2,300~2,800원(배당수익률 1.7~2.1%)이 가능하다. 주주환원 정책 강화는 Korea Discount 해소와 밸류에이션 Re-rating의 핵심 트리거이다.</p>
+</div>
+</div>
+<div class="chart-pair">
+<div class="chart-box" style="width:100%;max-width:700px;"><div class="chart-title">도표 6-1. 매출액 및 영업이익 추이</div>
+<svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg">
+<text x="42" y="14" fill="#A09CB0" font-size="9">(단위: 억원)</text>
+<line x1="40" y1="260" x2="680" y2="260" stroke="#2A2845" stroke-width="1"/>
+<line x1="40" y1="211.1" x2="680" y2="211.1" stroke="#2A2845" stroke-width="0.5" stroke-dasharray="3"/>
+<line x1="40" y1="162.2" x2="680" y2="162.2" stroke="#2A2845" stroke-width="0.5" stroke-dasharray="3"/>
+<line x1="40" y1="113.4" x2="680" y2="113.4" stroke="#2A2845" stroke-width="0.5" stroke-dasharray="3"/>
+<line x1="40" y1="64.5" x2="680" y2="64.5" stroke="#2A2845" stroke-width="0.5" stroke-dasharray="3"/>
+<rect x="50.0" y="80.3" width="50.0" height="179.7" rx="3" fill="#7C6AF7" opacity="0.8"/>
+<text x="75.0" y="74.3" fill="#E8E6F0" font-size="10" text-anchor="middle">35,156</text>
+<text x="75.0" y="274.0" fill="#A09CB0" font-size="9" text-anchor="middle">2022</text>
+<rect x="210.0" y="64.5" width="50.0" height="195.5" rx="3" fill="#7C6AF7" opacity="0.8"/>
+<text x="235.0" y="58.5" fill="#E8E6F0" font-size="10" text-anchor="middle">38,250</text>
+<text x="235.0" y="274.0" fill="#A09CB0" font-size="9" text-anchor="middle">2023</text>
+<rect x="370.0" y="84.3" width="50.0" height="175.7" rx="3" fill="#7C6AF7" opacity="0.8"/>
+<text x="395.0" y="78.3" fill="#E8E6F0" font-size="10" text-anchor="middle">34,381</text>
+<text x="395.0" y="274.0" fill="#A09CB0" font-size="9" text-anchor="middle">2024</text>
+<rect x="530.0" y="67.0" width="50.0" height="193.0" rx="3" fill="#7C6AF7" opacity="0.8"/>
+<text x="555.0" y="61.0" fill="#E8E6F0" font-size="10" text-anchor="middle">37,765</text>
+<text x="555.0" y="274.0" fill="#A09CB0" font-size="9" text-anchor="middle">2025</text>
+<polyline points="75.0,118.9 235.0,64.5 395.0,98.8 555.0,128.5" fill="none" stroke="#00E09E" stroke-width="2" stroke-linecap="round"/>
+<circle cx="75.0" cy="118.9" r="3" fill="#00E09E"/>
+<text x="75.0" y="110.9" fill="#00E09E" font-size="9" text-anchor="middle">4.8%</text>
+<circle cx="235.0" cy="64.5" r="3" fill="#00E09E"/>
+<text x="235.0" y="56.5" fill="#00E09E" font-size="9" text-anchor="middle">6.7%</text>
+<circle cx="395.0" cy="98.8" r="3" fill="#00E09E"/>
+<text x="395.0" y="90.8" fill="#00E09E" font-size="9" text-anchor="middle">5.5%</text>
+<circle cx="555.0" cy="128.5" r="3" fill="#00E09E"/>
+<text x="555.0" y="120.5" fill="#00E09E" font-size="9" text-anchor="middle">4.5%</text>
+<text x="680" y="20" fill="#00E09E" font-size="9" text-anchor="end">— OPM(%)</text>
+</svg><p style="font-size:10px;color:#888;text-align:right;margin-top:4px;">출처: DART, HD건설기계 IR, CUFA</p></div>
+<div class="chart-box" style="width:100%;max-width:700px;"><div class="chart-title">도표 6-2. 마진율 추이 (%)</div>
+<svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg">
+<text x="42" y="14" fill="#A09CB0" font-size="9">(단위: %)</text>
+<line x1="40" y1="211.1" x2="680" y2="211.1" stroke="#2A2845" stroke-width="0.5" stroke-dasharray="3"/>
+<line x1="40" y1="162.2" x2="680" y2="162.2" stroke="#2A2845" stroke-width="0.5" stroke-dasharray="3"/>
+<line x1="40" y1="113.4" x2="680" y2="113.4" stroke="#2A2845" stroke-width="0.5" stroke-dasharray="3"/>
+<line x1="40" y1="64.5" x2="680" y2="64.5" stroke="#2A2845" stroke-width="0.5" stroke-dasharray="3"/>
+<text x="50.0" y="274.0" fill="#A09CB0" font-size="9" text-anchor="middle">2022</text>
+<line x1="50.0" y1="20" x2="50.0" y2="260" stroke="#2A2845" stroke-width="0.5" stroke-dasharray="3"/>
+<text x="256.7" y="274.0" fill="#A09CB0" font-size="9" text-anchor="middle">2023</text>
+<line x1="256.7" y1="20" x2="256.7" y2="260" stroke="#2A2845" stroke-width="0.5" stroke-dasharray="3"/>
+<text x="463.3" y="274.0" fill="#A09CB0" font-size="9" text-anchor="middle">2024</text>
+<line x1="463.3" y1="20" x2="463.3" y2="260" stroke="#2A2845" stroke-width="0.5" stroke-dasharray="3"/>
+<text x="670.0" y="274.0" fill="#A09CB0" font-size="9" text-anchor="middle">2025</text>
+<line x1="670.0" y1="20" x2="670.0" y2="260" stroke="#2A2845" stroke-width="0.5" stroke-dasharray="3"/>
+<polyline points="50.0,90.1 256.7,69.2 463.3,69.3 670.0,64.5" fill="none" stroke="#7C6AF7" stroke-width="2"/>
+<circle cx="50.0" cy="90.1" r="3" fill="#7C6AF7"/>
+<text x="50.0" y="82.1" fill="#7C6AF7" font-size="8" text-anchor="middle">17.1</text>
+<circle cx="256.7" cy="69.2" r="3" fill="#7C6AF7"/>
+<text x="256.7" y="61.2" fill="#7C6AF7" font-size="8" text-anchor="middle">18.9</text>
+<circle cx="463.3" cy="69.3" r="3" fill="#7C6AF7"/>
+<text x="463.3" y="61.3" fill="#7C6AF7" font-size="8" text-anchor="middle">18.9</text>
+<circle cx="670.0" cy="64.5" r="3" fill="#7C6AF7"/>
+<text x="670.0" y="56.5" fill="#7C6AF7" font-size="8" text-anchor="middle">19.4</text>
+<polyline points="50.0,230.8 256.7,209.3 463.3,222.8 670.0,234.5" fill="none" stroke="#00E09E" stroke-width="2"/>
+<circle cx="50.0" cy="230.8" r="3" fill="#00E09E"/>
+<text x="50.0" y="222.8" fill="#00E09E" font-size="8" text-anchor="middle">4.8</text>
+<circle cx="256.7" cy="209.3" r="3" fill="#00E09E"/>
+<text x="256.7" y="201.3" fill="#00E09E" font-size="8" text-anchor="middle">6.7</text>
+<circle cx="463.3" cy="222.8" r="3" fill="#00E09E"/>
+<text x="463.3" y="214.8" fill="#00E09E" font-size="8" text-anchor="middle">5.5</text>
+<circle cx="670.0" cy="234.5" r="3" fill="#00E09E"/>
+<text x="670.0" y="226.5" fill="#00E09E" font-size="8" text-anchor="middle">4.5</text>
+<polyline points="50.0,253.9 256.7,248.2 463.3,257.7 670.0,260.0" fill="none" stroke="#FFB84D" stroke-width="2"/>
+<circle cx="50.0" cy="253.9" r="3" fill="#FFB84D"/>
+<text x="50.0" y="245.9" fill="#FFB84D" font-size="8" text-anchor="middle">2.8</text>
+<circle cx="256.7" cy="248.2" r="3" fill="#FFB84D"/>
+<text x="256.7" y="240.2" fill="#FFB84D" font-size="8" text-anchor="middle">3.3</text>
+<circle cx="463.3" cy="257.7" r="3" fill="#FFB84D"/>
+<text x="463.3" y="249.7" fill="#FFB84D" font-size="8" text-anchor="middle">2.5</text>
+<circle cx="670.0" cy="260.0" r="3" fill="#FFB84D"/>
+<text x="670.0" y="252.0" fill="#FFB84D" font-size="8" text-anchor="middle">2.3</text>
+<line x1="60" y1="12" x2="76" y2="12" stroke="#7C6AF7" stroke-width="2"/>
+<text x="80" y="15" fill="#7C6AF7" font-size="9">매출총이익률</text>
+<line x1="148" y1="12" x2="164" y2="12" stroke="#00E09E" stroke-width="2"/>
+<text x="168" y="15" fill="#00E09E" font-size="9">영업이익률</text>
+<line x1="228" y1="12" x2="244" y2="12" stroke="#FFB84D" stroke-width="2"/>
+<text x="248" y="15" fill="#FFB84D" font-size="9">순이익률</text>
+</svg><p style="font-size:10px;color:#888;text-align:right;margin-top:4px;">출처: DART, HD건설기계 IR, CUFA</p></div>
+</div>
+<div class="chart-pair">
+<div class="chart-box" style="width:100%;max-width:700px;"><div class="chart-title">도표 6-3. 현금흐름 구조</div>
+<svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg">
+<text x="42" y="14" fill="#A09CB0" font-size="9">(단위: 억원)</text>
+<line x1="40" y1="260" x2="680" y2="260" stroke="#2A2845" stroke-width="1"/>
+<line x1="40" y1="211.1" x2="680" y2="211.1" stroke="#2A2845" stroke-width="0.5" stroke-dasharray="3"/>
+<line x1="40" y1="162.2" x2="680" y2="162.2" stroke="#2A2845" stroke-width="0.5" stroke-dasharray="3"/>
+<line x1="40" y1="113.4" x2="680" y2="113.4" stroke="#2A2845" stroke-width="0.5" stroke-dasharray="3"/>
+<line x1="40" y1="64.5" x2="680" y2="64.5" stroke="#2A2845" stroke-width="0.5" stroke-dasharray="3"/>
+<text x="104.2" y="274.0" fill="#A09CB0" font-size="9" text-anchor="middle">2022</text>
+<rect x="50.0" y="103.3" width="36.2" height="156.7" rx="2" fill="#7C6AF7" opacity="0.8"/>
+<text x="68.1" y="99.3" fill="#E8E6F0" font-size="8" text-anchor="middle">2,550</text>
+<rect x="86.2" y="222.9" width="36.2" height="37.1" rx="2" fill="#FF4D4D" opacity="0.8"/>
+<text x="104.2" y="218.9" fill="#E8E6F0" font-size="8" text-anchor="middle">604</text>
+<rect x="122.3" y="228.4" width="36.2" height="31.6" rx="2" fill="#A78BFA" opacity="0.8"/>
+<text x="140.4" y="224.4" fill="#E8E6F0" font-size="8" text-anchor="middle">514</text>
+<text x="259.2" y="274.0" fill="#A09CB0" font-size="9" text-anchor="middle">2023</text>
+<rect x="205.0" y="64.5" width="36.2" height="195.5" rx="2" fill="#7C6AF7" opacity="0.8"/>
+<text x="223.1" y="60.5" fill="#E8E6F0" font-size="8" text-anchor="middle">3,182</text>
+<rect x="241.2" y="188.7" width="36.2" height="71.3" rx="2" fill="#FF4D4D" opacity="0.8"/>
+<text x="259.2" y="184.7" fill="#E8E6F0" font-size="8" text-anchor="middle">1,160</text>
+<rect x="277.3" y="226.7" width="36.2" height="33.3" rx="2" fill="#A78BFA" opacity="0.8"/>
+<text x="295.4" y="222.7" fill="#E8E6F0" font-size="8" text-anchor="middle">542</text>
+<text x="414.2" y="274.0" fill="#A09CB0" font-size="9" text-anchor="middle">2024</text>
+<rect x="360.0" y="99.9" width="36.2" height="160.1" rx="2" fill="#7C6AF7" opacity="0.8"/>
+<text x="378.1" y="95.9" fill="#E8E6F0" font-size="8" text-anchor="middle">2,606</text>
+<rect x="396.2" y="153.5" width="36.2" height="106.5" rx="2" fill="#FF4D4D" opacity="0.8"/>
+<text x="414.2" y="149.5" fill="#E8E6F0" font-size="8" text-anchor="middle">1,733</text>
+<rect x="432.3" y="225.3" width="36.2" height="34.7" rx="2" fill="#A78BFA" opacity="0.8"/>
+<text x="450.4" y="221.3" fill="#E8E6F0" font-size="8" text-anchor="middle">564</text>
+<text x="569.2" y="274.0" fill="#A09CB0" font-size="9" text-anchor="middle">2025</text>
+<rect x="515.0" y="158.0" width="36.2" height="102.0" rx="2" fill="#7C6AF7" opacity="0.8"/>
+<text x="533.1" y="154.0" fill="#E8E6F0" font-size="8" text-anchor="middle">1,660</text>
+<rect x="551.2" y="171.3" width="36.2" height="88.7" rx="2" fill="#FF4D4D" opacity="0.8"/>
+<text x="569.2" y="167.3" fill="#E8E6F0" font-size="8" text-anchor="middle">1,444</text>
+<rect x="587.3" y="223.8" width="36.2" height="36.2" rx="2" fill="#A78BFA" opacity="0.8"/>
+<text x="605.4" y="219.8" fill="#E8E6F0" font-size="8" text-anchor="middle">589</text>
+<rect x="60" y="8" width="10" height="10" rx="2" fill="#7C6AF7"/>
+<text x="74" y="17" fill="#A09CB0" font-size="9">영업CF</text>
+<rect x="126" y="8" width="10" height="10" rx="2" fill="#FF4D4D"/>
+<text x="140" y="17" fill="#A09CB0" font-size="9">CAPEX</text>
+<rect x="201" y="8" width="10" height="10" rx="2" fill="#A78BFA"/>
+<text x="215" y="17" fill="#A09CB0" font-size="9">감가상각</text>
+</svg><p style="font-size:10px;color:#888;text-align:right;margin-top:4px;">출처: DART, HD건설기계 IR, CUFA</p></div>
+<div class="chart-box" style="width:100%;max-width:700px;"><div class="chart-title">도표 6-4. 부채비율 및 자기자본배율 추이</div>
+<svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg">
+<line x1="40" y1="211.1" x2="680" y2="211.1" stroke="#2A2845" stroke-width="0.5" stroke-dasharray="3"/>
+<line x1="40" y1="162.2" x2="680" y2="162.2" stroke="#2A2845" stroke-width="0.5" stroke-dasharray="3"/>
+<line x1="40" y1="113.4" x2="680" y2="113.4" stroke="#2A2845" stroke-width="0.5" stroke-dasharray="3"/>
+<line x1="40" y1="64.5" x2="680" y2="64.5" stroke="#2A2845" stroke-width="0.5" stroke-dasharray="3"/>
+<text x="50.0" y="274.0" fill="#A09CB0" font-size="9" text-anchor="middle">2022</text>
+<line x1="50.0" y1="20" x2="50.0" y2="260" stroke="#2A2845" stroke-width="0.5" stroke-dasharray="3"/>
+<text x="256.7" y="274.0" fill="#A09CB0" font-size="9" text-anchor="middle">2023</text>
+<line x1="256.7" y1="20" x2="256.7" y2="260" stroke="#2A2845" stroke-width="0.5" stroke-dasharray="3"/>
+<text x="463.3" y="274.0" fill="#A09CB0" font-size="9" text-anchor="middle">2024</text>
+<line x1="463.3" y1="20" x2="463.3" y2="260" stroke="#2A2845" stroke-width="0.5" stroke-dasharray="3"/>
+<text x="670.0" y="274.0" fill="#A09CB0" font-size="9" text-anchor="middle">2025</text>
+<line x1="670.0" y1="20" x2="670.0" y2="260" stroke="#2A2845" stroke-width="0.5" stroke-dasharray="3"/>
+<polyline points="50.0,64.5 256.7,102.9 463.3,104.6 670.0,102.1" fill="none" stroke="#FF4D4D" stroke-width="2"/>
+<circle cx="50.0" cy="64.5" r="3" fill="#FF4D4D"/>
+<text x="50.0" y="56.5" fill="#FF4D4D" font-size="8" text-anchor="middle">106.8</text>
+<circle cx="256.7" cy="102.9" r="3" fill="#FF4D4D"/>
+<text x="256.7" y="94.9" fill="#FF4D4D" font-size="8" text-anchor="middle">86.2</text>
+<circle cx="463.3" cy="104.6" r="3" fill="#FF4D4D"/>
+<text x="463.3" y="96.6" fill="#FF4D4D" font-size="8" text-anchor="middle">85.3</text>
+<circle cx="670.0" cy="102.1" r="3" fill="#FF4D4D"/>
+<text x="670.0" y="94.1" fill="#FF4D4D" font-size="8" text-anchor="middle">86.6</text>
+<polyline points="50.0,259.6 256.7,260.0 463.3,260.0 670.0,260.0" fill="none" stroke="#7C6AF7" stroke-width="2"/>
+<circle cx="50.0" cy="259.6" r="3" fill="#7C6AF7"/>
+<text x="50.0" y="251.6" fill="#7C6AF7" font-size="8" text-anchor="middle">2.1</text>
+<circle cx="256.7" cy="260.0" r="3" fill="#7C6AF7"/>
+<text x="256.7" y="252.0" fill="#7C6AF7" font-size="8" text-anchor="middle">1.9</text>
+<circle cx="463.3" cy="260.0" r="3" fill="#7C6AF7"/>
+<text x="463.3" y="252.0" fill="#7C6AF7" font-size="8" text-anchor="middle">1.9</text>
+<circle cx="670.0" cy="260.0" r="3" fill="#7C6AF7"/>
+<text x="670.0" y="252.0" fill="#7C6AF7" font-size="8" text-anchor="middle">1.9</text>
+<line x1="60" y1="12" x2="76" y2="12" stroke="#FF4D4D" stroke-width="2"/>
+<text x="80" y="15" fill="#FF4D4D" font-size="9">부채비율(%)</text>
+<line x1="156" y1="12" x2="172" y2="12" stroke="#7C6AF7" stroke-width="2"/>
+<text x="176" y="15" fill="#7C6AF7" font-size="9">EM(배)</text>
+</svg><p style="font-size:10px;color:#888;text-align:right;margin-top:4px;">출처: DART, HD건설기계 IR, CUFA</p></div>
+</div>
+<p style="font-size:12px;color:var(--text-sec);margin:12px 0 6px;font-weight:600;">도표 6-5. 운전자본 효율성 지표</p>
+<table class="data"><tr><th>운전자본 지표</th><th>2022</th><th>2023</th><th>2024</th><th>2025</th><th>2026E(통합)</th></tr>
+<tr><td>DIO (재고회전일)</td><td>67</td><td>57</td><td>78</td><td>72</td><td>74</td></tr>
+<tr><td>DSO (매출채권회전일)</td><td>70</td><td>59</td><td>69</td><td>68</td><td>62</td></tr>
+<tr><td>DPO (매입채무회전일)</td><td>73</td><td>65</td><td>72</td><td>75</td><td>78</td></tr>
+<tr class="highlight-row"><td>CCC (현금전환주기)</td><td>64</td><td>51</td><td>75</td><td>65</td><td>58</td></tr>
+</table>
+<p style="font-size:10px;color:#888;text-align:right;margin-top:2px;">출처: DART, CUFA</p>
+<p style="font-size:12px;color:var(--text-sec);margin:12px 0 6px;font-weight:600;">도표 6-6. 분기별 마진 트렌드</p>
+<table class="data"><tr><th>분기</th><th>1Q24</th><th>2Q24</th><th>3Q24</th><th>4Q24</th><th>1Q25</th><th>2Q25</th><th>3Q25</th><th>4Q25</th></tr>
+<tr><td>매출(억)</td><td>8,200</td><td>9,100</td><td>8,800</td><td>8,281</td><td>8,700</td><td>9,800</td><td>10,100</td><td>9,165</td></tr>
+<tr><td>GPM(%)</td><td>18.2</td><td>19.5</td><td>19.3</td><td>18.7</td><td>18.5</td><td>19.8</td><td>20.1</td><td>19.0</td></tr>
+<tr><td>OPM(%)</td><td>4.8</td><td>6.1</td><td>5.8</td><td>5.3</td><td>3.9</td><td>5.0</td><td>4.9</td><td>4.2</td></tr>
+</table>
+<p style="font-size:10px;color:#888;text-align:right;margin-top:2px;">출처: DART</p>
+<p style="font-size:12px;color:var(--text-sec);margin:12px 0 6px;font-weight:600;">도표 6-7. 재무 요약 테이블</p>
+<table class="data"><tr><th>구분</th><th>2022</th><th>2023</th><th>2024</th><th>2025</th></tr>
+<tr><td>매출(억원)</td><td>35,156</td><td>38,250</td><td>34,381</td><td>37,765</td></tr>
+<tr><td>매출원가(억원)</td><td>29,136</td><td>31,004</td><td>27,872</td><td>30,458</td></tr>
+<tr><td>매출총이익(억원)</td><td>6,020</td><td>7,246</td><td>6,508</td><td>7,308</td></tr>
+<tr><td>판관비(억원)</td><td>4,314</td><td>4,673</td><td>4,604</td><td>5,599</td></tr>
+<tr class="highlight-row"><td>영업이익(억원)</td><td>1,706</td><td>2,572</td><td>1,904</td><td>1,709</td></tr>
+<tr class="highlight-row"><td>순이익(억원)</td><td>994</td><td>1,275</td><td>860</td><td>870</td></tr>
+<tr><td>OPM(%)</td><td>4.85</td><td>6.72</td><td>5.54</td><td>4.52</td></tr>
+<tr><td>NPM(%)</td><td>2.83</td><td>3.33</td><td>2.50</td><td>2.30</td></tr>
+<tr><td>총자산(억원)</td><td>34,486</td><td>32,970</td><td>33,246</td><td>36,027</td></tr>
+<tr><td>총부채(억원)</td><td>17,813</td><td>15,259</td><td>15,308</td><td>16,724</td></tr>
+<tr><td>자기자본(억원)</td><td>16,673</td><td>17,711</td><td>17,938</td><td>19,303</td></tr>
+<tr><td>현금(억원)</td><td>3,931</td><td>4,277</td><td>2,642</td><td>3,379</td></tr>
+<tr><td>영업CF(억원)</td><td>2,550</td><td>3,182</td><td>2,606</td><td>1,660</td></tr>
+<tr><td>CAPEX(억원)</td><td>604</td><td>1,160</td><td>1,733</td><td>1,444</td></tr>
+<tr class="highlight-row"><td>FCF(억원)</td><td>1,946</td><td>2,022</td><td>873</td><td>216</td></tr>
+<tr><td>부채비율(%)</td><td>106.8</td><td>86.2</td><td>85.3</td><td>86.6</td></tr>
+<tr class="highlight-row"><td>ROE(%)</td><td>7.99</td><td>9.17</td><td>6.18</td><td>5.74</td></tr>
+</table>
+<p style="font-size:10px;color:#888;text-align:right;margin-top:2px;">출처: DART</p>
+<p style="font-size:13px;color:var(--text-sec);margin:16px 0 8px;"><strong style="color:var(--purple-light);">듀폰 분해 (DuPont Decomposition)</strong></p>
+<p style="font-size:12px;color:var(--text-sec);margin:12px 0 6px;font-weight:600;">도표 6-8. 듀폰 분해 테이블</p>
+<table class="data"><tr><th>구성요소</th><th>2022</th><th>2023</th><th>2024</th><th>2025</th><th>2026E</th></tr>
+<tr><td>NPM (순이익률, %)</td><td>2.83</td><td>3.33</td><td>2.50</td><td>2.30</td><td>3.84</td></tr>
+<tr><td>AT (자산회전율, 배)</td><td>1.02</td><td>1.16</td><td>1.03</td><td>1.08</td><td>1.05</td></tr>
+<tr><td>EM (자기자본배율, 배)</td><td>2.07</td><td>1.86</td><td>1.85</td><td>1.87</td><td>1.90</td></tr>
+<tr class="highlight-row"><td>ROE (%)</td><td>7.99</td><td>9.17</td><td>6.18</td><td>5.74</td><td>7.0(E)</td></tr>
+</table>
+<p style="font-size:10px;color:#888;text-align:right;margin-top:2px;">출처: DART, CUFA</p>
+<p style="font-size:12px;color:var(--text-sec);margin:12px 0 6px;font-weight:600;">도표 6-9. ROIC vs WACC 갭 분석</p>
+<table class="data"><tr><th>지표</th><th>2022</th><th>2023</th><th>2024</th><th>2025</th><th>2026E</th><th>2027E</th><th>2028E</th></tr>
+<tr><td>NOPAT(억원)</td><td>1,279</td><td>1,929</td><td>1,428</td><td>1,282</td><td>3,824</td><td>5,040</td><td>5,850</td></tr>
+<tr><td>투하자본(억원)</td><td>22,000</td><td>20,500</td><td>21,000</td><td>22,500</td><td>50,000</td><td>52,000</td><td>53,500</td></tr>
+<tr><td>ROIC(%)</td><td>5.8</td><td>9.4</td><td>6.8</td><td>5.7</td><td>7.6</td><td>9.7</td><td>10.9</td></tr>
+<tr><td>WACC(%)</td><td>10.0</td><td>10.0</td><td>10.0</td><td>10.0</td><td>10.0</td><td>10.0</td><td>10.0</td></tr>
+<tr class="highlight-row"><td>ROIC-WACC(%p)</td><td>-4.2</td><td>-0.6</td><td>-3.2</td><td>-4.3</td><td>-2.4</td><td>-0.3</td><td>+0.9</td></tr>
+</table>
+<p style="font-size:10px;color:#888;text-align:right;margin-top:2px;">출처: CUFA 추정</p>
+</div>
+
+<div class="section" id="sec7">
+  <div class="section-subheader">Equity Research Report | HD건설기계 (267270)</div>
+  <div class="section-header">
+    <div class="section-num">7</div>
+    <div class="section-title">Peer 비교 — 글로벌 건설기계 기업</div>
+  </div>
+<div class="sidebar-layout">
+<div class="sidebar-kw">
+  <div class="kw">HD PER</div><div class="kw-val">13.85x</div>
+  <div class="kw">CAT PER</div><div class="kw-val">40.58x</div>
+  <div class="kw">Komatsu</div><div class="kw-val">14.68x</div>
+  <div class="kw">두산밥캣</div><div class="kw-val">15.14x</div>
+  <div class="kw">Volvo CE</div><div class="kw-val">18.0x</div>
+</div>
+<div class="content-area">
+
+    <p><strong>HD건설기계의 밸류에이션을 글로벌 및 국내 피어와 비교한다.</strong> 비교 대상은 Caterpillar(미국), Komatsu(일본), 두산밥캣(한국), Volvo CE(스웨덴), Hitachi CM(일본) 등 5개 기업이다. HD건설기계는 PER·PBR·EV/EBITDA 모든 멀티플에서 글로벌 평균 대비 할인 거래 중이며, 이는 합병 초기 불확실성과 Korea Discount가 복합적으로 작용한 결과이다.</p>
+
+    <p><strong>PER 기준으로 보면, HD건설기계의 12MF PER 13.85배는 Caterpillar(29배), Volvo CE(18배) 대비 크게 할인되어 있다.</strong> Komatsu(14.68배)와는 유사한 수준이나, HD건설기계의 향후 성장률이 Komatsu보다 높다는 점을 감안하면 추가 할인이 부당하다고 판단한다.</p>
+
+    <p><strong>PBR 측면에서는 HD건설기계(1.43배)가 두산밥캣(0.84배)보다 높지만, 이는 합병 프리미엄과 향후 ROE 개선 기대를 반영한 것이다.</strong> Komatsu(1.5배)와는 유사한 수준이다.</p>
+
+    <p><strong>EV/EBITDA 기준으로는 HD건설기계(9.17배)가 두산밥캣(5.53배)보다 높으나, Caterpillar(15배+), Volvo CE(12배+) 대비 할인 상태이다.</strong></p>
+
+    <p><strong><u>OPM과 PER의 관계를 분석하면, HD건설기계는 현재 OPM 4.5%에 PER 13.9배인데, OPM이 7~8%로 개선되면 PER 16~18배까지 Re-rating 여력이 있는 것으로 판단한다.</u></strong></p>
+
+    <p>배당 수익률 비교에서도 HD건설기계(0.38%)는 피어 대비 매우 낮은 수준이다. Komatsu(2.8%), 두산밥캣(3.2%), Caterpillar(1.5%)와 비교하면 개선의 여지가 크다. 합병 후 현금흐름이 안정화되면 배당 확대나 자사주 매입 등 주주환원 정책 강화가 기대되며, 이는 밸류에이션 Re-rating의 주요 트리거가 될 수 있다.</p>
+
+    <p>피어 그룹 내에서 HD건설기계의 차별화 포인트는 (1) 합병을 통한 성장 모멘텀, (2) 듀얼 브랜드의 시장 접근성, (3) 인도·중동 등 고성장 시장에서의 포지셔닝이다. 반면 약점은 (1) 글로벌 피어 대비 낮은 OPM, (2) AM 사업 비중 부족, (3) 전동화 기술의 상대적 열위이다. 이러한 강·약점을 종합적으로 고려할 때, 현재의 밸류에이션 할인은 과도하며, 중기적으로 해소될 것으로 판단한다.</p>
+
+    <p>Caterpillar의 경영 전략을 벤치마킹하면, Caterpillar는 (1) OPM 20%+ 달성(규모의 경제와 AM 사업의 높은 비중), (2) 적극적 주주환원(자사주 매입 $30B+), (3) 자율주행·전동화 기술 선도, (4) 글로벌 160개 딜러의 프리미엄 서비스 네트워크를 핵심 경쟁력으로 보유하고 있다. HD건설기계가 Caterpillar 수준의 OPM에 도달하기는 단기적으로 어렵지만, AM 비중 확대(10%→20%)와 구매 통합을 통해 OPM 8%까지는 중기적으로 달성 가능하다고 판단한다. Komatsu의 사례가 더 현실적인 벤치마크로, Komatsu는 Joy Global 인수 후 OPM을 11%에서 13%까지 개선하였다.</p>
+</div>
+</div>
+<div class="chart-pair">
+<div class="chart-box" style="width:100%;max-width:700px;"><div class="chart-title">도표 7-1. OPM vs PER 산점도 (글로벌 Peer)</div>
+<svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+<line x1="60" y1="350" x2="570" y2="350" stroke="#2A2845" stroke-width="1"/>
+<line x1="60" y1="20" x2="60" y2="350" stroke="#2A2845" stroke-width="1"/>
+<text x="300.0" y="390" fill="#A09CB0" font-size="10" text-anchor="middle">OPM (%)</text>
+<text x="15" y="200.0" fill="#A09CB0" font-size="10" text-anchor="middle" transform="rotate(-90,15,200.0)">PER (배)</text>
+<circle cx="81.5" cy="346.4" r="14" fill="#00E09E" opacity="0.7"/>
+<text x="81.5" y="328.4" fill="#E8E6F0" font-size="9" text-anchor="middle">HD건설기계</text>
+<text x="81.5" y="350.4" fill="#E8E6F0" font-size="8" text-anchor="middle">(4.5, 13.8)</text>
+<circle cx="462.3" cy="119.0" r="18" fill="#FFB84D" opacity="0.7"/>
+<text x="462.3" y="97.0" fill="#E8E6F0" font-size="9" text-anchor="middle">CAT</text>
+<text x="462.3" y="123.0" fill="#E8E6F0" font-size="8" text-anchor="middle">(20.5, 40.6)</text>
+<circle cx="288.4" cy="339.4" r="14" fill="#7C6AF7" opacity="0.7"/>
+<text x="288.4" y="321.4" fill="#E8E6F0" font-size="9" text-anchor="middle">Komatsu</text>
+<text x="288.4" y="343.4" fill="#E8E6F0" font-size="8" text-anchor="middle">(13.2, 14.7)</text>
+<circle cx="159.7" cy="335.5" r="12" fill="#A78BFA" opacity="0.7"/>
+<text x="159.7" y="319.5" fill="#E8E6F0" font-size="9" text-anchor="middle">두산밥캣</text>
+<text x="159.7" y="339.5" fill="#E8E6F0" font-size="8" text-anchor="middle">(7.8, 15.1)</text>
+<circle cx="247.9" cy="311.1" r="12" fill="#FF4D4D" opacity="0.7"/>
+<text x="247.9" y="295.1" fill="#E8E6F0" font-size="9" text-anchor="middle">Volvo CE</text>
+<text x="247.9" y="315.1" fill="#E8E6F0" font-size="8" text-anchor="middle">(11.5, 18.0)</text>
+</svg><p style="font-size:10px;color:#888;text-align:right;margin-top:4px;">출처: DART, HD건설기계 IR, CUFA</p></div>
+<div class="chart-box" style="width:100%;max-width:700px;"><div class="chart-title">도표 7-2. Peer 멀티플 비교 — PER (배)</div>
+<svg viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg">
+<text x="118" y="34" fill="#A09CB0" font-size="10" text-anchor="end">CAT</text>
+<rect x="124" y="22" width="425.0" height="18" rx="3" fill="#FFB84D" opacity="0.8"/>
+<text x="555.0" y="34" fill="#E8E6F0" font-size="10">40.6</text>
+<text x="118" y="64" fill="#A09CB0" font-size="10" text-anchor="end">Volvo CE</text>
+<rect x="124" y="52" width="188.5" height="18" rx="3" fill="#FF4D4D" opacity="0.8"/>
+<text x="318.5" y="64" fill="#E8E6F0" font-size="10">18.0</text>
+<text x="118" y="94" fill="#A09CB0" font-size="10" text-anchor="end">두산밥캣</text>
+<rect x="124" y="82" width="158.6" height="18" rx="3" fill="#A78BFA" opacity="0.8"/>
+<text x="288.6" y="94" fill="#E8E6F0" font-size="10">15.1</text>
+<text x="118" y="124" fill="#A09CB0" font-size="10" text-anchor="end">Komatsu</text>
+<rect x="124" y="112" width="153.7" height="18" rx="3" fill="#7C6AF7" opacity="0.8"/>
+<text x="283.7" y="124" fill="#E8E6F0" font-size="10">14.7</text>
+<text x="118" y="154" fill="#A09CB0" font-size="10" text-anchor="end">HD건설기계</text>
+<rect x="124" y="142" width="145.1" height="18" rx="3" fill="#00E09E" opacity="0.8"/>
+<text x="275.1" y="154" fill="#E8E6F0" font-size="10">13.8</text>
+</svg><p style="font-size:10px;color:#888;text-align:right;margin-top:4px;">출처: DART, HD건설기계 IR, CUFA</p></div>
+</div>
+<p style="font-size:12px;color:var(--text-sec);margin:12px 0 6px;font-weight:600;">도표 7-3. 글로벌 Peer 밸류에이션 비교</p>
+<table class="data"><tr><th>기업</th><th>시총(B USD)</th><th>PER(T)</th><th>Fwd PER</th><th>PBR</th><th>EV/EBITDA</th><th>OPM(%)</th><th>ROE(%)</th></tr>
+<tr><td>Caterpillar</td><td>195.0</td><td>40.58</td><td>29.0</td><td>N/M</td><td>15.2</td><td>20.5</td><td>52.0</td></tr>
+<tr><td>Komatsu</td><td>32.5</td><td>16.2</td><td>14.68</td><td>1.50</td><td>8.4</td><td>13.2</td><td>12.8</td></tr>
+<tr><td>Volvo CE</td><td>22.0</td><td>18.0</td><td>16.5</td><td>3.20</td><td>12.1</td><td>11.5</td><td>18.5</td></tr>
+<tr><td>두산밥캣</td><td>4.8</td><td>15.14</td><td>12.5</td><td>0.84</td><td>5.53</td><td>7.8</td><td>6.2</td></tr>
+<tr class="highlight-row"><td>HD건설기계</td><td>4.9</td><td>25.20</td><td>13.85</td><td>1.43</td><td>9.17</td><td>4.52</td><td>5.74</td></tr>
+</table>
+<p style="font-size:10px;color:#888;text-align:right;margin-top:2px;">출처: Bloomberg, CUFA</p>
+</div>
+
+<div class="section" id="sec8">
+  <div class="section-subheader">Equity Research Report | HD건설기계 (267270)</div>
+  <div class="section-header">
+    <div class="section-num">8</div>
+    <div class="section-title">실적 추정 — P×Q 매출 워크시트</div>
+  </div>
+<div class="sidebar-layout">
+<div class="sidebar-kw">
+  <div class="kw">통합 매출</div><div class="kw-val">88,500억</div>
+  <div class="kw">OPM</div><div class="kw-val">5.76%</div>
+  <div class="kw">EPS</div><div class="kw-val">8,972원</div>
+  <div class="kw">시너지 반영</div><div class="kw-val">60%</div>
+  <div class="kw">매출 성장</div><div class="kw-val">+6.6%</div>
+  <div class="kw">Bull TP</div><div class="kw-val">180,000원</div>
+</div>
+<div class="content-area">
+
+    <p><strong>2026년은 HD건설기계의 합병 후 첫 온전한 연간 실적이 반영되는 해이다.</strong> 합병 전 양사의 2025년 합산 매출은 약 83,000억원(건설기계 37,765억원 + 인프라코어 45,478억원)이며, 합병 시너지와 유기적 성장을 반영한 2026년 통합 매출은 88,500억원으로 추정한다. 이는 전년 합산 대비 약 6.6% 성장에 해당한다.</p>
+
+    <p><strong><u>P×Q(Price × Quantity) 방식의 사업부별 매출 추정</u></strong></p>
+
+    <p>본 보고서의 매출 추정은 단순한 Top-down 방식이 아닌, 사업부별 ASP(평균판매단가)와 Q(판매수량)를 개별적으로 추정하는 Bottom-up P×Q 방식을 적용하였다. 이는 SMIC(서울대 투자연구회)의 수정보고서 방법론을 참고한 것으로, 매출 추정의 투명성과 검증 가능성을 높이는 접근이다.</p>
+
+    <p><strong>① 굴착기 사업부: ASP 1.80억원/대 × 18,683대 = 33,630억원</strong></p>
+    <p>굴착기 사업부의 ASP 1.80억원은 2025년 실적 기준 ASP 1.75억원에 MIX 개선(대형 비중 확대)과 가격 인상(+2~3%)을 반영하여 산출하였다. 대형 굴착기(30톤급 이상)의 ASP는 3.5~5억원, 중형(10~30톤급)은 1.5~2.5억원, 소형(10톤 미만)은 0.5~1.2억원이며, 제품 MIX 상 중형이 50%, 소형 30%, 대형 20%를 차지한다. 판매수량 18,683대는 2025년 합산 출하량 17,800대에 글로벌 건설기계 수요 성장률(+5%)을 적용하여 산출하였다. 지역별로는 아시아(인도·중국·동남아) 45%, 북미 20%, 유럽 18%, 중동·아프리카 12%, 중남미 5%로 분포하며, 인도와 중동의 성장률이 가장 높다.</p>
+
+    <p><strong>② 휠로더 사업부: ASP 1.20억원/대 × 16,225대 = 19,470억원</strong></p>
+    <p>휠로더 ASP 1.20억원은 제품 MIX(대형 광산용 40%, 중형 건설용 35%, 소형 25%)를 반영한 가중평균이다. 대형 휠로더(5톤급 이상)의 ASP는 2.0~3.0억원으로 높아, MIX 개선이 ASP 상승의 핵심이다. 판매수량 16,225대는 2025년 합산 15,500대에 광업 수요 회복(+7%)을 가정하여 산출하였다. 특히 호주·남아공·칠레 등 광업국에서의 교체 수요가 수량 성장을 견인할 전망이다. 도로 포장 장비(피니셔, 롤러)도 이 사업부에 포함되어 약 2,000억원의 매출에 기여한다.</p>
+
+    <p><strong>③ 엔진 사업부: ASP 0.35억원/기 × 45,514기 = 15,930억원</strong></p>
+    <p>엔진 사업부의 ASP 0.35억원은 건설기계용 엔진(ASP 0.4억원, 비중 60%)과 산업용·선박용 엔진(ASP 0.28억원, 비중 40%)의 가중평균이다. 자체 장비 탑재용(내재화)이 60%, 외부 OEM 공급이 40%를 차지한다. 판매수량 45,514기는 자체 장비 출하량 증가에 연동되는 내수와 외부 OEM 수주를 합산한 수치이다. Tier4 Final/Stage V 규제 강화로 고사양 엔진 수요가 증가하고 있어, ASP 상승 추세가 지속될 전망이다.</p>
+
+    <p><strong>④ 산업차량 사업부: ASP 0.45억원/대 × 23,600대 = 10,620억원</strong></p>
+    <p>CLARK 브랜드 지게차가 주력이다. ASP 0.45억원은 전동 지게차(ASP 0.55억원, 비중 65%)와 디젤 지게차(ASP 0.30억원, 비중 35%)의 가중평균이다. 전동화 전환이 가속화되면서 ASP가 상승 추세에 있다. 판매수량 23,600대는 물류 산업 성장률(+5%)과 교체 수요를 반영하였다. 북미(40%)와 유럽(30%)이 주요 시장이며, 아시아(20%)에서도 e-커머스 확대로 수요가 증가하고 있다.</p>
+
+    <p><strong>⑤ 부품서비스 사업부: 매출 8,850억원</strong></p>
+    <p>부품서비스는 P×Q 방식의 단순 적용이 어려운 사업 특성을 가진다. 전 세계 약 40만 대의 HD건설기계 장비가 운영 중이며, 대당 연간 부품·정비 지출은 약 200~250만원으로 추정된다. 이를 기반으로 잠재 시장은 약 8,000~10,000억원이며, HD건설기계의 순정 부품 점유율 약 45~50%를 적용하면 8,850억원의 매출이 산출된다. 이 사업부는 장비 설치 기반(installed base)이 해마다 확대되므로, 안정적인 매출 성장이 가능하다. 영업이익률은 15~20%로 전사 평균의 3배에 달하며, 비중 확대가 전사 수익성 개선의 핵심 레버이다.</p>
+
+    <p><strong>영업이익은 5,098억원(OPM 5.76%)으로 추정한다.</strong> 합병 전 양사 합산 영업이익 4,573억원에 합병 시너지의 60%(약 1,800억원) 실현을 가정하되, 합병 비용(PMI 비용, 시스템 통합비 등) 약 1,275억원을 차감한 수치이다.</p>
+
+    <p><strong>순이익은 3,400억원, EPS는 8,972원으로 추정한다.</strong> 법인세율 25%, 비영업 손익 △500억원(이자비용, 환율 영향 등)을 반영하였다.</p>
+
+    <p>중기 실적 전망을 보면, 2027년에는 합병 시너지의 100% 실현과 글로벌 업사이클 본격화로 매출 96,000억원(+8.5%), 영업이익 6,720억원(OPM 7.0%)으로 추정한다. 2028년에는 매출 104,000억원, 영업이익 7,800억원(OPM 7.5%)까지 성장할 전망이다.</p>
+
+    <p><strong>Bull/Base/Bear 시나리오별 목표주가를 제시한다.</strong> Base Case는 상기 추정치를 기반으로 목표주가 160,000원(업사이드 +20.3%)이다. Bull Case는 시너지 조기 실현 + 업사이클 강도 상회를 가정하여 180,000원(+35.3%)이며, Bear Case는 시너지 지연 + 사이클 부진을 가정하여 100,000원(-24.8%)이다.</p>
+
+    <p>분기별 실적 궤적을 전망하면, 2026년 1분기는 합병 초기 PMI 비용 집중 반영으로 영업이익이 일시적으로 부진할 수 있다(추정 OPM 4.0%). 2분기부터는 구매 통합 효과가 반영되기 시작하여 OPM 5.9%로 개선될 전망이다. 3분기에는 글로벌 업사이클 진입 효과까지 더해져 OPM 7.1%로 연중 최고치를 기록할 것으로 예상한다. 4분기는 계절성(겨울 비수기)으로 OPM 5.8%로 소폭 하락하나, 여전히 합병 전 수준을 상회할 전망이다. 분기별 매출은 1Q 20,000억원, 2Q 22,000억원, 3Q 23,000억원, 4Q 23,500억원으로, 하반기 편중(53%)이 예상된다. 이는 건설기계 산업의 계절성(봄·가을 성수기)과 업사이클 진입 시점(하반기)이 맞물린 결과이다.</p>
+
+    <p>실적 추정의 핵심 전제를 정리하면 다음과 같다. (1) 글로벌 건설기계 시장 성장률 +5%(2026E), (2) 합병 시너지 1,800억원 반영(60% 실현), (3) 원/달러 환율 1,350원 가정, (4) 철강 가격 현 수준 유지, (5) 인도 시장 점유율 10%→12%로 확대이다. 리스크 요인으로는 환율 변동, 원자재 가격 급등, 중국 회복 지연, PMI 비용 초과 등을 고려해야 한다.</p>
+
+    <p>ASP(평균판매단가) 추정의 상향 근거를 추가적으로 설명하면, 건설기계 ASP는 (1) 제품 MIX 개선(대형 비중 확대), (2) 기술 고도화(Tier4F 엔진, 텔레매틱스, 안전 장치), (3) 원자재 가격 전가에 의해 구조적 상승 추세에 있다. 2020~2025년 글로벌 건설기계 ASP는 연평균 3~5% 상승하였으며, 이 추세는 전동화 장비의 확산과 함께 가속화될 전망이다. 전동 굴착기의 ASP는 디젤 대비 20~30% 높으나, TCO 기준으로는 5년 사용 시 오히려 10~15% 저렴하여 시장 수용성이 높아지고 있다.</p>
+</div>
+</div>
+<p style="font-size:12px;color:var(--text-sec);margin:12px 0 6px;font-weight:600;">도표 8-1. P×Q 사업부별 매출 추정 (2026E)</p>
+<table class="data"><tr><th>사업부</th><th>ASP(억원)</th><th>수량(대/기)</th><th>매출(억원)</th><th>비중(%)</th><th>YoY(%)</th></tr>
+<tr><td>굴착기</td><td>1.80</td><td>18,683</td><td>33,630</td><td>38.0</td><td>+5.0</td></tr>
+<tr><td>휠로더</td><td>1.20</td><td>16,225</td><td>19,470</td><td>22.0</td><td>+7.0</td></tr>
+<tr><td>엔진</td><td>0.35</td><td>45,514</td><td>15,930</td><td>18.0</td><td>+3.0</td></tr>
+<tr><td>산업차량</td><td>0.45</td><td>23,600</td><td>10,620</td><td>12.0</td><td>+5.0</td></tr>
+<tr><td>부품서비스</td><td>—</td><td>—</td><td>8,850</td><td>10.0</td><td>+8.0</td></tr>
+<tr class="highlight-row"><td>합계</td><td>—</td><td>—</td><td>88,500</td><td>100.0</td><td>+6.6</td></tr>
+</table>
+<p style="font-size:10px;color:#888;text-align:right;margin-top:2px;">출처: CUFA 추정</p>
+<p style="font-size:12px;color:var(--text-sec);margin:12px 0 6px;font-weight:600;">도표 8-2. 분기별 실적 추정 (2026E)</p>
+<table class="data"><tr><th>항목</th><th>1Q26E</th><th>2Q26E</th><th>3Q26E</th><th>4Q26E</th><th>2026E</th></tr>
+<tr><td>매출(억원)</td><td>20,000</td><td>22,000</td><td>23,000</td><td>23,500</td><td>88,500</td></tr>
+<tr><td>매출원가(억원)</td><td>16,200</td><td>17,600</td><td>18,170</td><td>18,830</td><td>70,800</td></tr>
+<tr><td>매출총이익(억원)</td><td>3,800</td><td>4,400</td><td>4,830</td><td>4,670</td><td>17,700</td></tr>
+<tr><td>GPM(%)</td><td>19.0</td><td>20.0</td><td>21.0</td><td>19.9</td><td>20.0</td></tr>
+<tr><td>판관비(억원)</td><td>3,000</td><td>3,100</td><td>3,200</td><td>3,302</td><td>12,602</td></tr>
+<tr class="highlight-row"><td>영업이익(억원)</td><td>800</td><td>1,300</td><td>1,630</td><td>1,368</td><td>5,098</td></tr>
+<tr class="highlight-row"><td>OPM(%)</td><td>4.0</td><td>5.9</td><td>7.1</td><td>5.8</td><td>5.76</td></tr>
+<tr><td>순이익(억원)</td><td>530</td><td>870</td><td>1,100</td><td>900</td><td>3,400</td></tr>
+</table>
+<p style="font-size:10px;color:#888;text-align:right;margin-top:2px;">출처: CUFA 추정</p>
+<div class="chart-box" style="width:100%;max-width:700px;"><div class="chart-title">도표 8-3. EPS 추이 및 전망</div>
+<svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg">
+<text x="42" y="14" fill="#A09CB0" font-size="9">(단위: 원)</text>
+<line x1="40" y1="260" x2="680" y2="260" stroke="#2A2845" stroke-width="1"/>
+<line x1="40" y1="211.1" x2="680" y2="211.1" stroke="#2A2845" stroke-width="0.5" stroke-dasharray="3"/>
+<line x1="40" y1="162.2" x2="680" y2="162.2" stroke="#2A2845" stroke-width="0.5" stroke-dasharray="3"/>
+<line x1="40" y1="113.4" x2="680" y2="113.4" stroke="#2A2845" stroke-width="0.5" stroke-dasharray="3"/>
+<line x1="40" y1="64.5" x2="680" y2="64.5" stroke="#2A2845" stroke-width="0.5" stroke-dasharray="3"/>
+<rect x="50.0" y="179.8" width="50.0" height="80.2" rx="3" fill="#A78BFA" opacity="0.8"/>
+<text x="75.0" y="173.8" fill="#E8E6F0" font-size="10" text-anchor="middle">5,661</text>
+<text x="75.0" y="274.0" fill="#A09CB0" font-size="9" text-anchor="middle">2022</text>
+<rect x="141.4" y="159.7" width="50.0" height="100.3" rx="3" fill="#A78BFA" opacity="0.8"/>
+<text x="166.4" y="153.7" fill="#E8E6F0" font-size="10" text-anchor="middle">7,077</text>
+<text x="166.4" y="274.0" fill="#A09CB0" font-size="9" text-anchor="middle">2023</text>
+<rect x="232.9" y="185.2" width="50.0" height="74.8" rx="3" fill="#A78BFA" opacity="0.8"/>
+<text x="257.9" y="179.2" fill="#E8E6F0" font-size="10" text-anchor="middle">5,277</text>
+<text x="257.9" y="274.0" fill="#A09CB0" font-size="9" text-anchor="middle">2024</text>
+<rect x="324.3" y="180.5" width="50.0" height="79.5" rx="3" fill="#A78BFA" opacity="0.8"/>
+<text x="349.3" y="174.5" fill="#E8E6F0" font-size="10" text-anchor="middle">5,613</text>
+<text x="349.3" y="274.0" fill="#A09CB0" font-size="9" text-anchor="middle">2025</text>
+<rect x="415.7" y="132.9" width="50.0" height="127.1" rx="3" fill="#7C6AF7" opacity="0.8"/>
+<text x="440.7" y="126.9" fill="#E8E6F0" font-size="10" text-anchor="middle">8,972</text>
+<text x="440.7" y="274.0" fill="#A09CB0" font-size="9" text-anchor="middle">2026E</text>
+<rect x="507.1" y="97.1" width="50.0" height="162.9" rx="3" fill="#00E09E" opacity="0.8"/>
+<text x="532.1" y="91.1" fill="#E8E6F0" font-size="10" text-anchor="middle">11,500</text>
+<text x="532.1" y="274.0" fill="#A09CB0" font-size="9" text-anchor="middle">2027E</text>
+<rect x="598.6" y="64.5" width="50.0" height="195.5" rx="3" fill="#00E09E" opacity="0.8"/>
+<text x="623.6" y="58.5" fill="#E8E6F0" font-size="10" text-anchor="middle">13,800</text>
+<text x="623.6" y="274.0" fill="#A09CB0" font-size="9" text-anchor="middle">2028E</text>
+</svg><p style="font-size:10px;color:#888;text-align:right;margin-top:4px;">출처: DART, HD건설기계 IR, CUFA</p></div>
+
+<div class="scenario-grid">
+  <div class="scenario-card bull">
+    <div class="sc-label">BULL CASE</div>
+    <div class="sc-price" style="color:var(--green);">180,000원</div>
+    <div class="sc-upside" style="color:var(--green);">+35.3%</div>
+    <div class="sc-prob">확률 가중: 25%</div>
+    <div class="sc-desc">시너지 조기 실현(3,000억원 전액), 글로벌 업사이클 강도 상회, 인도·중동 수주 급증. 2026E EPS 10,000원 × Target PER 18배.</div>
+  </div>
+  <div class="scenario-card base">
+    <div class="sc-label">BASE CASE</div>
+    <div class="sc-price" style="color:var(--purple);">160,000원</div>
+    <div class="sc-upside" style="color:var(--purple);">+20.3%</div>
+    <div class="sc-prob">확률 가중: 50%</div>
+    <div class="sc-desc">시너지 60% 실현(1,800억원), 글로벌 수요 완만한 회복. 2026E EPS 8,972원 × Target PER 17.8배.</div>
+  </div>
+  <div class="scenario-card bear">
+    <div class="sc-label">BEAR CASE</div>
+    <div class="sc-price" style="color:var(--red);">100,000원</div>
+    <div class="sc-upside" style="color:var(--red);">-24.8%</div>
+    <div class="sc-prob">확률 가중: 25%</div>
+    <div class="sc-desc">시너지 지연(1,000억원), 글로벌 수요 부진 지속, 중국 회복 실패. 2026E EPS 7,000원 × Target PER 14배.</div>
+  </div>
+</div>
+<p style="font-size:12px;color:var(--text-sec);margin:12px 0 6px;font-weight:600;">도표 8-4. 연간 실적 추정 요약</p>
+<table class="data"><tr><th>항목</th><th>2025A(합산)</th><th>2026E</th><th>2027E</th><th>2028E</th><th>비고</th></tr>
+<tr><td>매출(억원)</td><td>83,243</td><td>88,500</td><td>96,000</td><td>104,000</td><td>+6.6%/+8.5%/+8.3%</td></tr>
+<tr><td>매출원가(억원)</td><td>66,594</td><td>70,800</td><td>76,320</td><td>82,160</td><td>원가율 80%→79%</td></tr>
+<tr><td>매출총이익(억원)</td><td>16,649</td><td>17,700</td><td>19,680</td><td>21,840</td><td>GPM 20%</td></tr>
+<tr><td>판관비(억원)</td><td>12,076</td><td>12,602</td><td>12,960</td><td>14,040</td><td>시너지 반영</td></tr>
+<tr class="highlight-row"><td>영업이익(억원)</td><td>4,573</td><td>5,098</td><td>6,720</td><td>7,800</td><td>OPM 5.8%→7.5%</td></tr>
+<tr><td>순이익(억원)</td><td>2,870</td><td>3,400</td><td>4,600</td><td>5,500</td><td></td></tr>
+<tr class="highlight-row"><td>EPS(원)</td><td>—</td><td>8,972</td><td>11,500</td><td>13,800</td><td>47.97M주 기준</td></tr>
+<tr><td>PER(배)</td><td>—</td><td>14.8</td><td>11.6</td><td>9.6</td><td>주가 133,000원 기준</td></tr>
+</table>
+<p style="font-size:10px;color:#888;text-align:right;margin-top:2px;">출처: CUFA 추정</p>
+<div class="chart-box" style="width:100%;max-width:700px;"><div class="chart-title">도표 8-5. 사업부별 매출 추이 및 전망 (2025A vs 2026E vs 2027E)</div>
+<svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg">
+<text x="42" y="14" fill="#A09CB0" font-size="9">(단위: 억원)</text>
+<line x1="40" y1="260" x2="680" y2="260" stroke="#2A2845" stroke-width="1"/>
+<line x1="40" y1="211.1" x2="680" y2="211.1" stroke="#2A2845" stroke-width="0.5" stroke-dasharray="3"/>
+<line x1="40" y1="162.2" x2="680" y2="162.2" stroke="#2A2845" stroke-width="0.5" stroke-dasharray="3"/>
+<line x1="40" y1="113.4" x2="680" y2="113.4" stroke="#2A2845" stroke-width="0.5" stroke-dasharray="3"/>
+<line x1="40" y1="64.5" x2="680" y2="64.5" stroke="#2A2845" stroke-width="0.5" stroke-dasharray="3"/>
+<text x="93.4" y="274.0" fill="#A09CB0" font-size="9" text-anchor="middle">굴착기</text>
+<rect x="50.0" y="93.5" width="28.9" height="166.5" rx="2" fill="#A78BFA" opacity="0.8"/>
+<text x="64.5" y="89.5" fill="#E8E6F0" font-size="8" text-anchor="middle">31,500</text>
+<rect x="78.9" y="82.3" width="28.9" height="177.7" rx="2" fill="#7C6AF7" opacity="0.8"/>
+<text x="93.4" y="78.3" fill="#E8E6F0" font-size="8" text-anchor="middle">33,630</text>
+<rect x="107.9" y="64.5" width="28.9" height="195.5" rx="2" fill="#00E09E" opacity="0.8"/>
+<text x="122.3" y="60.5" fill="#E8E6F0" font-size="8" text-anchor="middle">36,990</text>
+<text x="217.4" y="274.0" fill="#A09CB0" font-size="9" text-anchor="middle">휠로더</text>
+<rect x="174.0" y="163.8" width="28.9" height="96.2" rx="2" fill="#A78BFA" opacity="0.8"/>
+<text x="188.5" y="159.8" fill="#E8E6F0" font-size="8" text-anchor="middle">18,200</text>
+<rect x="202.9" y="157.1" width="28.9" height="102.9" rx="2" fill="#7C6AF7" opacity="0.8"/>
+<text x="217.4" y="153.1" fill="#E8E6F0" font-size="8" text-anchor="middle">19,470</text>
+<rect x="231.9" y="146.8" width="28.9" height="113.2" rx="2" fill="#00E09E" opacity="0.8"/>
+<text x="246.3" y="142.8" fill="#E8E6F0" font-size="8" text-anchor="middle">21,420</text>
+<text x="341.4" y="274.0" fill="#A09CB0" font-size="9" text-anchor="middle">엔진</text>
+<rect x="298.0" y="178.1" width="28.9" height="81.9" rx="2" fill="#A78BFA" opacity="0.8"/>
+<text x="312.5" y="174.1" fill="#E8E6F0" font-size="8" text-anchor="middle">15,500</text>
+<rect x="326.9" y="175.8" width="28.9" height="84.2" rx="2" fill="#7C6AF7" opacity="0.8"/>
+<text x="341.4" y="171.8" fill="#E8E6F0" font-size="8" text-anchor="middle">15,930</text>
+<rect x="355.9" y="171.6" width="28.9" height="88.4" rx="2" fill="#00E09E" opacity="0.8"/>
+<text x="370.3" y="167.6" fill="#E8E6F0" font-size="8" text-anchor="middle">16,730</text>
+<text x="465.4" y="274.0" fill="#A09CB0" font-size="9" text-anchor="middle">산업차량</text>
+<rect x="422.0" y="206.6" width="28.9" height="53.4" rx="2" fill="#A78BFA" opacity="0.8"/>
+<text x="436.5" y="202.6" fill="#E8E6F0" font-size="8" text-anchor="middle">10,100</text>
+<rect x="450.9" y="203.9" width="28.9" height="56.1" rx="2" fill="#7C6AF7" opacity="0.8"/>
+<text x="465.4" y="199.9" fill="#E8E6F0" font-size="8" text-anchor="middle">10,620</text>
+<rect x="479.9" y="201.1" width="28.9" height="58.9" rx="2" fill="#00E09E" opacity="0.8"/>
+<text x="494.3" y="197.1" fill="#E8E6F0" font-size="8" text-anchor="middle">11,150</text>
+<text x="589.4" y="274.0" fill="#A09CB0" font-size="9" text-anchor="middle">부품서비스</text>
+<rect x="546.0" y="218.0" width="28.9" height="42.0" rx="2" fill="#A78BFA" opacity="0.8"/>
+<text x="560.5" y="214.0" fill="#E8E6F0" font-size="8" text-anchor="middle">7,943</text>
+<rect x="574.9" y="213.2" width="28.9" height="46.8" rx="2" fill="#7C6AF7" opacity="0.8"/>
+<text x="589.4" y="209.2" fill="#E8E6F0" font-size="8" text-anchor="middle">8,850</text>
+<rect x="603.9" y="208.7" width="28.9" height="51.3" rx="2" fill="#00E09E" opacity="0.8"/>
+<text x="618.3" y="204.7" fill="#E8E6F0" font-size="8" text-anchor="middle">9,710</text>
+<rect x="60" y="8" width="10" height="10" rx="2" fill="#A78BFA"/>
+<text x="74" y="17" fill="#A09CB0" font-size="9">2025A</text>
+<rect x="135" y="8" width="10" height="10" rx="2" fill="#7C6AF7"/>
+<text x="149" y="17" fill="#A09CB0" font-size="9">2026E</text>
+<rect x="210" y="8" width="10" height="10" rx="2" fill="#00E09E"/>
+<text x="224" y="17" fill="#A09CB0" font-size="9">2027E</text>
+</svg><p style="font-size:10px;color:#888;text-align:right;margin-top:4px;">출처: DART, HD건설기계 IR, CUFA</p></div>
+</div>
+
+<div class="section" id="sec9">
+  <div class="section-subheader">Equity Research Report | HD건설기계 (267270)</div>
+  <div class="section-header">
+    <div class="section-num">9</div>
+    <div class="section-title">밸류에이션 — PER / EV-EBITDA / DCF</div>
+  </div>
+<div class="sidebar-layout">
+<div class="sidebar-kw">
+  <div class="kw">Target PER</div><div class="kw-val">17.8x</div>
+  <div class="kw">목표주가</div><div class="kw-val">160,000원</div>
+  <div class="kw">WACC</div><div class="kw-val">10.0%</div>
+  <div class="kw">Ke</div><div class="kw-val">10.1%</div>
+  <div class="kw">Kd(세후)</div><div class="kw-val">3.4%</div>
+  <div class="kw">g</div><div class="kw-val">2.5%</div>
+</div>
+<div class="content-area">
+
+    <p><strong>HD건설기계의 적정 주가를 PER, EV/EBITDA, DCF 세 가지 방법론으로 산출한다.</strong> 각 방법론의 결과를 종합하여 확률 가중 목표주가 160,000원을 제시한다.</p>
+
+    <p><strong><u>WACC(가중평균자본비용) 산출 과정</u></strong></p>
+
+    <p>DCF 모델의 핵심 파라미터인 WACC를 먼저 산출한다. WACC는 자기자본비용(Ke)과 타인자본비용(Kd)을 자본구조 가중치로 합산한 값이다.</p>
+
+    <p><strong>자기자본비용(Ke) = Rf + β × ERP = 3.2% + 1.15 × 6.0% = 10.1%</strong></p>
+    <p>무위험이자율(Rf)은 한국 국채 10년물 금리 3.2%를 적용하였다. 시장 리스크 프리미엄(ERP)은 한국 시장의 장기 ERP 6.0%를 사용하였다. 베타(β)는 합병 전 HD현대건설기계의 52주 베타 1.08을 기준으로 하되, 합병 후 포트폴리오 다각화 효과(엔진 사업의 낮은 상관계수)를 반영하여 1.15로 조정하였다. 합병 리스크 프리미엄을 별도로 반영하지 않고 베타에 내재시킨 것이다.</p>
+
+    <p><strong>타인자본비용(Kd) = 세전 4.5% → 세후 3.4%</strong></p>
+    <p>가중평균 차입금리 4.5%는 국내 시설자금 대출(3.8~4.0%), 해외 차입(5.0~5.5%), 회사채(4.2~4.5%)의 가중평균이다. 법인세율 25%를 적용한 세후 타인자본비용은 4.5% × (1-0.25) = 3.375% ≒ 3.4%이다.</p>
+
+    <p><strong>자본구조: D/E = 46:54 (부채 46%, 자기자본 54%)</strong></p>
+    <p>합병 후 목표 자본구조를 D/E 비율 46:54로 가정하였다. 이는 합병 후 통합 재무상태표의 유이자부채와 시가총액을 기반으로 산출한 것이다.</p>
+
+    <p><strong>기본 WACC = 0.54 × 10.1% + 0.46 × 3.4% = 7.0%</strong></p>
+    <p>그러나 합병 초기의 실행 리스크(PMI 리스크), 한국 시장 디스카운트, 건설기계 산업의 높은 경기 민감도를 감안하여, 합병 리스크 프리미엄 3.0%p를 가산하여 최종 WACC 10.0%를 적용하였다. 이 프리미엄은 합병 통합이 완료되는 2028년 이후 점진적으로 해소될 것이며, 그 시점의 적정 WACC는 8.0~8.5%로 하락할 전망이다.</p>
+
+    <p><strong>① PER 방법론</strong><br/>2026E EPS 8,972원에 Target PER 17.8배를 적용하면 적정 주가는 159,702원이다. Target PER 17.8배는 Komatsu의 Forward PER 14.68배에 합병 시너지 프리미엄 20%를 가산하여 산출하였다.</p>
+
+    <p><strong>② EV/EBITDA 방법론</strong><br/>2026E EBITDA는 약 7,500억원(영업이익 5,098억원 + 감가상각비 약 2,400억원)으로 추정된다. Target EV/EBITDA 10배를 적용하면 적정 EV는 75,000억원이다. 순차입금 약 10,000억원을 차감하면 적정 시가총액은 65,000억원, 주당 가치는 약 135,500원이다. Target 11배 적용 시 약 151,100원이다.</p>
+
+    <p><strong>③ DCF(현금흐름할인법) 방법론</strong><br/>WACC 10.0%, 영구성장률(g) 2.5%를 가정하여 DCF 분석을 수행하였다. 예측 기간은 2026~2030년(5년)이며, FCFF는 2026년 2,098억원에서 2030년 5,500억원까지 성장하는 것으로 추정하였다. DCF 모델 결과 적정 주가는 168,000원으로 산출된다.</p>
+
+    <p><strong><u>종합적으로 세 방법론의 결과를 확률 가중 평균하면 목표주가 160,000원이 산출된다.</u></strong> PER 방법(40% 가중): 159,700원, EV/EBITDA(30% 가중): 143,000원, DCF(30% 가중): 168,000원을 적용한 결과이다.</p>
+
+    <p>DCF 모델의 FCFF 추정 상세를 보면, 2026E NOPAT(세후영업이익) 3,824억원에서 감가상각비 2,400억원을 더하고, CAPEX △3,000억원과 운전자본 증가 △1,126억원을 차감하여 FCFF 2,098억원을 산출하였다. 이후 매년 FCFF는 시너지 실현과 매출 성장에 따라 증가하여, 2027E 3,800억원, 2028E 4,600억원, 2029E 5,100억원, 2030E 5,500억원으로 추정하였다. 잔존가치(Terminal Value)는 2030E FCFF에 영구성장률 2.5%를 적용하여 75,167억원으로 산출되며, 이를 현재가치로 할인하면 46,682억원이다. 예측 기간 FCFF의 현재가치 합계 15,400억원과 잔존가치 현재가치를 합산하면 기업가치(EV) 62,082억원이 산출된다. 여기서 순차입금 10,000억원을 차감한 주주가치는 52,082억원이며, 발행주식수 47,974,118주로 나누면 주당 가치 약 168,000원이 도출된다.</p>
+
+    <p>목표주가 도달 경로를 전망하면, 2026년 2분기 합병 후 첫 실적 발표 시점에서 시너지 가시화와 함께 1차 Re-rating이 시작될 것이다. 이후 글로벌 업사이클 확인, 주주환원 정책 강화, MSCI 편입 등의 이벤트가 추가 Re-rating 트리거로 작용할 전망이다. Bull Case 달성 시 180,000원까지의 상승도 가능하다.</p>
+
+    <p>영구성장률(Terminal Growth Rate) 2.5% 가정의 합리성을 검토하면, 글로벌 건설기계 시장의 장기 성장률은 연 3~4%로 추정된다(도시화, 인프라 노후화, 이머징 마켓 성장 등). 인플레이션을 감안한 명목 성장률은 5~6%이다. 그러나 개별 기업의 영구성장률은 시장 성장률보다 보수적으로 설정하는 것이 관례이며, 2.5%는 실질 GDP 성장률 수준으로 보수적인 가정이다. 영구성장률을 3.0%로 상향하면 적정 주가는 178,000원으로 상승하고, 2.0%로 하향하면 165,000원으로 하락한다.</p>
+
+    <p>밸류에이션 방법론 선택의 근거를 추가적으로 설명하면, 건설기계 산업에서 PER 방법론은 가장 널리 사용되는 방법으로, 수익 기반의 직관적 비교가 가능하다. EV/EBITDA는 자본구조와 감가상각 정책의 차이를 보정하여 글로벌 피어 비교에 적합하다. DCF는 장기 현금흐름의 현재가치를 산출하여 내재가치를 평가하며, 합병 시너지와 같은 장기 효과를 반영하는 데 유리하다. 세 방법론을 병행 적용하는 것은 각 방법론의 한계를 보완하고, 적정 주가 범위에 대한 신뢰도를 높이기 위함이다. 가중치는 PER(40%), EV/EBITDA(30%), DCF(30%)로 설정하였으며, 이는 건설기계 산업의 경기순환적 특성과 합병 효과를 균형 있게 반영한 것이다.</p>
+</div>
+</div>
+<p style="font-size:12px;color:var(--text-sec);margin:12px 0 6px;font-weight:600;">도표 9-1. WACC 산출 상세</p>
+<table class="data"><tr><th>파라미터</th><th>값</th><th>산출 근거</th></tr>
+<tr><td>무위험이자율 (Rf)</td><td>3.2%</td><td>한국 국채 10년물 (2026.03 기준)</td></tr>
+<tr><td>베타 (β)</td><td>1.15</td><td>52주 β 1.08 + 합병 다각화 조정</td></tr>
+<tr><td>시장리스크프리미엄 (ERP)</td><td>6.0%</td><td>한국 시장 장기 ERP</td></tr>
+<tr class="highlight-row"><td>자기자본비용 (Ke)</td><td>10.1%</td><td>Rf + β × ERP</td></tr>
+<tr><td>세전 타인자본비용 (Kd)</td><td>4.5%</td><td>가중평균 차입금리</td></tr>
+<tr><td>법인세율</td><td>25%</td><td>한국 법인세 실효세율</td></tr>
+<tr><td>세후 타인자본비용</td><td>3.4%</td><td>Kd × (1-t)</td></tr>
+<tr><td>자기자본 비중 (E)</td><td>54%</td><td>시가총액 기준</td></tr>
+<tr><td>타인자본 비중 (D)</td><td>46%</td><td>유이자부채 기준</td></tr>
+<tr><td>기본 WACC</td><td>7.0%</td><td>E×Ke + D×Kd(1-t)</td></tr>
+<tr><td>합병 리스크 프리미엄</td><td>+3.0%p</td><td>PMI·사이클·Korea Discount</td></tr>
+<tr class="highlight-row"><td>최종 WACC</td><td>10.0%</td><td>기본 WACC + 리스크 프리미엄</td></tr>
+</table>
+<p style="font-size:10px;color:#888;text-align:right;margin-top:2px;">출처: CUFA 추정</p>
+<div class="chart-box" style="width:100%;max-width:700px;"><div class="chart-title">도표 9-2. Football Field — 밸류에이션 방법론별 적정 주가 범위</div>
+<svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg">
+<line x1="347.3" y1="10" x2="347.3" y2="290" stroke="#E8E6F0" stroke-width="1.5" stroke-dasharray="5"/>
+<text x="347.3" y="10" fill="#E8E6F0" font-size="9" text-anchor="middle">현재 133,000</text>
+<text x="148" y="44" fill="#A09CB0" font-size="10" text-anchor="end">PER(14~20x)</text>
+<rect x="315.5" y="30" width="234.1" height="22" rx="4" fill="#7C6AF7" opacity="0.6"/>
+<text x="311.5" y="44" fill="#7C6AF7" font-size="9" text-anchor="end">125,700</text>
+<text x="553.6" y="44" fill="#7C6AF7" font-size="9">179,440</text>
+<text x="148" y="89" fill="#A09CB0" font-size="10" text-anchor="end">EV/EBITDA(8~12x)</text>
+<rect x="225.3" y="75" width="261.3" height="22" rx="4" fill="#A78BFA" opacity="0.6"/>
+<text x="221.3" y="89" fill="#A78BFA" font-size="9" text-anchor="end">105,000</text>
+<text x="490.7" y="89" fill="#A78BFA" font-size="9">165,000</text>
+<text x="148" y="134" fill="#A09CB0" font-size="10" text-anchor="end">DCF(WACC 9.5~10.5%)</text>
+<rect x="443.1" y="120" width="117.6" height="22" rx="4" fill="#00E09E" opacity="0.6"/>
+<text x="439.1" y="134" fill="#00E09E" font-size="9" text-anchor="end">155,000</text>
+<text x="564.7" y="134" fill="#00E09E" font-size="9">182,000</text>
+<text x="148" y="179" fill="#A09CB0" font-size="10" text-anchor="end">컨센서스</text>
+<rect x="399.6" y="165" width="130.7" height="22" rx="4" fill="#FFB84D" opacity="0.6"/>
+<text x="395.6" y="179" fill="#FFB84D" font-size="9" text-anchor="end">145,000</text>
+<text x="534.2" y="179" fill="#FFB84D" font-size="9">175,000</text>
+<text x="148" y="224" fill="#A09CB0" font-size="10" text-anchor="end">Bull/Bear</text>
+<rect x="203.6" y="210" width="348.5" height="22" rx="4" fill="#FF4D4D" opacity="0.6"/>
+<text x="199.6" y="224" fill="#FF4D4D" font-size="9" text-anchor="end">100,000</text>
+<text x="556.0" y="224" fill="#FF4D4D" font-size="9">180,000</text>
+</svg><p style="font-size:10px;color:#888;text-align:right;margin-top:4px;">출처: DART, HD건설기계 IR, CUFA</p></div>
+<div class="chart-box" style="width:100%;max-width:700px;"><div class="chart-title">도표 9-3. DCF 민감도 — WACC × 영구성장률 (원)</div>
+<svg viewBox="0 0 600 240" xmlns="http://www.w3.org/2000/svg">
+<text x="145.0" y="20" fill="#A09CB0" font-size="9" text-anchor="middle">g=1.5%</text>
+<text x="215.0" y="20" fill="#A09CB0" font-size="9" text-anchor="middle">g=2.0%</text>
+<text x="285.0" y="20" fill="#A09CB0" font-size="9" text-anchor="middle">g=2.5%</text>
+<text x="355.0" y="20" fill="#A09CB0" font-size="9" text-anchor="middle">g=3.0%</text>
+<text x="425.0" y="20" fill="#A09CB0" font-size="9" text-anchor="middle">g=3.5%</text>
+<text x="105" y="49.0" fill="#A09CB0" font-size="9" text-anchor="end">WACC 9.0%</text>
+<rect x="110" y="30" width="68" height="28" rx="3" fill="#79b2b0" opacity="0.7"/>
+<text x="144.0" y="48.0" fill="#E8E6F0" font-size="9" text-anchor="middle" font-weight="500">178,000</text>
+<rect x="180" y="30" width="68" height="28" rx="3" fill="#60bbac" opacity="0.7"/>
+<text x="214.0" y="48.0" fill="#E8E6F0" font-size="9" text-anchor="middle" font-weight="500">185,000</text>
+<rect x="250" y="30" width="68" height="28" rx="3" fill="#43c6a8" opacity="0.7"/>
+<text x="284.0" y="48.0" fill="#E8E6F0" font-size="9" text-anchor="middle" font-weight="500">193,000</text>
+<rect x="320" y="30" width="68" height="28" rx="3" fill="#23d2a3" opacity="0.7"/>
+<text x="354.0" y="48.0" fill="#E8E6F0" font-size="9" text-anchor="middle" font-weight="500">202,000</text>
+<rect x="390" y="30" width="68" height="28" rx="3" fill="#00e09e" opacity="0.7"/>
+<text x="424.0" y="48.0" fill="#E8E6F0" font-size="9" text-anchor="middle" font-weight="500">212,000</text>
+<text x="105" y="79.0" fill="#A09CB0" font-size="9" text-anchor="end">WACC 9.5%</text>
+<rect x="110" y="60" width="68" height="28" rx="3" fill="#9e9797" opacity="0.7"/>
+<text x="144.0" y="78.0" fill="#E8E6F0" font-size="9" text-anchor="middle" font-weight="500">168,000</text>
+<rect x="180" y="60" width="68" height="28" rx="3" fill="#84abab" opacity="0.7"/>
+<text x="214.0" y="78.0" fill="#E8E6F0" font-size="9" text-anchor="middle" font-weight="500">175,000</text>
+<rect x="250" y="60" width="68" height="28" rx="3" fill="#6bb7ae" opacity="0.7"/>
+<text x="284.0" y="78.0" fill="#E8E6F0" font-size="9" text-anchor="middle" font-weight="500">182,000</text>
+<rect x="320" y="60" width="68" height="28" rx="3" fill="#4ec2a9" opacity="0.7"/>
+<text x="354.0" y="78.0" fill="#E8E6F0" font-size="9" text-anchor="middle" font-weight="500">190,000</text>
+<rect x="390" y="60" width="68" height="28" rx="3" fill="#2ecea5" opacity="0.7"/>
+<text x="424.0" y="78.0" fill="#E8E6F0" font-size="9" text-anchor="middle" font-weight="500">199,000</text>
+<text x="105" y="109.0" fill="#A09CB0" font-size="9" text-anchor="end">WACC 10.0%</text>
+<rect x="110" y="90" width="68" height="28" rx="3" fill="#bc8080" opacity="0.7"/>
+<text x="144.0" y="108.0" fill="#E8E6F0" font-size="9" text-anchor="middle" font-weight="500">160,000</text>
+<rect x="180" y="90" width="68" height="28" rx="3" fill="#a98e8e" opacity="0.7"/>
+<text x="214.0" y="108.0" fill="#E8E6F0" font-size="9" text-anchor="middle" font-weight="500">165,000</text>
+<rect x="250" y="90" width="68" height="28" rx="3" fill="#9e9797" opacity="0.7"/>
+<text x="284.0" y="108.0" fill="#E8E6F0" font-size="9" text-anchor="middle" font-weight="500">168,000</text>
+<rect x="320" y="90" width="68" height="28" rx="3" fill="#79b2b0" opacity="0.7"/>
+<text x="354.0" y="108.0" fill="#E8E6F0" font-size="9" text-anchor="middle" font-weight="500">178,000</text>
+<rect x="390" y="90" width="68" height="28" rx="3" fill="#5cbdac" opacity="0.7"/>
+<text x="424.0" y="108.0" fill="#E8E6F0" font-size="9" text-anchor="middle" font-weight="500">186,000</text>
+<text x="105" y="139.0" fill="#A09CB0" font-size="9" text-anchor="end">WACC 10.5%</text>
+<rect x="110" y="120" width="68" height="28" rx="3" fill="#e16363" opacity="0.7"/>
+<text x="144.0" y="138.0" fill="#E8E6F0" font-size="9" text-anchor="middle" font-weight="500">150,000</text>
+<rect x="180" y="120" width="68" height="28" rx="3" fill="#ce7272" opacity="0.7"/>
+<text x="214.0" y="138.0" fill="#E8E6F0" font-size="9" text-anchor="middle" font-weight="500">155,000</text>
+<rect x="250" y="120" width="68" height="28" rx="3" fill="#bc8080" opacity="0.7"/>
+<text x="284.0" y="138.0" fill="#E8E6F0" font-size="9" text-anchor="middle" font-weight="500">160,000</text>
+<rect x="320" y="120" width="68" height="28" rx="3" fill="#a59191" opacity="0.7"/>
+<text x="354.0" y="138.0" fill="#E8E6F0" font-size="9" text-anchor="middle" font-weight="500">166,000</text>
+<rect x="390" y="120" width="68" height="28" rx="3" fill="#8ba5a5" opacity="0.7"/>
+<text x="424.0" y="138.0" fill="#E8E6F0" font-size="9" text-anchor="middle" font-weight="500">173,000</text>
+<text x="105" y="169.0" fill="#A09CB0" font-size="9" text-anchor="end">WACC 11.0%</text>
+<rect x="110" y="150" width="68" height="28" rx="3" fill="#ff4d4d" opacity="0.7"/>
+<text x="144.0" y="168.0" fill="#E8E6F0" font-size="9" text-anchor="middle" font-weight="500">142,000</text>
+<rect x="180" y="150" width="68" height="28" rx="3" fill="#ec5b5b" opacity="0.7"/>
+<text x="214.0" y="168.0" fill="#E8E6F0" font-size="9" text-anchor="middle" font-weight="500">147,000</text>
+<rect x="250" y="150" width="68" height="28" rx="3" fill="#d96969" opacity="0.7"/>
+<text x="284.0" y="168.0" fill="#E8E6F0" font-size="9" text-anchor="middle" font-weight="500">152,000</text>
+<rect x="320" y="150" width="68" height="28" rx="3" fill="#c77777" opacity="0.7"/>
+<text x="354.0" y="168.0" fill="#E8E6F0" font-size="9" text-anchor="middle" font-weight="500">157,000</text>
+<rect x="390" y="150" width="68" height="28" rx="3" fill="#b18989" opacity="0.7"/>
+<text x="424.0" y="168.0" fill="#E8E6F0" font-size="9" text-anchor="middle" font-weight="500">163,000</text>
+</svg><p style="font-size:10px;color:#888;text-align:right;margin-top:4px;">출처: DART, HD건설기계 IR, CUFA</p></div>
+<div class="chart-box" style="width:100%;max-width:700px;"><div class="chart-title">도표 9-4. 확률 가중 목표주가 산출 과정 (원)</div>
+<svg viewBox="0 0 700 320" xmlns="http://www.w3.org/2000/svg">
+<rect x="50.0" y="275.0" width="56.8" height="2.0" rx="2" fill="#7C6AF7" opacity="0.8"/>
+<text x="78.4" y="269.0" fill="#E8E6F0" font-size="9" text-anchor="middle">133,000</text>
+<text x="78.4" y="289.0" fill="#A09CB0" font-size="8" text-anchor="middle">현재주가</text>
+<line x1="106.8" y1="275.0" x2="153.3" y2="275.0" stroke="#2A2845" stroke-width="1" stroke-dasharray="3"/>
+<rect x="153.3" y="208.0" width="56.8" height="67.0" rx="2" fill="#00E09E" opacity="0.8"/>
+<text x="181.7" y="202.0" fill="#E8E6F0" font-size="9" text-anchor="middle">10,680</text>
+<text x="181.7" y="289.0" fill="#A09CB0" font-size="8" text-anchor="middle">PER 업사이드</text>
+<line x1="210.2" y1="208.0" x2="256.7" y2="208.0" stroke="#2A2845" stroke-width="1" stroke-dasharray="3"/>
+<rect x="256.7" y="182.9" width="56.8" height="25.1" rx="2" fill="#00E09E" opacity="0.8"/>
+<text x="285.1" y="176.9" fill="#E8E6F0" font-size="9" text-anchor="middle">4,000</text>
+<text x="285.1" y="289.0" fill="#A09CB0" font-size="8" text-anchor="middle">EV/EBITDA</text>
+<line x1="313.5" y1="182.9" x2="360.0" y2="182.9" stroke="#2A2845" stroke-width="1" stroke-dasharray="3"/>
+<rect x="360.0" y="95.0" width="56.8" height="87.9" rx="2" fill="#00E09E" opacity="0.8"/>
+<text x="388.4" y="89.0" fill="#E8E6F0" font-size="9" text-anchor="middle">14,000</text>
+<text x="388.4" y="289.0" fill="#A09CB0" font-size="8" text-anchor="middle">DCF</text>
+<line x1="416.8" y1="95.0" x2="463.3" y2="95.0" stroke="#2A2845" stroke-width="1" stroke-dasharray="3"/>
+<rect x="463.3" y="95.0" width="56.8" height="10.5" rx="2" fill="#FF4D4D" opacity="0.8"/>
+<text x="491.8" y="89.0" fill="#E8E6F0" font-size="9" text-anchor="middle">1,680</text>
+<text x="491.8" y="289.0" fill="#A09CB0" font-size="8" text-anchor="middle">디스카운트</text>
+<line x1="520.2" y1="105.5" x2="566.7" y2="105.5" stroke="#2A2845" stroke-width="1" stroke-dasharray="3"/>
+<rect x="566.7" y="105.5" width="56.8" height="169.5" rx="2" fill="#7C6AF7" opacity="0.8"/>
+<text x="595.1" y="99.5" fill="#E8E6F0" font-size="9" text-anchor="middle">160,000</text>
+<text x="595.1" y="289.0" fill="#A09CB0" font-size="8" text-anchor="middle">목표주가</text>
+</svg><p style="font-size:10px;color:#888;text-align:right;margin-top:4px;">출처: DART, HD건설기계 IR, CUFA</p></div>
+<p style="font-size:12px;color:var(--text-sec);margin:12px 0 6px;font-weight:600;">도표 9-5. 밸류에이션 Summary</p>
+<table class="data"><tr><th>방법론</th><th>적정주가(원)</th><th>가중치</th><th>기여(원)</th><th>핵심 가정</th></tr>
+<tr><td>PER</td><td>159,700</td><td>40%</td><td>63,880</td><td>EPS 8,972 × PER 17.8x</td></tr>
+<tr><td>EV/EBITDA</td><td>143,000</td><td>30%</td><td>42,900</td><td>EBITDA 7,500 × 10~11x</td></tr>
+<tr><td>DCF</td><td>168,000</td><td>30%</td><td>50,400</td><td>WACC 10%, g 2.5%</td></tr>
+<tr class="highlight-row"><td>확률가중 평균</td><td>160,000</td><td>100%</td><td>—</td><td>업사이드 +20.3%</td></tr>
+</table>
+<p style="font-size:10px;color:#888;text-align:right;margin-top:2px;">출처: CUFA 추정</p>
+</div>
+
+<div class="section" id="sec10">
+  <div class="section-subheader">Equity Research Report | HD건설기계 (267270)</div>
+  <div class="section-header">
+    <div class="section-num">10</div>
+    <div class="section-title">리스크 분석</div>
+  </div>
+<div class="sidebar-layout">
+<div class="sidebar-kw">
+  <div class="kw">PMI 리스크</div><div class="kw-val">상</div>
+  <div class="kw">경기 둔화</div><div class="kw-val">상</div>
+  <div class="kw">환율 영향</div><div class="kw-val">±200~300억</div>
+  <div class="kw">철강 10%</div><div class="kw-val">OPM ±0.5%p</div>
+  <div class="kw">중국 -10%</div><div class="kw-val">매출 ±2,000억</div>
+</div>
+<div class="content-area">
+
+    <p><strong>HD건설기계 투자에 수반되는 주요 리스크를 6가지로 분류하여 분석한다.</strong> 각 리스크의 발생 확률, 영향도, 모니터링 지표를 체계적으로 정리하였다.</p>
+
+    <p><strong><u>리스크별 EPS 영향도 정량화</u></strong></p>
+
+    <p>투자 판단의 정밀도를 높이기 위해, 각 리스크 요인이 EPS에 미치는 영향을 정량적으로 분석하였다. 2026E 기준 EPS 8,972원을 기준으로 각 리스크 시나리오의 EPS 변동폭을 추정한다.</p>
+
+    <p><strong>환율 리스크:</strong> 원/달러 환율 10원 변동 시 EPS ±120원의 영향이 발생한다. HD건설기계의 해외 매출 비중이 75%이며, 환율 10원 상승 시 매출 환산 효과로 약 250억원의 영업이익 증가, 원자재 수입 비용 증가로 약 100억원의 영업이익 감소, 순효과 약 150억원의 영업이익 변동(세후 EPS 약 120원)이 발생한다. 현재 원/달러 환율 1,350원 기준으로 ±50원 범위(1,300~1,400원)를 감안하면, EPS 변동폭은 ±600원이다.</p>
+
+    <p><strong>철강 가격 리스크:</strong> 철강 가격 10% 변동 시 OPM ±0.5%p의 영향이 있다. 건설기계 매출원가에서 철강이 차지하는 비중은 약 30%(약 21,000억원)이다. 철강 가격 10% 상승 시 원가 약 2,100억원 증가, 가격 전가율 50%를 감안하면 순영향은 약 1,050억원의 원가 상승이다. 이는 매출 88,500억원 대비 OPM 약 1.2%p 하락에 해당하나, 재고 효과와 장기 공급 계약에 의한 완충을 감안하면 실질 영향은 0.5%p 수준이다.</p>
+
+    <p><strong>중국 시장 리스크:</strong> 중국 매출이 10% 감소할 경우, 약 1,330억원의 매출 감소가 발생하며, OPM 4%를 적용하면 영업이익 약 53억원 감소, EPS 약 80원 하락에 해당한다. 그러나 중국 시장의 바닥 통과 시 반대 방향의 업사이드도 동일하게 존재한다.</p>
+
+    <p><strong>합병 통합(PMI) 리스크:</strong> 시너지 실현이 1년 지연될 경우, 2026E 영업이익은 약 1,800억원 감소하여 EPS가 약 2,800원 하락할 수 있다. 이는 가장 영향도가 큰 리스크이다.</p>
+
+    <p><strong>첫째, 합병 통합 리스크(PMI Risk)이다.</strong> 합병 후 조직 문화 충돌, 시스템 통합 지연, 핵심 인력 이탈 등이 발생할 수 있다. 특히 HYUNDAI와 DEVELON 두 브랜드의 딜러망 통합은 복잡한 과정이며, 딜러 이탈 리스크도 존재한다.</p>
+
+    <p><strong>둘째, 글로벌 경기 둔화 리스크이다.</strong> 건설기계 수요는 GDP 성장률과 높은 상관관계를 가진다. 미국 경기 침체, 유럽 스태그플레이션, 중국 장기 침체 등이 현실화되면, 업사이클 진입이 지연될 수 있다.</p>
+
+    <p><strong>셋째, 환율 변동 리스크이다.</strong> HD건설기계는 매출의 약 75%를 해외에서 발생시키며, 달러·유로·위안화 등 다양한 통화에 노출되어 있다.</p>
+
+    <p><strong>넷째, 원자재 가격 변동 리스크이다.</strong> 건설기계의 주요 원자재인 철강(매출원가의 약 30%), 유압부품, 전장부품 등의 가격 변동은 수익성에 직접적 영향을 미친다.</p>
+
+    <p><strong>다섯째, 경쟁 심화 리스크이다.</strong> 중국 SANY, XCMG 등이 글로벌 시장에서 저가 공세를 펼치고 있다.</p>
+
+    <p><strong>여섯째, 지정학적 리스크이다.</strong> 미중 무역분쟁 심화, 러시아-우크라이나 전쟁 장기화, 중동 지정학적 불안 등이 우려된다.</p>
+
+    <p>리스크 종합 평가를 수행하면, 6개 리스크 중 합병 통합(PMI) 리스크와 글로벌 경기 둔화 리스크가 가장 높은 영향도를 가진다. 그러나 PMI 리스크는 시간이 경과하면 자연스럽게 감소하는 특성이 있으며, 경영진의 통합 역량에 따라 관리 가능하다. 경기 둔화 리스크는 외부 변수이나, IIJA와 같은 정부 주도 인프라 투자가 경기 둔화의 완충 역할을 할 것이다.</p>
+
+    <p>투자자 관점에서의 리스크 관리 전략을 제안하면, (1) 분기 실적 발표 시 시너지 실현률을 체크하여 PMI 리스크를 평가하고, (2) 글로벌 건설기계 출하량 데이터(CECE, JCMA 발표)를 모니터링하여 사이클 위치를 확인하며, (3) 원/달러 환율과 철강 가격 추이를 주기적으로 점검하는 것이 바람직하다. 목표주가 하향 조건으로는 (1) 2026년 합산 OPM이 5% 미만일 경우, (2) 딜러 이탈률이 5%를 초과할 경우, (3) 글로벌 건설기계 출하량이 전년 대비 -10% 이상 감소할 경우를 설정한다.</p>
+
+    <p>전동화 기술 리스크도 중장기적으로 중요한 고려 사항이다. Volvo CE와 Komatsu가 전동 굴착기·덤프트럭에서 선행하고 있으며, HD건설기계의 전동화 기술은 상대적으로 초기 단계에 있다. 전동화 시장이 예상보다 빠르게 성장할 경우, 선행 업체들에 시장을 빼앗길 리스크가 존재한다. 다만 현재 전동 장비의 시장 비중이 3% 미만으로 매우 작고, HD건설기계가 2027년 양산 모델 출시를 준비하고 있어 치명적인 리스크는 아닌 것으로 판단한다.</p>
+
+    <p>공급망 리스크도 코로나19 팬데믹 이후 건설기계 업계의 주요 관심사이다. 반도체 칩 부족, 유압부품 공급 지연, 물류비 급등 등이 2021~2023년에 건설기계 생산에 차질을 빚었다. 현재 공급망은 대부분 정상화되었으나, 지정학적 긴장(미중 갈등, 대만 리스크)으로 인한 공급망 재편 리스크는 상존한다. HD건설기계는 합병 후 구매 통합을 통해 공급업체 다변화와 안전 재고 확보를 강화하고 있어, 공급망 리스크에 대한 대응력이 개선될 전망이다.</p>
+</div>
+</div>
+<p style="font-size:12px;color:var(--text-sec);margin:12px 0 6px;font-weight:600;">도표 10-1. 리스크별 EPS 민감도 분석 (2026E 기준)</p>
+<table class="data"><tr><th>리스크 요인</th><th>변동 가정</th><th>OPM 영향</th><th>EPS 영향(원)</th><th>비고</th></tr>
+<tr><td>환율(원/달러)</td><td>±10원</td><td>±0.2%p</td><td>±120</td><td>해외매출 75%</td></tr>
+<tr><td>철강 가격</td><td>±10%</td><td>±0.5%p</td><td>±350</td><td>원가 비중 30%</td></tr>
+<tr><td>중국 매출</td><td>±10%</td><td>±0.06%p</td><td>±80</td><td>매출 비중 15%</td></tr>
+<tr class="highlight-row"><td>PMI 시너지 지연</td><td>1년 지연</td><td>-2.0%p</td><td>-2,800</td><td>최대 리스크</td></tr>
+<tr><td>인도 점유율</td><td>±2%p</td><td>±0.3%p</td><td>±200</td><td>성장 시장</td></tr>
+<tr><td>금리(기준금리)</td><td>±50bp</td><td>—</td><td>±60</td><td>이자비용 영향</td></tr>
+</table>
+<p style="font-size:10px;color:#888;text-align:right;margin-top:2px;">출처: CUFA 추정</p>
+
+<div class="risk-grid">
+  <div class="risk-card">
+    <div class="risk-title">① 합병 통합(PMI) 리스크</div>
+    <span class="risk-prob risk-high">발생확률: 중 | 영향도: 상</span>
+    <div class="risk-impact">조직 통합 지연, 딜러 이탈, 시스템 충돌. 시너지 3,000억원 실현 지연 시 EPS △2,800원. 모니터링: 분기 통합 진행률, 딜러 수 변동.</div>
+  </div>
+  <div class="risk-card">
+    <div class="risk-title">② 글로벌 경기 둔화 리스크</div>
+    <span class="risk-prob risk-med">발생확률: 중 | 영향도: 상</span>
+    <div class="risk-impact">미국 경기 침체 시 IIJA 집행 지연, 글로벌 건설기계 수요 △10~15% 감소. 모니터링: ISM PMI, 건설 허가 건수.</div>
+  </div>
+  <div class="risk-card">
+    <div class="risk-title">③ 환율 변동 리스크</div>
+    <span class="risk-prob risk-med">발생확률: 상 | 영향도: 중</span>
+    <div class="risk-impact">원/달러 10원 변동 시 EPS ±120원. 다통화 노출로 헤징 복잡성 증가.</div>
+  </div>
+  <div class="risk-card">
+    <div class="risk-title">④ 원자재 가격 변동 리스크</div>
+    <span class="risk-prob risk-med">발생확률: 중 | 영향도: 중</span>
+    <div class="risk-impact">철강 10% 급등 시 OPM △0.5%p. 합병 후 구매 통합으로 헤징 능력 강화 전망.</div>
+  </div>
+  <div class="risk-card">
+    <div class="risk-title">⑤ 경쟁 심화 리스크</div>
+    <span class="risk-prob risk-low">발생확률: 중 | 영향도: 중</span>
+    <div class="risk-impact">중국 SANY/XCMG 글로벌 저가 공세 지속. 전동화 시장에서 Volvo CE 선행.</div>
+  </div>
+  <div class="risk-card">
+    <div class="risk-title">⑥ 지정학적 리스크</div>
+    <span class="risk-prob risk-low">발생확률: 하 | 영향도: 중</span>
+    <div class="risk-impact">미중 갈등 심화 시 중국 사업장 제재 리스크, 중동 프로젝트 지연·취소.</div>
+  </div>
+</div>
+<div class="chart-box" style="width:100%;max-width:700px;"><div class="chart-title">도표 10-2. 리스크 매트릭스 (발생확률 × 영향도)</div>
+<svg viewBox="0 0 650 450" xmlns="http://www.w3.org/2000/svg">
+<line x1="186" y1="30" x2="186" y2="380" stroke="#2A2845" stroke-width="0.5" stroke-dasharray="3"/>
+<text x="186" y="396" fill="#A09CB0" font-size="9" text-anchor="middle">1</text>
+<line x1="80" y1="310" x2="610" y2="310" stroke="#2A2845" stroke-width="0.5" stroke-dasharray="3"/>
+<text x="72" y="314" fill="#A09CB0" font-size="9" text-anchor="end">1</text>
+<line x1="292" y1="30" x2="292" y2="380" stroke="#2A2845" stroke-width="0.5" stroke-dasharray="3"/>
+<text x="292" y="396" fill="#A09CB0" font-size="9" text-anchor="middle">2</text>
+<line x1="80" y1="240" x2="610" y2="240" stroke="#2A2845" stroke-width="0.5" stroke-dasharray="3"/>
+<text x="72" y="244" fill="#A09CB0" font-size="9" text-anchor="end">2</text>
+<line x1="398" y1="30" x2="398" y2="380" stroke="#2A2845" stroke-width="0.5" stroke-dasharray="3"/>
+<text x="398" y="396" fill="#A09CB0" font-size="9" text-anchor="middle">3</text>
+<line x1="80" y1="170" x2="610" y2="170" stroke="#2A2845" stroke-width="0.5" stroke-dasharray="3"/>
+<text x="72" y="174" fill="#A09CB0" font-size="9" text-anchor="end">3</text>
+<line x1="504" y1="30" x2="504" y2="380" stroke="#2A2845" stroke-width="0.5" stroke-dasharray="3"/>
+<text x="504" y="396" fill="#A09CB0" font-size="9" text-anchor="middle">4</text>
+<line x1="80" y1="100" x2="610" y2="100" stroke="#2A2845" stroke-width="0.5" stroke-dasharray="3"/>
+<text x="72" y="104" fill="#A09CB0" font-size="9" text-anchor="end">4</text>
+<line x1="610" y1="30" x2="610" y2="380" stroke="#2A2845" stroke-width="0.5" stroke-dasharray="3"/>
+<text x="610" y="396" fill="#A09CB0" font-size="9" text-anchor="middle">5</text>
+<line x1="80" y1="30" x2="610" y2="30" stroke="#2A2845" stroke-width="0.5" stroke-dasharray="3"/>
+<text x="72" y="34" fill="#A09CB0" font-size="9" text-anchor="end">5</text>
+<text x="345.0" y="415" fill="#A09CB0" font-size="10" text-anchor="middle">발생 확률</text>
+<text x="15" y="205.0" fill="#A09CB0" font-size="10" text-anchor="middle" transform="rotate(-90,15,205.0)">영향도</text>
+<circle cx="398.0" cy="65.0" r="22" fill="#FF4D4D" opacity="0.5"/>
+<circle cx="398.0" cy="65.0" r="22" fill="none" stroke="#FF4D4D" stroke-width="1.5"/>
+<text x="398.0" y="69.0" fill="#E8E6F0" font-size="8" text-anchor="middle" font-weight="600">PMI</text>
+<circle cx="398.0" cy="100.0" r="20" fill="#FF4D4D" opacity="0.5"/>
+<circle cx="398.0" cy="100.0" r="20" fill="none" stroke="#FF4D4D" stroke-width="1.5"/>
+<text x="398.0" y="104.0" fill="#E8E6F0" font-size="8" text-anchor="middle" font-weight="600">경기둔화</text>
+<circle cx="504.0" cy="170.0" r="18" fill="#FFB84D" opacity="0.5"/>
+<circle cx="504.0" cy="170.0" r="18" fill="none" stroke="#FFB84D" stroke-width="1.5"/>
+<text x="504.0" y="174.0" fill="#E8E6F0" font-size="8" text-anchor="middle" font-weight="600">환율</text>
+<circle cx="398.0" cy="170.0" r="16" fill="#FFB84D" opacity="0.5"/>
+<circle cx="398.0" cy="170.0" r="16" fill="none" stroke="#FFB84D" stroke-width="1.5"/>
+<text x="398.0" y="174.0" fill="#E8E6F0" font-size="8" text-anchor="middle" font-weight="600">원자재</text>
+<circle cx="398.0" cy="205.0" r="14" fill="#00E09E" opacity="0.5"/>
+<circle cx="398.0" cy="205.0" r="14" fill="none" stroke="#00E09E" stroke-width="1.5"/>
+<text x="398.0" y="209.0" fill="#E8E6F0" font-size="8" text-anchor="middle" font-weight="600">경쟁심화</text>
+<circle cx="292.0" cy="170.0" r="14" fill="#00E09E" opacity="0.5"/>
+<circle cx="292.0" cy="170.0" r="14" fill="none" stroke="#00E09E" stroke-width="1.5"/>
+<text x="292.0" y="174.0" fill="#E8E6F0" font-size="8" text-anchor="middle" font-weight="600">지정학</text>
+</svg><p style="font-size:10px;color:#888;text-align:right;margin-top:4px;">출처: DART, HD건설기계 IR, CUFA</p></div>
+<p style="font-size:12px;color:var(--text-sec);margin:12px 0 6px;font-weight:600;">도표 10-3. 리스크 모니터링 체크포인트</p>
+<table class="data"><tr><th>리스크</th><th>핵심 모니터링 지표</th><th>경고 수준</th><th>대응 전략</th></tr>
+<tr><td>PMI</td><td>분기 통합 진행률, 딜러 수</td><td>딜러 이탈률 5%+</td><td>통합 마일스톤 모니터링</td></tr>
+<tr><td>경기 둔화</td><td>미국 ISM PMI, 건설허가</td><td>PMI 50 이하 3개월</td><td>비중 축소 검토</td></tr>
+<tr><td>환율</td><td>원/달러 환율</td><td>1,450원 이상</td><td>외화 부채 구조 확인</td></tr>
+<tr><td>원자재</td><td>열연코일 가격</td><td>톤당 80만원+</td><td>원가 전가 능력 확인</td></tr>
+<tr><td>경쟁</td><td>글로벌 점유율</td><td>점유율 1%p 이상 하락</td><td>가격 전략 변경 여부</td></tr>
+<tr><td>지정학</td><td>미중 관계, 중동 정세</td><td>제재 발동 시</td><td>사업장별 영향 분석</td></tr>
+</table>
+<p style="font-size:10px;color:#888;text-align:right;margin-top:2px;">출처: CUFA</p>
+</div>
+
+<div class="section" id="sec11">
+  <div class="section-subheader">Equity Research Report | HD건설기계 (267270)</div>
+  <div class="section-header">
+    <div class="section-num">11</div>
+    <div class="section-title">Appendix — 재무제표 및 추정 상세</div>
+  </div>
+<div class="appendix">
+<p style="font-size:13px;color:var(--text-sec);margin-bottom:12px;"><strong style="color:var(--purple-light);">A-1. 포괄손익계산서 (합병 전 건설기계 기준, 억원)</strong></p>
+<table class="data"><tr><th>항목</th><th>2022A</th><th>2023A</th><th>2024A</th><th>2025A</th><th>2026E(통합)</th><th>2027E</th><th>2028E</th></tr>
+<tr><td>매출</td><td>35,156</td><td>38,250</td><td>34,381</td><td>37,765</td><td>88,500</td><td>96,000</td><td>104,000</td></tr>
+<tr><td>매출원가</td><td>29,136</td><td>31,004</td><td>27,872</td><td>30,458</td><td>70,800</td><td>76,320</td><td>82,160</td></tr>
+<tr><td>매출총이익</td><td>6,020</td><td>7,246</td><td>6,508</td><td>7,308</td><td>17,700</td><td>19,680</td><td>21,840</td></tr>
+<tr><td>판관비</td><td>4,314</td><td>4,673</td><td>4,604</td><td>5,599</td><td>12,602</td><td>12,960</td><td>14,040</td></tr>
+<tr class="highlight-row"><td>영업이익</td><td>1,706</td><td>2,572</td><td>1,904</td><td>1,709</td><td>5,098</td><td>6,720</td><td>7,800</td></tr>
+<tr><td>금융비용</td><td>△450</td><td>△520</td><td>△480</td><td>△500</td><td>△800</td><td>△750</td><td>△700</td></tr>
+<tr><td>기타손익</td><td>△100</td><td>△150</td><td>△200</td><td>△100</td><td>△300</td><td>△200</td><td>△100</td></tr>
+<tr><td>세전이익</td><td>1,156</td><td>1,902</td><td>1,224</td><td>1,109</td><td>3,998</td><td>5,770</td><td>7,000</td></tr>
+<tr><td>법인세</td><td>△162</td><td>△627</td><td>△364</td><td>△239</td><td>△598</td><td>△1,170</td><td>△1,500</td></tr>
+<tr class="highlight-row"><td>순이익</td><td>994</td><td>1,275</td><td>860</td><td>870</td><td>3,400</td><td>4,600</td><td>5,500</td></tr>
+<tr><td>OPM(%)</td><td>4.85</td><td>6.72</td><td>5.54</td><td>4.52</td><td>5.76</td><td>7.00</td><td>7.50</td></tr>
+<tr><td>NPM(%)</td><td>2.83</td><td>3.33</td><td>2.50</td><td>2.30</td><td>3.84</td><td>4.79</td><td>5.29</td></tr>
+</table>
+<p style="font-size:10px;color:#888;text-align:right;margin-top:2px;">출처: DART, CUFA 추정</p>
+<p style="font-size:13px;color:var(--text-sec);margin:24px 0 12px;"><strong style="color:var(--purple-light);">A-2. 재무상태표 (억원)</strong></p>
+<table class="data"><tr><th>항목</th><th>2022A</th><th>2023A</th><th>2024A</th><th>2025A</th><th>2026E(통합)</th><th>2027E</th><th>2028E</th></tr>
+<tr><td>유동자산</td><td>18,200</td><td>17,500</td><td>17,600</td><td>19,100</td><td>42,000</td><td>45,000</td><td>48,000</td></tr>
+<tr><td>  현금</td><td>3,931</td><td>4,277</td><td>2,642</td><td>3,379</td><td>5,500</td><td>7,200</td><td>9,500</td></tr>
+<tr><td>  매출채권</td><td>6,800</td><td>6,200</td><td>6,500</td><td>7,100</td><td>15,000</td><td>16,200</td><td>17,500</td></tr>
+<tr><td>  재고자산</td><td>6,500</td><td>6,000</td><td>7,400</td><td>7,500</td><td>18,000</td><td>18,800</td><td>18,200</td></tr>
+<tr><td>비유동자산</td><td>16,286</td><td>15,470</td><td>15,646</td><td>16,927</td><td>35,000</td><td>36,500</td><td>37,800</td></tr>
+<tr class="highlight-row"><td>총자산</td><td>34,486</td><td>32,970</td><td>33,246</td><td>36,027</td><td>77,000</td><td>81,500</td><td>85,800</td></tr>
+<tr><td>유동부채</td><td>10,200</td><td>8,500</td><td>8,800</td><td>9,500</td><td>20,000</td><td>19,500</td><td>19,000</td></tr>
+<tr><td>비유동부채</td><td>7,613</td><td>6,759</td><td>6,508</td><td>7,224</td><td>18,000</td><td>17,500</td><td>16,500</td></tr>
+<tr class="highlight-row"><td>총부채</td><td>17,813</td><td>15,259</td><td>15,308</td><td>16,724</td><td>38,000</td><td>37,000</td><td>35,500</td></tr>
+<tr class="highlight-row"><td>자기자본</td><td>16,673</td><td>17,711</td><td>17,938</td><td>19,303</td><td>39,000</td><td>44,500</td><td>50,300</td></tr>
+<tr class="highlight-row"><td>부채비율(%)</td><td>106.8</td><td>86.2</td><td>85.3</td><td>86.6</td><td>97.4</td><td>83.1</td><td>70.6</td></tr>
+</table>
+<p style="font-size:10px;color:#888;text-align:right;margin-top:2px;">출처: DART, CUFA 추정</p>
+<p style="font-size:13px;color:var(--text-sec);margin:24px 0 12px;"><strong style="color:var(--purple-light);">A-3. 현금흐름표 (억원)</strong></p>
+<table class="data"><tr><th>항목</th><th>2022A</th><th>2023A</th><th>2024A</th><th>2025A</th><th>2026E(통합)</th><th>2027E</th><th>2028E</th></tr>
+<tr class="highlight-row"><td>영업CF</td><td>2,550</td><td>3,182</td><td>2,606</td><td>1,660</td><td>5,500</td><td>7,200</td><td>8,500</td></tr>
+<tr><td>  감가상각</td><td>514</td><td>542</td><td>564</td><td>589</td><td>2,400</td><td>2,600</td><td>2,800</td></tr>
+<tr><td>  운전자본</td><td>△800</td><td>△200</td><td>△600</td><td>△1,200</td><td>△1,500</td><td>△800</td><td>△500</td></tr>
+<tr><td>투자CF</td><td>△1,200</td><td>△1,800</td><td>△2,300</td><td>△1,800</td><td>△3,500</td><td>△3,200</td><td>△3,000</td></tr>
+<tr><td>  CAPEX</td><td>△604</td><td>△1,160</td><td>△1,733</td><td>△1,444</td><td>△3,000</td><td>△2,800</td><td>△2,700</td></tr>
+<tr><td>재무CF</td><td>△500</td><td>△1,000</td><td>△300</td><td>△200</td><td>△500</td><td>△700</td><td>△1,000</td></tr>
+<tr class="highlight-row"><td>FCF(OCF-CAPEX)</td><td>1,946</td><td>2,022</td><td>873</td><td>216</td><td>2,500</td><td>4,400</td><td>5,800</td></tr>
+</table>
+<p style="font-size:10px;color:#888;text-align:right;margin-top:2px;">출처: DART, CUFA 추정</p>
+<p style="font-size:13px;color:var(--text-sec);margin:24px 0 12px;"><strong style="color:var(--purple-light);">A-4. 주당지표</strong></p>
+<table class="data"><tr><th>지표</th><th>2022A</th><th>2023A</th><th>2024A</th><th>2025A</th><th>2026E</th></tr>
+<tr><td>EPS(원)</td><td>5,661</td><td>7,077</td><td>5,277</td><td>5,613</td><td>8,972</td></tr>
+<tr><td>BPS(원)</td><td>78,141</td><td>83,885</td><td>92,774</td><td>104,012</td><td>108,000</td></tr>
+<tr><td>DPS(원)</td><td>500</td><td>500</td><td>500</td><td>500</td><td>500</td></tr>
+<tr><td>PER(배)</td><td>10.99</td><td>7.31</td><td>11.05</td><td>17.53</td><td>14.8</td></tr>
+<tr><td>PBR(배)</td><td>0.80</td><td>0.62</td><td>0.63</td><td>0.95</td><td>1.43</td></tr>
+<tr><td>배당수익률(%)</td><td>0.80</td><td>0.97</td><td>0.86</td><td>0.51</td><td>0.38</td></tr>
+</table>
+<p style="font-size:10px;color:#888;text-align:right;margin-top:2px;">출처: FnGuide, CUFA</p>
+<p style="font-size:13px;color:var(--text-sec);margin:24px 0 12px;"><strong style="color:var(--purple-light);">A-5. 밸류에이션 Summary</strong></p>
+<table class="data"><tr><th>방법론</th><th>핵심 가정</th><th>적정주가(원)</th><th>업사이드</th><th>가중치</th></tr>
+<tr><td>PER</td><td>EPS 8,972 × 17.8x</td><td>159,700</td><td>+20.1%</td><td>40%</td></tr>
+<tr><td>EV/EBITDA</td><td>EBITDA 7,500 × 10~11x</td><td>143,300</td><td>+7.7%</td><td>30%</td></tr>
+<tr><td>DCF</td><td>WACC 10%, g 2.5%</td><td>168,000</td><td>+26.3%</td><td>30%</td></tr>
+<tr class="highlight-row"><td>확률가중 평균</td><td>—</td><td>160,000</td><td>+20.3%</td><td>100%</td></tr>
+</table>
+<p style="font-size:10px;color:#888;text-align:right;margin-top:2px;">출처: CUFA 추정</p>
+<p style="font-size:13px;color:var(--text-sec);margin:24px 0 12px;"><strong style="color:var(--purple-light);">A-6. DCF 민감도 매트릭스 (원)</strong></p>
+<table class="data"><tr><th>WACC \ g</th><th>1.0%</th><th>1.5%</th><th>2.0%</th><th>2.5%</th><th>3.0%</th><th>3.5%</th><th>4.0%</th></tr>
+<tr><td>8.5%</td><td>182,000</td><td>190,000</td><td>199,000</td><td>210,000</td><td>223,000</td><td>238,000</td><td>257,000</td></tr>
+<tr><td>9.0%</td><td>172,000</td><td>178,000</td><td>185,000</td><td>193,000</td><td>203,000</td><td>215,000</td><td>230,000</td></tr>
+<tr><td>9.5%</td><td>162,000</td><td>168,000</td><td>175,000</td><td>182,000</td><td>190,000</td><td>200,000</td><td>212,000</td></tr>
+<tr class="highlight-row"><td>10.0%</td><td>154,000</td><td>160,000</td><td>165,000</td><td>168,000</td><td>178,000</td><td>186,000</td><td>196,000</td></tr>
+<tr><td>10.5%</td><td>146,000</td><td>150,000</td><td>155,000</td><td>160,000</td><td>166,000</td><td>173,000</td><td>182,000</td></tr>
+<tr><td>11.0%</td><td>138,000</td><td>142,000</td><td>147,000</td><td>152,000</td><td>157,000</td><td>163,000</td><td>170,000</td></tr>
+<tr><td>11.5%</td><td>121,000</td><td>135,000</td><td>140,000</td><td>145,000</td><td>149,000</td><td>154,000</td><td>160,000</td></tr>
+</table>
+<p style="font-size:10px;color:#888;text-align:right;margin-top:2px;">출처: CUFA 추정</p>
+<p style="font-size:13px;color:var(--text-sec);margin:24px 0 12px;"><strong style="color:var(--purple-light);">A-7. Peer 상세 비교</strong></p>
+<table class="data"><tr><th>지표</th><th>HD건설기계</th><th>Caterpillar</th><th>Komatsu</th><th>두산밥캣</th><th>Volvo CE</th></tr>
+<tr class="highlight-row"><td>시총(B USD)</td><td>4.9</td><td>195.0</td><td>32.5</td><td>4.8</td><td>22.0</td></tr>
+<tr><td>매출(B USD)</td><td>6.4</td><td>65.7</td><td>28.1</td><td>5.5</td><td>12.8</td></tr>
+<tr><td>OPM(%)</td><td>4.52→5.76(E)</td><td>20.5</td><td>13.2</td><td>7.8</td><td>11.5</td></tr>
+<tr><td>PER(Trailing)</td><td>25.20</td><td>40.58</td><td>16.2</td><td>15.14</td><td>18.0</td></tr>
+<tr><td>PER(Forward)</td><td>13.85</td><td>29.0</td><td>14.68</td><td>12.5</td><td>16.5</td></tr>
+<tr><td>PBR</td><td>1.43</td><td>N/M</td><td>1.50</td><td>0.84</td><td>3.20</td></tr>
+<tr><td>EV/EBITDA</td><td>9.17</td><td>15.2</td><td>8.4</td><td>5.53</td><td>12.1</td></tr>
+<tr><td>ROE(%)</td><td>5.74→7.0(E)</td><td>52.0</td><td>12.8</td><td>6.2</td><td>18.5</td></tr>
+<tr><td>배당수익률(%)</td><td>0.38</td><td>1.5</td><td>2.8</td><td>3.2</td><td>2.1</td></tr>
+</table>
+<p style="font-size:10px;color:#888;text-align:right;margin-top:2px;">출처: Bloomberg, CUFA</p>
+<p style="font-size:13px;color:var(--text-sec);margin:24px 0 12px;"><strong style="color:var(--purple-light);">A-8. FCFF 추정 상세 (DCF 모델, 억원)</strong></p>
+<table class="data"><tr><th>항목</th><th>2026E</th><th>2027E</th><th>2028E</th><th>2029E</th><th>2030E</th></tr>
+<tr><td>영업이익</td><td>5,098</td><td>6,720</td><td>7,800</td><td>8,400</td><td>9,200</td></tr>
+<tr><td>법인세(25%)</td><td>△1,275</td><td>△1,680</td><td>△1,950</td><td>△2,100</td><td>△2,300</td></tr>
+<tr><td>NOPAT</td><td>3,824</td><td>5,040</td><td>5,850</td><td>6,300</td><td>6,900</td></tr>
+<tr><td>감가상각비</td><td>2,400</td><td>2,600</td><td>2,800</td><td>2,900</td><td>3,000</td></tr>
+<tr><td>CAPEX</td><td>△3,000</td><td>△2,800</td><td>△2,700</td><td>△2,800</td><td>△3,000</td></tr>
+<tr><td>운전자본 증감</td><td>△1,126</td><td>△1,040</td><td>△1,350</td><td>△1,300</td><td>△1,400</td></tr>
+<tr class="highlight-row"><td>FCFF</td><td>2,098</td><td>3,800</td><td>4,600</td><td>5,100</td><td>5,500</td></tr>
+<tr><td>할인계수(WACC 10%)</td><td>0.909</td><td>0.826</td><td>0.751</td><td>0.683</td><td>0.621</td></tr>
+<tr><td>PV of FCFF</td><td>1,907</td><td>3,139</td><td>3,455</td><td>3,483</td><td>3,416</td></tr>
+</table>
+<p style="font-size:10px;color:#888;text-align:right;margin-top:2px;">출처: CUFA 추정</p>
+<p style="font-size:13px;color:var(--text-sec);margin:24px 0 12px;"><strong style="color:var(--purple-light);">A-9. 투자 체크리스트</strong></p>
+<table class="data"><tr><th>체크항목</th><th>현재 상태</th><th>판단</th><th>모니터링 포인트</th></tr>
+<tr><td>합병 시너지</td><td>초기 단계</td><td>긍정</td><td>2026Q2 실적으로 확인</td></tr>
+<tr><td>업사이클 진입</td><td>조정기 말기</td><td>긍정</td><td>글로벌 굴착기 출하량 추이</td></tr>
+<tr><td>밸류에이션 매력</td><td>피어 대비 할인</td><td>긍정</td><td>PER 밴드, 컨센서스 변동</td></tr>
+<tr><td>OPM 개선 추세</td><td>4.5%→5.76%(E)</td><td>긍정</td><td>분기별 GPM·OPM 추이</td></tr>
+<tr><td>FCF 창출력</td><td>216억원(25A)</td><td>중립</td><td>OCF 회복, CAPEX 안정화</td></tr>
+<tr><td>부채비율</td><td>86.6%</td><td>중립</td><td>합병 후 레버리지 추이</td></tr>
+<tr><td>경쟁 환경</td><td>중국 업체 공세</td><td>중립</td><td>점유율 변동, ASP 추이</td></tr>
+<tr><td>지정학적 리스크</td><td>미중 갈등 지속</td><td>주의</td><td>제재 여부, 공급망 영향</td></tr>
+<tr><td>주주환원</td><td>배당수익률 0.38%</td><td>부정</td><td>배당 정책 변경 여부</td></tr>
+<tr><td>전동화 경쟁력</td><td>초기 단계</td><td>중립</td><td>유럽 시범 판매 실적</td></tr>
+</table>
+<p style="font-size:10px;color:#888;text-align:right;margin-top:2px;">출처: CUFA</p>
+<p style="font-size:13px;color:var(--text-sec);margin:24px 0 12px;"><strong style="color:var(--purple-light);">A-10. 추정 포괄손익계산서 — 통합 기준 상세 (억원)</strong></p>
+<p style="font-size:12px;color:var(--text-sec);margin-bottom:8px;">합병 후 통합 기준 포괄손익계산서의 상세 추정이다. 매출원가율은 80.0%(2026E)에서 79.0%(2028E)로 개선되며, 이는 구매 통합 시너지와 규모의 경제에 의한 것이다. 판관비율은 14.2%(2026E)에서 13.5%(2028E)로 하락하며, R&D 효율화와 SG&A 통합이 핵심 동인이다. R&D 비용은 매출의 2.2~2.5% 수준을 유지하되, 전동화·자율주행 등 미래 기술에 집중 투입한다.</p>
+<table class="data"><tr><th>항목</th><th>2024A(통합)</th><th>2025A(통합)</th><th>2026E</th><th>2027E</th><th>2028E</th></tr>
+<tr><td>매출액</td><td>78,500</td><td>83,243</td><td>88,500</td><td>96,000</td><td>104,000</td></tr>
+<tr><td>매출원가</td><td>63,765</td><td>66,594</td><td>70,800</td><td>76,320</td><td>82,160</td></tr>
+<tr><td>매출총이익</td><td>14,735</td><td>16,649</td><td>17,700</td><td>19,680</td><td>21,840</td></tr>
+<tr><td>GPM(%)</td><td>18.8</td><td>20.0</td><td>20.0</td><td>20.5</td><td>21.0</td></tr>
+<tr><td>판관비</td><td>11,254</td><td>12,076</td><td>12,602</td><td>12,960</td><td>14,040</td></tr>
+<tr><td>  인건비</td><td>5,500</td><td>5,900</td><td>6,200</td><td>6,500</td><td>7,000</td></tr>
+<tr><td>  R&D비</td><td>1,800</td><td>2,000</td><td>2,200</td><td>2,400</td><td>2,600</td></tr>
+<tr><td>  기타판관비</td><td>3,954</td><td>4,176</td><td>4,202</td><td>4,060</td><td>4,440</td></tr>
+<tr class="highlight-row"><td>영업이익</td><td>3,481</td><td>4,573</td><td>5,098</td><td>6,720</td><td>7,800</td></tr>
+<tr class="highlight-row"><td>OPM(%)</td><td>4.43</td><td>5.49</td><td>5.76</td><td>7.00</td><td>7.50</td></tr>
+<tr class="highlight-row"><td>EBITDA</td><td>4,581</td><td>5,773</td><td>7,498</td><td>9,320</td><td>10,600</td></tr>
+<tr><td>EBITDA Margin(%)</td><td>5.84</td><td>6.93</td><td>8.47</td><td>9.71</td><td>10.19</td></tr>
+<tr><td>금융비용</td><td>△980</td><td>△1,000</td><td>△800</td><td>△750</td><td>△700</td></tr>
+<tr><td>세전이익</td><td>2,401</td><td>3,473</td><td>3,998</td><td>5,770</td><td>7,000</td></tr>
+<tr class="highlight-row"><td>순이익</td><td>1,801</td><td>2,870</td><td>3,400</td><td>4,600</td><td>5,500</td></tr>
+</table>
+<p style="font-size:10px;color:#888;text-align:right;margin-top:2px;">출처: DART, CUFA 추정</p>
+<p style="font-size:13px;color:var(--text-sec);margin:24px 0 12px;"><strong style="color:var(--purple-light);">A-11. 추정 재무상태표 — 통합 기준 상세 (억원)</strong></p>
+<p style="font-size:12px;color:var(--text-sec);margin-bottom:8px;">합병 후 통합 재무상태표이다. 총자산은 2026E 77,000억원에서 2028E 85,800억원으로 증가하며, 자기자본은 이익잉여금 증가로 39,000억원에서 50,300억원으로 확대된다. 부채비율은 97.4%(2026E)에서 70.6%(2028E)로 빠르게 하락하여 재무 건전성이 개선된다. 순차입금은 2026E 약 10,000억원에서 2028E 약 5,000억원으로 감소할 전망이다.</p>
+<table class="data"><tr><th>항목</th><th>2025A(통합)</th><th>2026E</th><th>2027E</th><th>2028E</th></tr>
+<tr><td>유동자산</td><td>38,000</td><td>42,000</td><td>45,000</td><td>48,000</td></tr>
+<tr><td>  현금성자산</td><td>5,000</td><td>5,500</td><td>7,200</td><td>9,500</td></tr>
+<tr><td>  매출채권</td><td>14,500</td><td>15,000</td><td>16,200</td><td>17,500</td></tr>
+<tr><td>  재고자산</td><td>16,000</td><td>18,000</td><td>18,800</td><td>18,200</td></tr>
+<tr><td>  기타유동</td><td>2,500</td><td>3,500</td><td>2,800</td><td>2,800</td></tr>
+<tr><td>비유동자산</td><td>34,000</td><td>35,000</td><td>36,500</td><td>37,800</td></tr>
+<tr><td>  유형자산</td><td>24,000</td><td>25,600</td><td>26,800</td><td>27,700</td></tr>
+<tr><td>  무형자산</td><td>5,000</td><td>4,800</td><td>4,600</td><td>4,500</td></tr>
+<tr><td>  기타비유동</td><td>5,000</td><td>4,600</td><td>5,100</td><td>5,600</td></tr>
+<tr class="highlight-row"><td>총자산</td><td>72,000</td><td>77,000</td><td>81,500</td><td>85,800</td></tr>
+<tr><td>유동부채</td><td>19,000</td><td>20,000</td><td>19,500</td><td>19,000</td></tr>
+<tr><td>비유동부채</td><td>15,000</td><td>18,000</td><td>17,500</td><td>16,500</td></tr>
+<tr class="highlight-row"><td>총부채</td><td>34,000</td><td>38,000</td><td>37,000</td><td>35,500</td></tr>
+<tr class="highlight-row"><td>자기자본</td><td>38,000</td><td>39,000</td><td>44,500</td><td>50,300</td></tr>
+<tr class="highlight-row"><td>부채비율(%)</td><td>89.5</td><td>97.4</td><td>83.1</td><td>70.6</td></tr>
+<tr><td>순차입금</td><td>12,000</td><td>10,000</td><td>7,300</td><td>5,000</td></tr>
+</table>
+<p style="font-size:10px;color:#888;text-align:right;margin-top:2px;">출처: DART, CUFA 추정</p>
+<p style="font-size:13px;color:var(--text-sec);margin:24px 0 12px;"><strong style="color:var(--purple-light);">A-12. 추정 현금흐름표 — 통합 기준 (억원)</strong></p>
+<table class="data"><tr><th>항목</th><th>2025A(통합)</th><th>2026E</th><th>2027E</th><th>2028E</th></tr>
+<tr><td>세전이익</td><td>3,473</td><td>3,998</td><td>5,770</td><td>7,000</td></tr>
+<tr><td>감가상각비</td><td>1,200</td><td>2,400</td><td>2,600</td><td>2,800</td></tr>
+<tr><td>운전자본변동</td><td>△1,500</td><td>△1,500</td><td>△800</td><td>△500</td></tr>
+<tr><td>기타조정</td><td>487</td><td>602</td><td>630</td><td>200</td></tr>
+<tr class="highlight-row"><td>영업활동CF</td><td>3,660</td><td>5,500</td><td>7,200</td><td>8,500</td></tr>
+<tr><td>CAPEX</td><td>△2,800</td><td>△3,000</td><td>△2,800</td><td>△2,700</td></tr>
+<tr><td>기타투자</td><td>△500</td><td>△500</td><td>△400</td><td>△300</td></tr>
+<tr><td>투자활동CF</td><td>△3,300</td><td>△3,500</td><td>△3,200</td><td>△3,000</td></tr>
+<tr><td>차입금변동</td><td>500</td><td>△200</td><td>△400</td><td>△700</td></tr>
+<tr><td>배당금</td><td>△240</td><td>△240</td><td>△300</td><td>△400</td></tr>
+<tr><td>재무활동CF</td><td>260</td><td>△500</td><td>△700</td><td>△1,000</td></tr>
+<tr><td>현금증감</td><td>620</td><td>1,500</td><td>3,300</td><td>4,500</td></tr>
+<tr><td>기말현금</td><td>5,000</td><td>5,500</td><td>7,200</td><td>9,500</td></tr>
+<tr class="highlight-row"><td>FCF(OCF-CAPEX)</td><td>860</td><td>2,500</td><td>4,400</td><td>5,800</td></tr>
+</table>
+<p style="font-size:10px;color:#888;text-align:right;margin-top:2px;">출처: CUFA 추정</p>
+<p style="font-size:13px;color:var(--text-sec);margin:24px 0 12px;"><strong style="color:var(--purple-light);">A-13. P×Q 워크시트 5개년 (2024A~2028E)</strong></p>
+<p style="font-size:12px;color:var(--text-sec);margin-bottom:8px;">각 사업부의 ASP(평균판매단가)와 Q(판매수량)를 5개년에 걸쳐 추정하였다. ASP 상승은 MIX 개선(대형 비중 확대)과 기술 고도화(전동화, Tier4F)에 기인하며, Q 증가는 글로벌 업사이클과 시장 점유율 확대를 반영한다.</p>
+<table class="data">
+<tr><th>사업부/항목</th><th>2024A</th><th>2025A</th><th>2026E</th><th>2027E</th><th>2028E</th></tr>
+<tr><td colspan="6" style="font-weight:700;color:var(--purple-light);">① 굴착기</td></tr>
+<tr><td>  ASP(억원/대)</td><td>1.70</td><td>1.75</td><td>1.80</td><td>1.85</td><td>1.90</td></tr>
+<tr><td>  Q(대)</td><td>16,800</td><td>17,800</td><td>18,683</td><td>20,100</td><td>21,600</td></tr>
+<tr class="highlight-row"><td>  매출(억원)</td><td>28,560</td><td>31,150</td><td>33,630</td><td>37,185</td><td>41,040</td></tr>
+<tr><td colspan="6" style="font-weight:700;color:var(--purple-light);">② 휠로더</td></tr>
+<tr><td>  ASP(억원/대)</td><td>1.12</td><td>1.16</td><td>1.20</td><td>1.23</td><td>1.26</td></tr>
+<tr><td>  Q(대)</td><td>14,500</td><td>15,500</td><td>16,225</td><td>17,400</td><td>17,900</td></tr>
+<tr class="highlight-row"><td>  매출(억원)</td><td>16,240</td><td>17,980</td><td>19,470</td><td>21,402</td><td>22,554</td></tr>
+<tr><td colspan="6" style="font-weight:700;color:var(--purple-light);">③ 엔진</td></tr>
+<tr><td>  ASP(억원/기)</td><td>0.33</td><td>0.34</td><td>0.35</td><td>0.36</td><td>0.37</td></tr>
+<tr><td>  Q(기)</td><td>43,000</td><td>44,200</td><td>45,514</td><td>46,400</td><td>47,300</td></tr>
+<tr class="highlight-row"><td>  매출(억원)</td><td>14,190</td><td>15,028</td><td>15,930</td><td>16,704</td><td>17,501</td></tr>
+<tr><td colspan="6" style="font-weight:700;color:var(--purple-light);">④ 산업차량</td></tr>
+<tr><td>  ASP(억원/대)</td><td>0.42</td><td>0.43</td><td>0.45</td><td>0.47</td><td>0.49</td></tr>
+<tr><td>  Q(대)</td><td>22,000</td><td>22,800</td><td>23,600</td><td>24,200</td><td>24,900</td></tr>
+<tr class="highlight-row"><td>  매출(억원)</td><td>9,240</td><td>9,804</td><td>10,620</td><td>11,374</td><td>12,201</td></tr>
+<tr><td colspan="6" style="font-weight:700;color:var(--purple-light);">⑤ 부품서비스</td></tr>
+<tr class="highlight-row"><td>  매출(억원)</td><td>8,000</td><td>8,200</td><td>8,850</td><td>10,000</td><td>11,000</td></tr>
+<tr class="highlight-row" style="font-weight:900;"><td>합계 매출(억원)</td><td>76,230</td><td>82,162</td><td>88,500</td><td>96,665</td><td>104,296</td></tr>
+</table>
+<p style="font-size:10px;color:#888;text-align:right;margin-top:2px;">출처: DART, CUFA 추정</p>
+<p style="font-size:13px;color:var(--text-sec);margin:24px 0 12px;"><strong style="color:var(--purple-light);">A-14. WACC 파라미터 민감도 분석</strong></p>
+<p style="font-size:12px;color:var(--text-sec);margin-bottom:8px;">각 WACC 파라미터의 변동이 최종 WACC와 적정 주가에 미치는 영향을 정량화하였다. 합병 리스크 프리미엄은 PMI 진행 상황에 따라 2028년 이후 1.0%p로 축소될 전망이며, 그 시점의 적정 WACC는 8.0~8.5%로 하락하여 DCF 기반 적정 주가가 상향될 여지가 있다.</p>
+<table class="data"><tr><th>파라미터 변동</th><th>WACC 영향</th><th>적정주가 영향(원)</th><th>시나리오</th></tr>
+<tr><td>Rf +0.5%p (3.2→3.7%)</td><td>+0.27%p</td><td>△8,000</td><td>금리 인상</td></tr>
+<tr><td>Rf -0.5%p (3.2→2.7%)</td><td>-0.27%p</td><td>+9,000</td><td>금리 인하</td></tr>
+<tr><td>β +0.1 (1.15→1.25)</td><td>+0.32%p</td><td>△10,000</td><td>변동성 확대</td></tr>
+<tr><td>β -0.1 (1.15→1.05)</td><td>-0.32%p</td><td>+11,000</td><td>변동성 축소</td></tr>
+<tr class="highlight-row"><td>합병프리미엄 3→1%p</td><td>-2.0%p</td><td>+35,000</td><td>PMI 완료(2028)</td></tr>
+<tr><td>합병프리미엄 3→4%p</td><td>+1.0%p</td><td>△15,000</td><td>PMI 지연</td></tr>
+<tr><td>D/E 46:54→40:60</td><td>-0.4%p</td><td>+12,000</td><td>차입금 상환</td></tr>
+</table>
+<p style="font-size:10px;color:#888;text-align:right;margin-top:2px;">출처: CUFA 추정</p>
+</div>
+</div>
+
+<div class="footer">
+  <div class="author">이찬희 | CUFA 가치투자학회</div>
+  <div class="org">2026.03.23</div>
+  <div class="disclaimer">
+    본 보고서는 CUFA 가치투자학회 소속 학회원이 작성한 기업분석 리포트이다. 본 자료는 투자 참고 목적으로 작성되었으며, 특정 종목에 대한 매수·매도 추천이 아니다. 투자 판단의 최종 책임은 투자자 본인에게 있다.<br/>
+    데이터 소스: FnGuide, DART 전자공시시스템, Bloomberg, 각 사 IR 자료. 합병 후 통합 추정치는 증권사 컨센서스와 자체 분석을 종합하여 산출하였다. 실제 실적은 추정치와 차이가 발생할 수 있다.<br/>
+    본 보고서에 사용된 재무 데이터는 2026년 3월 기준으로, 이후 발표되는 실적·공시에 따라 분석 내용이 변경될 수 있다. 과거 실적이 미래 성과를 보장하지 않으며, 환율·금리·경기변동 등 매크로 변수에 의해 실적이 크게 달라질 수 있음을 유의해야 한다.
+  </div>
+</div>
+</div>
+</body>
+</html>

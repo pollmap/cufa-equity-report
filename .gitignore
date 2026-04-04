@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+.env
+*_API_KEY*
+config_secret.py
+output/*.html
+output/*.xlsx
+data/*.csv
+data/*.json
+node_modules/
+.DS_Store
+Thumbs.db
+*.tmp
