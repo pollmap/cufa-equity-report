@@ -1197,3 +1197,45 @@ def risk_grid(risks: Sequence[tuple[str, str, str]]) -> str:
             f"</div>"
         )
     return f'<div class="risk-grid">{"".join(cards)}</div>'
+
+
+def chart_with_insight(chart_html: str, insight: str, src: str = "") -> str:
+    """차트 + 해석 블록. SMIC 패턴: 차트 아래 2-3줄 해석문."""
+    src_html = f'<div class="chart-source">출처: {_esc(src)}</div>' if src else ""
+    return (
+        f'<div class="chart-box">{chart_html}{src_html}'
+        f'<div class="chart-insight">{_esc(insight)}</div></div>'
+    )
+
+def chart_pair(chart1: str, chart2: str) -> str:
+    """두 차트를 2열로 배치. HD건설기계 .chart-pair 패턴."""
+    return (
+        f'<div class="chart-pair">'
+        f'<div class="chart-box">{chart1}</div>'
+        f'<div class="chart-box">{chart2}</div>'
+        f'</div>'
+    )
+
+def kill_condition_gauge(conditions: list[tuple[str, str, str, str]]) -> str:
+    """Kill Condition 시각화. conditions = [(조건, 현재, 여유, 상태)].
+    상태: 'safe'=초록, 'warn'=노랑, 'danger'=빨강"""
+    cards = []
+    for cond, current, margin, status in conditions:
+        color = {"safe": "var(--green)", "warn": "#FFB84D", "danger": "var(--red)"}.get(status, "var(--text-sec)")
+        cards.append(
+            f'<div class="kill-card">'
+            f'<div class="kill-status" style="color:{color}">●</div>'
+            f'<div class="kill-cond">{_esc(cond)}</div>'
+            f'<div class="kill-current">현재: {_esc(current)}</div>'
+            f'<div class="kill-margin">여유: {_esc(margin)}</div>'
+            f'</div>'
+        )
+    return f'<div class="kill-grid">{"".join(cards)}</div>'
+
+def assumption_tracker(assumptions: list[tuple[str, str, str, str, str]]) -> str:
+    """가정 추적기. assumptions = [(가정, 수치, 출처, 반증조건, 모니터링주기)]."""
+    return table(
+        ["가정", "수치", "출처", "반증 조건", "모니터링"],
+        [[a[0], a[1], a[2], a[3], a[4]] for a in assumptions],
+        title="Assumption Tracker — 모든 가정과 반증 조건",
+    )

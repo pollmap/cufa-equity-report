@@ -228,6 +228,92 @@ def build_cover(cfg: ModuleType) -> str:
 
 
 # ============================================================
+#  Executive Summary 빌드
+# ============================================================
+
+def build_executive_summary(cfg: ModuleType) -> str:
+    """Executive Summary — 커버 직후, TOC 직전."""
+    subtitle = getattr(cfg, "SUBTITLE", "")
+    current = getattr(cfg, "CURRENT_PRICE", 0)
+    mcap = getattr(cfg, "MARKET_CAP", 0)
+    ratios = getattr(cfg, "RATIOS", {})
+    opinion = getattr(cfg, "OPINION", "N/R")
+    scenarios = getattr(cfg, "SCENARIOS", {})
+    ips = getattr(cfg, "INVESTMENT_POINTS", [])
+    risks = getattr(cfg, "RISKS", [])
+
+    # --- Investment Thesis (1문단) ---
+    thesis = f'<p style="font-size:13px;line-height:1.7;margin-bottom:16px;">{_esc(subtitle)}</p>' if subtitle else ""
+
+    # --- Metric Grid: 현재가 / 시총 / PSR(TTM) / 투자의견 ---
+    psr_val = f'{_fmt(ratios.get("psr_ttm"))}배' if ratios.get("psr_ttm") else "N/A"
+    opinion_color = "var(--green)" if opinion == "BUY" else ("var(--red)" if opinion == "SELL" else "var(--purple)")
+
+    metrics_html = C.metric_grid([
+        ("현재가", f"{_fmt(current)}원", "", ""),
+        ("시가총액", f"{_fmt(mcap)}억원", "", ""),
+        ("PSR(TTM)", psr_val, "", ""),
+        ("투자의견", opinion, "", "up" if opinion == "BUY" else ("down" if opinion == "SELL" else "")),
+    ])
+
+    # --- Bull / Base / Bear 한줄 요약 ---
+    scenario_html = ""
+    if scenarios:
+        rows_data = []
+        for key, label, color in [("bull", "Bull", "var(--green)"), ("base", "Base", "var(--purple)"), ("bear", "Bear", "var(--red)")]:
+            s = scenarios.get(key, {})
+            price = s.get("price", "")
+            desc = s.get("desc", s.get("description", s.get("label", "")))
+            rows_data.append(
+                f'<tr>'
+                f'<td style="color:{color};font-weight:700;width:60px;">{label}</td>'
+                f'<td style="font-weight:600;">{_fmt(price)}원</td>'
+                f'<td style="font-size:12px;color:var(--text-sec);">{_esc(str(desc)[:80])}</td>'
+                f'</tr>'
+            )
+        scenario_html = (
+            '<div style="margin:16px 0;">'
+            '<div style="font-size:11px;font-weight:700;color:var(--text-sec);margin-bottom:6px;">시나리오 요약</div>'
+            '<table style="width:100%;border-collapse:collapse;">'
+            + "\n".join(rows_data)
+            + '</table></div>'
+        )
+
+    # --- Key Debates: Bull 논거 3개 + Bear 논거 3개 ---
+    bull_args = [ip.get("title", "") for ip in ips[:3]]
+    bear_args = [r.get("name", r.get("title", "")) for r in risks[:3]]
+
+    debate_rows = ""
+    max_len = max(len(bull_args), len(bear_args))
+    for i in range(max_len):
+        b = _esc(bull_args[i]) if i < len(bull_args) else ""
+        r = _esc(bear_args[i]) if i < len(bear_args) else ""
+        debate_rows += f'<tr><td style="color:var(--green);font-size:12px;">&#9650; {b}</td><td style="color:var(--red);font-size:12px;">&#9660; {r}</td></tr>\n'
+
+    debate_html = ""
+    if bull_args or bear_args:
+        debate_html = (
+            '<div style="margin:16px 0;">'
+            '<div style="font-size:11px;font-weight:700;color:var(--text-sec);margin-bottom:6px;">Key Debates</div>'
+            '<table style="width:100%;border-collapse:collapse;">'
+            '<tr><th style="text-align:left;font-size:11px;color:var(--green);padding-bottom:4px;">Bull Case</th>'
+            '<th style="text-align:left;font-size:11px;color:var(--red);padding-bottom:4px;">Bear Case</th></tr>\n'
+            + debate_rows
+            + '</table></div>'
+        )
+
+    return f"""
+<div class="section" id="exec-summary">
+  <div style="font-size:16px;font-weight:700;margin-bottom:12px;color:var(--purple);">Executive Summary</div>
+  {thesis}
+  {metrics_html}
+  {scenario_html}
+  {debate_html}
+</div>
+"""
+
+
+# ============================================================
 #  목차 빌드
 # ============================================================
 
@@ -282,7 +368,8 @@ def build_float_toc(cfg: ModuleType) -> str:
         if idx - 1 < len(titles):
             titles[idx - 1] = (idx, f'IP{ip["id"]}. {ip["title"][:10]}')
 
-    links = "\n".join(
+    links = '<a href="#exec-summary">Executive Summary</a>\n'
+    links += "\n".join(
         f'<a href="#sec{n}">{n}. {_esc(t[:20])}</a>'
         for n, t in titles
     )
@@ -851,6 +938,7 @@ def build_report(config_path: str) -> str:
     # 각 섹션 빌드
     sections = [
         build_cover(cfg),
+        build_executive_summary(cfg),
         build_toc(cfg),
         _sec(1), _sec(2), _sec(3), _sec(4), _sec(5),
         _sec(6), _sec(7), _sec(8), _sec(9), _sec(10), _sec(11),

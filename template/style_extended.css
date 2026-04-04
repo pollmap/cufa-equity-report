@@ -281,3 +281,51 @@
     border-top-color: #ddd;
   }
 }
+
+/* chart-insight (차트 해석 블록) */
+.chart-insight {
+  font-size: 12px;
+  color: var(--text-sec);
+  margin-top: 8px;
+  padding: 8px 12px;
+  border-left: 2px solid var(--purple);
+  line-height: 1.5;
+  font-style: italic;
+}
+
+/* kill-grid (Kill Condition 시각화) */
+.kill-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.kill-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px;
+  display: grid;
+  grid-template-columns: 24px 1fr;
+  grid-template-rows: auto auto;
+  gap: 4px 8px;
+}
+
+.kill-status {
+  font-size: 18px;
+  grid-row: 1 / 3;
+  align-self: center;
+}
+
+.kill-cond {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.kill-current, .kill-margin {
+  font-size: 11px;
+  color: var(--text-sec);
+  grid-column: 2;
+}
