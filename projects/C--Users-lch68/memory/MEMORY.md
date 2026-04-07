@@ -61,7 +61,8 @@
 - [project_ai_code_agent_vision.md](project_ai_code_agent_vision.md) — AI 코드 에이전트 풀스택 비전, 80% 달성, Atomic Chat 대기
 
 ## Reference
-- [reference_environment.md](reference_environment.md) — VPS/노트북/배포패턴, API 키 발급처
+- [reference_environment.md](reference_environment.md) — VPS/노트북/배포패턴, API 키 발급처 (2026-04-07 업데이트)
 - [reference_smic_report_structure.md](reference_smic_report_structure.md) — SMIC 수정보고서 구조 (평균 35.7p, 섹션 패턴, Valuation 방법론)
 - [reference_mcp_field_report.md](reference_mcp_field_report.md) — Nexus MCP 실전 리포트: 19개 이슈 (P0 버그 3, P1 누락 5, P2 부족 5, P3 확장 6)
 - [reference_external_projects.md](reference_external_projects.md) — Karpathy Wiki, OpenClaude, Obsidian Mind, DeepScientist, Anthropic Harness 참고
+- [../../../Desktop/LUXON-AI-INFRA-STATUS-2026-04-07.md](../../../Desktop/LUXON-AI-INFRA-STATUS-2026-04-07.md) — 종합 인프라 현황 보고서 (Lenovo 83HY, OpenClaude, gitlawb, MCP, 도식화 포함)
