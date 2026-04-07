@@ -36,10 +36,14 @@ type: reference
 - **gitlawb DID**: `did:key:z6Mkk8VikHH7mm5UCCrVr5jFrzyKk7enGt2fTGYCq4bQFrF7`
 - **접속**: `wsl -d Ubuntu-24.04`
 
-## Galaxy Book2 Pro (별도 기기)
-- **용도**: WSL 전용 기기 (별도 운용)
-- SSH: `valuealpha@10.0.0.2`
-- 이번 세션에서 미사용
+## Galaxy Book2 Pro (DOGE 에이전트 전용 기기)
+- **용도**: DOGE (INTP) 에이전트 24시간 운영
+- **역할**: 리서치+퀀트 검증+소스 수집+딥 분석 (ORACLE 기능 흡수)
+- **포트**: 18794
+- **SSH**: `valuealpha@10.0.0.2`
+- **OS**: WSL2 Ubuntu
+- **사양**: 찬희에게 확인 필요 (RAM/CPU)
+- **중요**: 이 기기의 WSL과 Lenovo의 WSL은 별개! Lenovo WSL = gitlawb CLI만
 
 ## VPS — Contabo (62.171.141.206)
 - **OS**: Ubuntu 24.04.4 LTS

@@ -44,6 +44,13 @@ type: project
 | Companion/Kanna | Claude Code 웹 UI | 참고용 |
 | Paperclip | 멀티에이전트 제어판 | 참고용 |
 
+## GitHub: pollmap/luxon-ai (2026.04.07)
+
+- **Repo**: https://github.com/pollmap/luxon-ai
+- **목적**: Luxon AI 공식 문서 공개 — SOUL/README/VISION/ARCHITECTURE/MCP-CATALOG
+- **로컬 경로**: `~/Desktop/luxon-ai-docs/`
+- **내용**: 에이전트 SOUL.md, 인프라 아키텍처, MCP 카탈로그, 비전 문서 등 Luxon AI 시스템 전체 문서
+
 ## 법적 주의
 
 OpenClaude는 Anthropic 비인가 포크. 실험/학습용 OK, 프로덕션 서비스 통합 시 리스크 평가 필요.
