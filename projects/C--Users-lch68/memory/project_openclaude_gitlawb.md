@@ -12,6 +12,8 @@ type: project
 - **에이전트 라우팅**: Plan/architect/security → 5.4, 나머지 → 5.3 (`settings.json`)
 - **토큰 자동 리프레시**: Windows Task Scheduler `LuxonCodexTokenRefresh` 매일 09:00
 - **쉘 설정**: `~/.profile` — `oc`, `oc5`, `oc3`, `ocds` 별칭, `oc-model`, `oc-status` 함수
+- **CRITICAL: --bare 모드 필수**: 203스킬이 GPT-5 컨텍스트 윈도우 초과. `oc` 별칭은 `--bare --system-prompt-file`로 경량 프롬프트만 로드
+- **경량 프롬프트**: `~/.claude/openclaude-system-prompt.md` (찬희 규칙 + 환경정보 + MCP 핵심만)
 
 ## gitlawb v0.3.8 (WSL2 Ubuntu 24.04)
 

@@ -15,6 +15,22 @@ triggers:
 
 # OpenClaude + gitlawb 운영 스킬
 
+## CRITICAL: --bare 모드 필수
+
+OpenClaude에서 203개 스킬을 전부 로드하면 GPT-5.x 컨텍스트 윈도우를 초과한다 (API Error 500).
+반드시 `--bare` 모드로 실행하고, 경량 시스템 프롬프트만 로드해야 한다.
+
+```bash
+# 올바른 사용법 (별칭 oc가 이미 설정됨)
+oc                    # --bare + system-prompt-file 자동 적용
+oc-raw                # 시스템 프롬프트도 없는 순수 bare 모드
+oc-full               # 전체 모드 (GPT-5에서 크래시 가능, Claude Code 전용)
+```
+
+경량 시스템 프롬프트: `~/.claude/openclaude-system-prompt.md`
+- 찬희 작업 스타일 + 환경정보 + MCP 핵심만 포함
+- 스킬/커맨드/메모리 자동 로드 안 됨
+
 ## 1. 멀티모델 관리
 
 ### 현재 모델 설정
@@ -32,7 +48,12 @@ oc-model 5.3     # GPT-5.3으로 전환
 oc-model ds      # DeepSeek로 전환
 oc-model local   # Ollama 로컬로 전환
 
-# 또는 별칭 사용
+# --bare 모드 별칭 (필수, 위 CRITICAL 섹션 참조)
+oc                # --bare + system-prompt-file 자동 적용 (기본 사용법)
+oc-raw            # 시스템 프롬프트도 없는 순수 bare 모드
+oc-full           # 전체 모드 (GPT-5에서 크래시 가능, Claude Code 전용)
+
+# 모델별 별칭
 oc5              # GPT-5.4로 OpenClaude 실행
 oc3              # GPT-5.3으로 OpenClaude 실행
 ocds             # DeepSeek로 OpenClaude 실행
