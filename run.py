@@ -186,12 +186,40 @@ def main():
     parser = argparse.ArgumentParser(
         description="CUFA 원커맨드 자동 빌드 파이프라인"
     )
-    parser.add_argument('ticker', nargs='?', help='종목명 (예: 삼성전자)')
-    parser.add_argument('--no-git', action='store_true', help='GitHub 업로드 건너뜀')
-    parser.add_argument('--eval',   action='store_true', help='Evaluator 상세 리포트')
-    parser.add_argument('--list',   action='store_true', help='빌드 가능 종목 목록')
-    parser.add_argument('--all',    action='store_true', help='모든 종목 순차 빌드')
+    parser.add_argument('ticker',   nargs='?',            help='종목명 (예: 삼성전자)')
+    parser.add_argument('code',     nargs='?',            help='종목코드 (collect 모드 시, 예: 005930)')
+    parser.add_argument('--no-git', action='store_true',  help='GitHub 업로드 건너뜀')
+    parser.add_argument('--eval',   action='store_true',  help='Evaluator 상세 리포트')
+    parser.add_argument('--list',   action='store_true',  help='빌드 가능 종목 목록')
+    parser.add_argument('--all',    action='store_true',  help='모든 종목 순차 빌드')
+    parser.add_argument('--collect',action='store_true',  help='Phase 0: Nexus MCP로 데이터 자동수집 후 config.py 생성')
+    parser.add_argument('--update', action='store_true',  help='기존 config.py FINANCIALS를 최신 DART 실적으로 업데이트')
     args = parser.parse_args()
+
+    # ── Phase 0: 데이터 자동수집 모드 ──────────────────────
+    if args.collect or args.update:
+        if not args.ticker:
+            print("사용법: python run.py {종목명} {종목코드} --collect")
+            return
+        ticker_code = args.code or ""
+        collector_path = ROOT / "data" / "collector.py"
+        mode = "--update" if args.update else ""
+        out_path = EXAMPLES / args.ticker / "config.py"
+        cmd = [sys.executable, str(collector_path),
+               args.ticker, ticker_code,
+               "--output", str(out_path)]
+        if mode:
+            cmd.append(mode)
+        r = subprocess.run(cmd, capture_output=False)
+        if r.returncode == 0 and not args.update:
+            print(f"\n✅ config.py 생성 완료 — 빌드 계속 진행 중...")
+            build(args.ticker, no_git=args.no_git, eval_detail=args.eval)
+        return
+
+    # ── 기존 연간 자동 업데이트 (매년 1분기 실적 발표 후) ──
+    if args.update:
+        print("연간 FINANCIALS 업데이트 모드 — Nexus MCP DART 사용")
+        return
 
     if args.list or not args.ticker:
         tickers = list_tickers()
