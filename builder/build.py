@@ -1014,7 +1014,105 @@ def main():
 
     print(f"Text: {text_chars:,} chars | SVG: {svg_count} | Tables: {table_count}")
 
+    # ── 마크다운 본문 자동 export ────────────────────────────
+    md_path = OUTPUT_DIR / f"{name}_CUFA_본문.md"
+    md_text = _html_to_markdown(html, name, cfg)
+    md_path.write_text(md_text, encoding="utf-8")
+    print(f"Markdown saved: {md_path} ({len(md_text):,} chars)")
+
     return output_path
+
+
+def _html_to_markdown(html: str, company: str, cfg) -> str:
+    """HTML 보고서 → 깔끔한 마크다운 본문 변환.
+    AI 재편집, 팀 리뷰, GPT 추가 분석에 최적화된 구조."""
+    import re
+    from datetime import datetime
+
+    # 1. <body> 내부만 추출
+    body_match = re.search(r'<div class="report">(.*?)</div>\s*<button', html, re.DOTALL)
+    body = body_match.group(1) if body_match else html
+
+    # 2. SVG/script/style 제거
+    body = re.sub(r'<svg[\s\S]*?</svg>', '[SVG 차트]', body)
+    body = re.sub(r'<script[\s\S]*?</script>', '', body)
+    body = re.sub(r'<style[\s\S]*?</style>', '', body)
+
+    # 3. HTML → Markdown 변환
+    # 헤딩
+    body = re.sub(r'<h1[^>]*>(.*?)</h1>', r'# \1', body)
+    body = re.sub(r'<h2[^>]*>(.*?)</h2>', r'\n## \1\n', body)
+    body = re.sub(r'<h3[^>]*>(.*?)</h3>', r'\n### \1\n', body)
+    body = re.sub(r'<h4[^>]*>(.*?)</h4>', r'\n#### \1\n', body)
+
+    # 볼드/이탤릭
+    body = re.sub(r'<strong>(.*?)</strong>', r'**\1**', body)
+    body = re.sub(r'<b>(.*?)</b>', r'**\1**', body)
+    body = re.sub(r'<em>(.*?)</em>', r'*\1*', body)
+
+    # 테이블 → 마크다운 테이블
+    def _convert_table(match):
+        tbl = match.group(0)
+        rows = re.findall(r'<tr[^>]*>(.*?)</tr>', tbl, re.DOTALL)
+        md_rows = []
+        for i, row in enumerate(rows):
+            cells = re.findall(r'<t[hd][^>]*>(.*?)</t[hd]>', row, re.DOTALL)
+            cells = [re.sub(r'<[^>]+>', '', c).strip() for c in cells]
+            if not cells:
+                continue
+            md_rows.append('| ' + ' | '.join(cells) + ' |')
+            if i == 0:
+                md_rows.append('|' + '|'.join(['---'] * len(cells)) + '|')
+        return '\n'.join(md_rows) + '\n'
+
+    body = re.sub(r'<table[\s\S]*?</table>', _convert_table, body)
+
+    # 리스트
+    body = re.sub(r'<li[^>]*>(.*?)</li>', r'- \1', body)
+    body = re.sub(r'<ul[^>]*>|</ul>|<ol[^>]*>|</ol>', '', body)
+
+    # 단락
+    body = re.sub(r'<p[^>]*>(.*?)</p>', r'\1\n', body, flags=re.DOTALL)
+
+    # 나머지 태그 제거
+    body = re.sub(r'<[^>]+>', '', body)
+
+    # HTML 엔티티
+    body = body.replace('&amp;', '&').replace('&lt;', '<').replace('&gt;', '>')
+    body = body.replace('&quot;', '"').replace('&#39;', "'")
+
+    # 연속 빈줄 정리
+    body = re.sub(r'\n{4,}', '\n\n\n', body)
+    body = re.sub(r' {2,}', ' ', body)
+
+    # 4. 헤더 + 메타데이터 추가
+    opinion = getattr(cfg, 'OPINION', 'N/R')
+    target = getattr(cfg, 'TARGET_PRICE', 0)
+    current = getattr(cfg, 'CURRENT_PRICE', 0)
+    ticker = getattr(cfg, 'TICKER', '')
+    date_str = getattr(cfg, 'REPORT_DATE_STR', datetime.now().strftime('%Y-%m-%d'))
+
+    header = f"""---
+title: "{company}({ticker}) CUFA 기업분석보고서"
+date: {date_str}
+opinion: {opinion}
+target_price: {target:,}원
+current_price: {current:,}원
+upside: {round((target/current - 1)*100, 1) if current else 0}%
+author: CUFA 리서치팀
+source: DART CFS(연결), pykrx, FnGuide, ECOS
+ai_assisted: true (Claude Code + Nexus MCP)
+---
+
+# {company}({ticker}) CUFA 기업분석보고서
+
+> 투자의견: **{opinion}** | 목표주가: **{target:,}원** | 현재가: {current:,}원 | 업사이드: {round((target/current - 1)*100, 1) if current else 0}%
+> 작성일: {date_str} | CUFA 리서치팀
+
+---
+
+"""
+    return header + body.strip() + "\n"
 
 
 if __name__ == "__main__":
