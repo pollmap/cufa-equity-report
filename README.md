@@ -1,243 +1,303 @@
-# CUFA Equity Research Report System
+# CUFA Equity Report Skill v15.1
 
-**AI 기반 기업분석보고서 완전 자동화 시스템** -- 충북대학교 가치투자학회(CUFA)
+> 충북대학교 가치투자학회(CUFA) 공식 기업분석보고서 생성 표준 스킬.
+> 모든 종목에 재사용 가능한 **모듈화된 프로토콜**.
+> Phase 0 Pre-flight → Build → Evaluator v2 ALL PASS → Re-rating Note(조건부).
 
-원커맨드 하나로 **HTML 보고서 + 엑셀 재무데이터 + 마크다운 본문 + GitHub push** 전부 자동.
-
-> "모든 숫자에는 출처가 있고, 모든 가정에는 반증 조건이 있다."
+**핵심 원칙**: 모든 숫자에는 출처가 있고, 모든 가정에는 반증 조건이 있다.
 
 ---
 
 ## Quick Start
 
-```bash
-git clone https://github.com/pollmap/cufa-equity-report.git
-cd cufa-equity-report
-pip install openpyxl pandas requests pykrx
-
-# 신규 종목 (Phase 0 데이터 수집부터 전체 자동)
-python run.py 삼성전자 005930 --collect
-
-# 기존 종목 재빌드 (config.py 있을 때)
-python run.py 삼성전자
-
-# 매년 실적 업데이트
-python run.py 삼성전자 --update
-
-# 빌드 가능 종목 목록
-python run.py --list
-```
-
----
-
-## 산출물 3종 (모두 자동 생성)
-
-| 산출물 | 파일 | 용도 |
-|--------|------|------|
-| HTML 보고서 | {종목}\_CUFA\_보고서.html | 인터랙티브 다크테마, SVG 25+, Float TOC |
-| 엑셀 재무데이터 | {종목}\_재무데이터.xlsx | 10시트 (IS/BS/CF/Peer/DCF 등) |
-| 마크다운 본문 | {종목}\_CUFA\_본문.md | AI 편집/가공/이해 최적화 |
-
----
-
-## 전체 파이프라인
-
-```
-python run.py {종목} {코드} --collect
-
-  Phase 0  데이터 수집 (data/collector.py)
-    1순위  Nexus MCP DART   재무제표 5개년 CFS + 주가 + 금리
-    2순위  pykrx (KRX)      주가 52주 고저 + 거래량
-    3순위  FnGuide          IS/BS/CF HTML 파싱
-    4순위  TODO 주석         수동 입력 대기 (Mock 금지!)
-
-  Phase 1  config.py 자동 생성 (Single Source of Truth)
-
-  Phase 2  builder/build.py  HTML 보고서 생성
-           sections.py 있으면 커스텀 본문 반영
-           template/style.css HD건설기계 v4-1 표준
-
-  Phase 3  builder/evaluator.py  품질 자동 검증
-           HARD_MIN + SMIC_STYLE + HALLUCINATION + SECTION_CHARS
-
-  Phase 4  build_xlsx.py  엑셀 10시트 생성
-
-  Phase 5  git add + commit + push  GitHub 자동
-```
-
----
-
-## 시스템 계층 구조
-
-```
-Layer 0  run.py              원커맨드 오케스트레이터
-Layer 1  data/collector.py   Nexus MCP + pykrx + FnGuide Fallback
-Layer 2  config.py           Single Source of Truth (연도 자동)
-Layer 3  builder/build.py    HTML 생성 + template/style.css
-Layer 4  evaluator.py        Evaluator v2 품질 검증
-Layer 5  output/             HTML + Excel + Markdown + GitHub
-```
-
----
-
-## 보고서 논리 흐름
-
-```
-커버     이 회사, 지금 사야 하나?
-         투자의견 + 목표주가 + 업사이드 + IP 3개 한줄 요약
-
-[배경]   Sec 1   기업개요    이 회사가 뭐 하는 회사인가?
-         Sec 2   산업분석    이 산업 지금 어디에 있나?
-         Sec 2-1 기업분석    이 회사의 포지션은?
-
-[논거]   Sec 3   IP 1       5단계 추론체인 + 2중 counter_arg
-         Sec 4   IP 2       5단계 추론체인 + 2중 counter_arg
-         Sec 5   IP 3       5단계 추론체인 + 2중 counter_arg
-
-[검증]   Sec 6   재무분석    듀폰/ROIC/OCF/FCF
-         Sec 7   Peer비교   OPM x PER 산점도
-         Sec 8   실적추정    P x Q Bottom-up + 시나리오
-         Sec 9   밸류에이션  WACC + Football Field + DCF히트맵
-
-[관리]   Sec 10  리스크      Kill Conditions + Catalyst Timeline
-         Sec 11  Appendix   A-1 ~ A-16
-```
-
----
-
-## IP 5단계 추론 방법론 (SMIC S등급)
-
-```
-B등급  산업성장 -> 주가상승 (2단계)
-A등급  수요 -> 매출 -> OPM -> EPS (3~4단계)
-S등급  트렌드 -> 카테고리 -> 포지셔닝 -> 수익영향 -> 밸류에이션리레이팅 (5단계)
-
-예시 (삼성전자 HBM):
-  AI인프라투자 -> HBM GPU당 2배증가 -> 삼성점유율25->35% -> DS OPM 30%+ -> PER재평가
-```
-
-각 IP마다 2중 반박 구조 필수:
-- 인라인 반박: "다만 ~우려 -> 1 2 3 반박"
-- counter_arg 블록: 시장의 우려 vs 정량적 반박
-
----
-
-## Evaluator v2 품질 기준
-
-| 카테고리 | 항목 | 기준 |
-|----------|------|------|
-| HARD_MIN | 텍스트 | 80,000자+ |
-| HARD_MIN | SVG 차트 | 25개+ |
-| HARD_MIN | 테이블 | 25개+ |
-| HARD_MIN | H2/H3 | 20개+ |
-| SMIC_STYLE | 볼드 첫문장 | 150개+ |
-| SMIC_STYLE | 평균 문단 | 150~450자 |
-| SMIC_STYLE | 크로스레퍼런스 | 5회+ |
-| SMIC_STYLE | "동사" 호칭 | 40~120회 |
-| SMIC_STYLE | 전환어 | 30회+ |
-| SMIC_STYLE | counter_arg | 3개+ |
-| HALLUCINATION | "약 N%" 등 | 0건 목표 |
-
----
-
-## config.py 핵심 포맷
-
 ```python
-TICKER        = "005930"
-COMPANY_NAME  = "삼성전자"
-CURRENT_PRICE = 210_000           # 원
-MARKET_CAP    = 12_536_543        # 억원 (주가 x 주식수 / 1억)
+from config._template import StockConfig
+from preflight import preflight_validate, NexusMCPClient
+from builder import build_report, write_output
+from evaluator import evaluate
+from post_processing import smic_inject
+from sections import SectionData, SECTION_BUILDERS
 
-FINANCIALS = {
-    "revenue": {2023: 2_589_355, 2024: 3_008_709, 2025: 3_336_059,
-                "2026E": 3_607_000, "2027E": 3_918_000},
-}
+# 1) 종목 config 작성 (config/000720.py)
+config = StockConfig(
+    stock_code="000720",
+    company_name="현대건설",
+    company_name_en="Hyundai E&C",
+    market="KOSPI",
+    industry="건설",
+    subtitle="중동 르네상스와 국내 재건축의 교차점",
+    builder_revenue=326_703 * 1e8,
+    builder_op_income=-12_634 * 1e8,
+    builder_price=179_500,
+    builder_bps=86_548,
+    builder_eps_next=11_635,
+    shares_outstanding=111_723_419,
+    target_year=2024,
+)
 
-RATIOS = {"psr_ttm": 3.76, "per_ttm": 32.0, "pbr": 3.28, "roe": 10.4}
+# 2) Phase 0 — Pre-flight 검증
+result = preflight_validate(config, NexusMCPClient())
+if result.has_fail():
+    if result.is_rerating_mode():
+        # F2_VOLATILITY → Re-rating v2 모드 전환
+        ...
+    else:
+        # F1/F3/F4/F5 → config 또는 데이터 교체
+        raise SystemExit(result.fail_codes)
 
-PRODUCTS = [{"name": "DS", "revenue_pct": 33, "description": "..."}]
-PEERS = {"000660": {"name": "SK하이닉스", "per": 12.0, "opm": 38.0}}
-RISKS = [{"name": "HBM열위", "probability": 30, "impact": 70}]
-KILL_CONDITIONS = [{"condition": "OPM<8%", "current": "13.1%", "margin": "5.1%p", "frequency": "분기별"}]
-INVESTMENT_POINTS = [
-    {"id": 1, "title": "HBM4 마진 재편", "subtitle": "...",
-     "chain": ["AI수요", "HBM폭증", "점유율회복", "OPM개선", "PER리레이팅"]}
-]
+# 3) 섹션 데이터 작성 → 빌드
+sections = []
+for num, builder in SECTION_BUILDERS.items():
+    data = SectionData(
+        keywords=[...],
+        narrative_html="...",
+        charts=[...],
+        tables=[...],
+    )
+    sections.append(lambda c, d=data, b=builder: b(c, d))
+
+ctx = build_report(
+    config, sections,
+    opinion="BUY", target_price=200_000, current_price=179_500,
+    post_process=lambda h: smic_inject(h, config.company_name),
+)
+
+# 4) 결과 저장 + Evaluator 검증
+out_path = write_output(ctx, config)
+eval_result = evaluate(ctx.output_html)
+if not eval_result.all_passed:
+    print("ALL PASS 실패:", eval_result.failed_checks())
 ```
 
 ---
 
-## sections.py API
-
-```python
-C = None  # build.py가 mod.C = C 로 주입
-
-def gen_section1() -> str:
-    header = C.section_header(1, "기업 개요", "삼성전자", "005930")
-    body   = C.sidebar_wrap([("설립","1969년")], "<p><strong>볼드.</strong> 본문</p>")
-    chart  = C.add_source(C.svg_bar("매출", labels, vals, sec=1), "DART")
-    return header + body + chart
-```
-
-C 모듈 주요 함수: section_header, sidebar_wrap, table, svg_bar, svg_line, svg_donut, svg_scatter, svg_football, svg_heatmap, svg_timeline, add_source, counter_arg, callout, expand_card
-
----
-
-## 연도 자동 전환
-
-REPORT_YEAR = datetime.now(KST).year -- 매년 자동.
-
-| 연도 | EST_YEARS | ACTUAL_YEARS |
-|------|-----------|--------------|
-| 2026 | 2026E, 2027E, 2028E | 2025A, 2024A, 2023A |
-| 2027 | 2027E, 2028E, 2029E | 2026A, 2025A, 2024A |
-
----
-
-## 현황 (2026-04-08)
-
-| 종목 | 의견 | 현재가 | 목표주가 | HTML |
-|------|------|--------|----------|------|
-| 삼성전자 (005930) | BUY | 210,000 | 250,000 | 317KB |
-| 인텔리안테크 (189300) | BUY | 111,200 | 155,000 | 346KB |
-| 이노스페이스 (462350) | - | - | - | 335KB |
-
----
-
-## 파일 구조
+## 모듈 아키텍처 (v15.1)
 
 ```
 cufa-equity-report/
-  run.py                     원커맨드 오케스트레이터
-  data/collector.py          Phase 0 자동수집 (MCP + Fallback)
-  builder/build.py           HTML 생성 엔진
-  builder/evaluator.py       Evaluator v2
-  template/style.css         HD건설기계 v4-1 (수정 금지!)
-  template/components.py     C 모듈 26개 함수
-  template/interactive.js    Float TOC, 진행률 바
-  examples/삼성전자/          config.py + sections.py + build_xlsx.py
-  examples/인텔리안테크/      config.py + sections.py + build_xlsx.py
-  examples/이노스페이스/      config.py + build_xlsx.py
-  output/                    .gitignore (HTML + Excel 로컬)
+├── SKILL.md                      ← 규칙·프로토콜 (1,306줄)
+├── README.md                     ← 본 문서
+├── CHANGELOG.md                  ← 버전 이력
+├── skill.meta.json               ← 메타데이터
+│
+├── preflight/                    ← Phase 0 검증 (7 files, 80K)
+│   ├── thresholds.py             ← PREFLIGHT 상수
+│   ├── checker.py                ← preflight_validate()
+│   ├── mcp_client.py             ← NexusMCPClient (SSE)
+│   ├── dart_parser.py            ← CFS/OFS 분리
+│   ├── industry_checklist.py     ← INDUSTRY_CHECKLIST (8개)
+│   └── tool_schemas.py           ← MCP 도구 스키마
+│
+├── config/                       ← 종목별 설정
+│   ├── _template.py              ← StockConfig 템플릿
+│   └── {stock_code}.py           ← 실제 종목
+│
+├── builder/                      ← HTML 빌드 엔진 (10 files, 290K)
+│   ├── core.py                   ← build_report() 오케스트레이터
+│   ├── css.py                    ← gen_css() 단일 표준
+│   ├── design_tokens.py          ← CSS_VARS, 색상 역할
+│   ├── figure.py                 ← FigureCounter 클래스
+│   ├── svg.py                    ← 32종 SVG 차트
+│   ├── helpers.py                ← section_header, sidebar_wrap, table
+│   ├── components.py             ← counter_arg, expand_card 등 9종
+│   ├── markdown.py               ← md_to_html()
+│   └── phase65_backtest.py       ← Nexus backtest_run 래퍼
+│
+├── sections/                     ← 11섹션 스캐폴더 (14 files)
+│   ├── base.py                   ← SectionData, assemble_section()
+│   ├── minima.py                 ← SECTION_MINIMA (섹션별 최소치)
+│   ├── section1_company.py       ← 기업개요
+│   ├── section2_industry.py      ← 산업분석
+│   ├── section3_ip1.py           ← 투자포인트 I
+│   ├── section4_ip2.py           ← 투자포인트 II
+│   ├── section5_ip3.py           ← 투자포인트 III
+│   ├── section6_financial.py     ← 재무분석
+│   ├── section7_peer.py          ← Peer 비교
+│   ├── section8_estimate.py      ← 실적추정
+│   ├── section9_valuation.py     ← 밸류에이션
+│   ├── section10_risk.py         ← 리스크
+│   └── section11_appendix.py     ← Appendix
+│
+├── evaluator/                    ← v2 자동 검증 (3 files, 9K)
+│   ├── criteria.py               ← EvaluatorCriteria 상수
+│   └── run.py                    ← evaluate() → EvaluationResult
+│
+└── post_processing/              ← 빌드 후 처리 (4 files, 10K)
+    ├── protect_replace.py        ← 보호-치환-복원 패턴
+    ├── smic_injector.py          ← '동사' 문체 주입
+    └── rerating_note.py          ← Re-rating v2 블록 생성
+```
+
+### 모듈 의존성 (DAG)
+
+```
+config → preflight → builder → post_processing → evaluator → output
+                         ↓
+                     sections
 ```
 
 ---
 
-## 핵심 원칙
+## 표준 상수 (모든 종목 동일)
 
-| 원칙 | 내용 |
-|------|------|
-| Mock 금지 | 수집 실패 -> TODO 주석. 가짜 데이터 절대 금지 |
-| CSS 고정 | template/style.css 절대 수정 금지 |
-| 3종 산출물 | HTML + 엑셀 + 마크다운. 셋 다 필수 |
-| 연도 자동화 | datetime.now().year로 자동 전환 |
-| 결정론적 숫자 | 입력 -> 수학 -> 출력. 모든 수치에 출처 |
-| 반증 가능성 | Kill Condition 명시. 틀렸을 때 추적 가능 |
+### PreflightThresholds
+
+| 상수 | 값 | 의미 |
+|---|---:|---|
+| `FINANCIAL_DRIFT_MAX` | 0.10 | 재무 드리프트 한계 (10%) |
+| `PRICE_DRIFT_MAX` | 0.10 | 주가 드리프트 한계 (10%) |
+| `VOLATILITY_RERATING_TRIGGER` | 0.30 | Re-rating Mode 트리거 (±30%) |
+| `SELF_CONSISTENCY_TOLERANCE` | 0.01 | PBR×BPS=Price 정합성 |
+| `MIN_YEARS_ACTUAL` | 3 | 과거 실적 최소 연수 |
+| `MIN_DAYS_OHLCV` | 200 | OHLCV 최소 거래일 |
+
+### EvaluatorCriteria (v2 HARD_MIN)
+
+| 체크 | 기준 | 비고 |
+|---|---:|---|
+| `TEXT_MIN` | 80,000자 | 본문 분량 |
+| `SVG_MIN` | 25개 | 차트 최소 |
+| `TABLE_MIN` | 25개 | 테이블 최소 |
+| `H2H3_MIN` | 20개 | 소제목 최소 |
+| `BOLD_FIRST_MIN` | 150개 | 볼드 첫문장 |
+| `TRANSITIONS_MIN` | 30개 | 전환어 빈도 |
+| `DONGSA_MIN` | 40회 | "동사" 호칭 |
+| `COUNTER_ARG_MIN` | 3개 | 반박 블록 |
+| `APPENDIX_MIN` | 16개 | 부록 최소 |
+| `HALLUCINATION_PATTERNS` | 0건 | "약 N%", "대략" 등 |
 
 ---
 
-MIT License -- 충북대학교 가치투자학회(CUFA)
+## Fail Code 체계
 
-> AI 도구(Claude Code + Nexus MCP)가 수집/작성을 보조.
-> 투자 판단과 최종 검증은 학회원이 수행합니다.
-> 본 시스템이 생성하는 보고서는 매수/매도 권유가 아닙니다.
+| Code | 의미 | 대응 |
+|---|---|---|
+| `F1_FINANCIAL_DRIFT` | 재무 드리프트 > 10% | 실데이터 교체 |
+| `F1_SIGN_FLIP` | 영업손익 부호 반전 | Kitchen Sinking 판정 |
+| `F2_PRICE_DRIFT` | 주가 드리프트 > 10% | 현재가 갱신 |
+| `F2_VOLATILITY` | 1년 수익률 > ±30% | **Re-rating v2 모드** |
+| `F3_TRIPLE_CHECK` | PBR × BPS ≠ Price | config 재검증 |
+| `F4_RAW_MISSING` | 원본 응답 미보존 | 재호출 + 저장 |
+| `F5_INDUSTRY` | 산업 체크리스트 누락 | 2차 MCP 수집 |
+
+---
+
+## 빌더 SVG 차트 카탈로그 (32종, svg_radar 금지)
+
+**Tier 1 — Core (11종)**: donut · bar · line · hbar · waterfall · scatter · football · heatmap · grouped_bar · bubble_risk · flow_diagram
+
+**Tier 2 — Extended (16종)**: area · timeline · roe_pbr_path · rebased_price · candlestick · boxplot · bullet · gantt · pareto · bump · sparkline · lollipop · histogram · slope · tornado · treemap
+
+**Tier 3 — Advanced (5종)**: sankey · waffle · gauge · marimekko · pictogram
+
+> `svg_radar` 는 v13부터 금지. `svg_grouped_bar()` 또는 `svg_scatter()` 로 대체.
+
+---
+
+## 섹션별 최소 분량 (SECTION_MINIMA)
+
+| # | 섹션 | 글자 | 차트 | 테이블 | counter_arg |
+|:-:|---|---:|:-:|:-:|:-:|
+| 1 | 기업개요 | 3,000 | 1+ | 2+ | - |
+| 2 | 산업분석 | 10,000 | 4+ | 2+ | - |
+| 3 | 투자포인트 I | 8,000 | 3+ | 1+ | **1+** |
+| 4 | 투자포인트 II | 8,000 | 3+ | 1+ | **1+** |
+| 5 | 투자포인트 III | 8,000 | 3+ | 1+ | **1+** |
+| 6 | 재무분석 | 7,000 | 4+ | 4+ | - |
+| 7 | Peer 비교 | 4,000 | 3+ | 3+ | - |
+| 8 | 실적추정 | 7,000 | 3+ | 4+ | - |
+| 9 | 밸류에이션 | 6,000 | 3+ | 3+ | - |
+| 10 | 리스크 | 4,000 | 2+ | 1+ | **1+** |
+| 11 | Appendix | 17,000 | 0 | 8+ | - |
+| **합** | | **82,000** | **26+** | **30+** | **4+** |
+
+---
+
+## SMIC 문체 규칙 (Evaluator v2 기준)
+
+- **'동사' 호칭**: 기업명 직접 사용 금지, 40회+ 사용
+- **'본서는/본서에서는'**: 5회+ 사용
+- **'전술한/후술할'**: 섹션 간 크로스레퍼런스, 5회+
+- **볼드-첫문장**: 모든 단락 첫 문장 `<strong>` 처리, 150개+
+- **전환어**: 전술한 / 그렇다면 / 이에 더해 / 한편 / 이처럼 / 실제로 / 다만 (30회+)
+- **반박 2중 구조**: 인라인 반박(본문) + counter_arg 블록 (각 IP당 1+)
+
+---
+
+## 할루시네이션 패턴 (탐지 시 FAIL)
+
+```
+약 \d+%    |  대략 \d+      |  정도로? 추정
+일반적으로 \d+  |  보통 \d+    |  통상적으로
+업계 평균 \d+  |  약간        |  다소
+```
+
+**원칙**: 모든 숫자는 출처가 있어야 한다. 출처 없는 추정은 삭제.
+
+---
+
+## 개발 이력
+
+- **v15.1** (2026-04-11) — builder/ 모듈 10개 + sections/ 14개 + phase65/rerating 구현
+- **v15.0** (2026-04-11) — 표준화 전면 재설계, SKILL.md 75% 감축, 모듈 아키텍처 도입
+- **v14.1** (2026-04-04) — Evaluator v2 ALL PASS 시스템 완성
+- **v13.2** (2026-04-03) — Jeff Sun 기술적 분석 + KIS Backtest MCP
+- **v10~v12** — SMIC 문체 정립, 서브에이전트 병렬 빌드
+- **v7~v9** — 벤치마크 14건 종합, 89점 자동 달성
+
+상세 이력: [CHANGELOG.md](CHANGELOG.md)
+
+---
+
+## 빌드 파이프라인 (Phase 0~7)
+
+```
+Phase 0  — Pre-flight 검증 (preflight_validate)
+            ├─ F1 재무 드리프트 체크
+            ├─ F2 주가 드리프트 체크 (F2_VOLATILITY → Re-rating Mode)
+            ├─ F3 Triple check (PBR×BPS=Price)
+            ├─ F4 원본 응답 저장
+            └─ F5 산업 체크리스트
+Phase 1  — MCP 데이터 수집 (DART/stocks/ECOS/backtest)
+Phase 2  — 엑셀 시트 v1 빌드 (Single Source of Truth)
+Phase 3  — IP 3개 초안 수립
+Phase 4  — 본문 작성 (sections/ 11개 병렬 빌드)
+Phase 5  — 엑셀 시트 v2 업데이트 (본문 수치 완전 기록)
+Phase 6  — HTML 빌드 + Evaluator v2 ALL PASS 루프
+Phase 6.5— 백테스트 검증 (run_phase65)
+Phase 7  — (조건부) Re-rating Note v2 삽입 + SMIC 주입
+```
+
+---
+
+## 사용 예시 (현대건설 000720, Re-rating Mode)
+
+사례 기록: `SKILL.md` Appendix A `CASE-000720-v2`
+
+```python
+# Phase 0 Pre-flight 에서 주가 +370% 감지 → F2_VOLATILITY
+from post_processing.rerating_note import ReratingNoteV2, RatingChange, gen_rerating_note_v2
+
+note = ReratingNoteV2(
+    fail_code="F2_VOLATILITY",
+    trigger_summary="주가 +370% 급등 (1년), 빌더 기준가 33,500원 vs 실제 179,500원",
+    changes=[
+        RatingChange("투자의견", "BUY", "HOLD",
+                     "리레이팅이 이미 가격에 반영됨"),
+        RatingChange("목표주가", "45,000원", "200,000원",
+                     "v1 EPS/PBR 가정 무효화"),
+    ],
+    new_investment_points=["중동 르네상스 수주", "1기 신도시 재건축"],
+    new_bear_cases=["Kitchen Sinking 해소 지연", "PF 우발채무"],
+    new_kill_conditions=["2025H2 영업이익 흑자 전환 실패"],
+)
+rerating_html = gen_rerating_note_v2(note)
+# → builder.build_report() 의 post_process 에 주입하여 커버 직후 삽입
+```
+
+---
+
+## 라이선스 / 기여
+
+내부 사용 전용. CUFA 공식 보고서 생성에만 사용.
+피드백·개선 제안은 `CHANGELOG.md` PR 로 제출.

@@ -1,0 +1,45 @@
+{
+    "name": "cufa-equity-report",
+    "version": "15.2",
+    "tier": "domain",
+    "owner": "local",
+    "status": "active",
+    "quality_level": "managed",
+    "description": "CUFA 가치투자학회 기업분석보고서 표준 스킬 v15.0. 모든 종목에 재사용 가능한 표준화 프로토콜. Phase 0 Pre-flight 5점 검증 → Build → Evaluator v2 ALL PASS → Re-rating Note(조건부). 상수 레지스트리(PreflightThresholds·EvaluatorCriteria·IndustryChecklist) + 모듈 아키텍처(preflight·evaluator·post_processing). 종목별 하드코딩 금지. 트리거: '기업분석보고서', 'CUFA 보고서', '투자보고서', 'equity research', 'SMIC 스타일'.",
+    "source": "local-.claude",
+    "target_harnesses": [
+        "codex",
+        "claude-code",
+        "openclaw"
+    ],
+    "dependencies": [
+        "skills/artifact/xlsx"
+    ],
+    "modules": {
+        "preflight": "Phase 0 표준 검증 (PreflightConfig, preflight_validate, NexusMCPClient)",
+        "builder": "HTML 빌드 엔진 (core, css, svg 32종, helpers, components, markdown, design_tokens, figure)",
+        "evaluator": "v2 자동 검증 (HARD_MIN + SMIC_STYLE + HALLUCINATION)",
+        "post_processing": "SMIC 문체 주입 + 보호-치환-복원",
+        "config": "종목별 설정 템플릿 (_template.py)"
+    },
+    "entry_points": {
+        "standards": "SKILL.md",
+        "changelog": "CHANGELOG.md",
+        "legacy": "SKILL_legacy_v14_2_backup.md"
+    },
+    "trigger_policy": "description-first, progressive-disclosure references only when needed",
+    "tags": [
+        "finance",
+        "equity-research",
+        "reporting",
+        "standardized",
+        "module-architecture"
+    ],
+    "breaking_changes_v15": [
+        "SKILL.md 75% 감축 (5268줄 → 1306줄)",
+        "종목별 하드코딩 금지 → config/*.py로 이동",
+        "임계값 상수화 (PreflightThresholds, EvaluatorCriteria)",
+        "모듈 디렉토리 신설 (preflight/, evaluator/, post_processing/)",
+        "검증 케이스는 SKILL.md Appendix A로 분리"
+    ]
+}
