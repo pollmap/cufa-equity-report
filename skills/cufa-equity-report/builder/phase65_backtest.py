@@ -1,8 +1,11 @@
 """CUFA Builder — Phase 6.5 백테스트 검증.
 
-Nexus `backtest_run` MCP 도구를 래핑하여 투자포인트에서 매매 전략을
-추출·실행·결과 수집한다. KIS-backtest MCP 로컬 서버가 내려가 있을 때는
+Nexus `backtest_run` MCP 도구를 래핑하여 기술적 매매 전략(이동평균/모멘텀/평균회귀)을
+종목에 대해 실행·결과 수집한다. KIS-backtest MCP 로컬 서버가 내려가 있을 때는
 Nexus fallback 으로 자동 전환.
+
+결과 타입: `StrategyBacktestResult` — 전략 레벨(수익률/MDD/샤프/승률).
+Trade Ticket 기반 실행 결과는 `trade_ticket.backtest_hook.BacktestResult` 사용.
 
 SKILL.md §10.4 구현체.
 """
@@ -25,8 +28,13 @@ class StrategySpec:
 
 
 @dataclass(frozen=True)
-class BacktestResult:
-    """백테스트 결과 단위 (strategy-level)."""
+class StrategyBacktestResult:
+    """전략 레벨 백테스트 결과 (Phase 6.5 — MCP backtest_run 응답).
+
+    Trade Ticket 기반 실행 결과와 구분:
+        이 클래스  → Nexus MCP `backtest_run` (기술 전략)
+        BacktestResult (trade_ticket.backtest_hook) → QuantPipeline (Trade Ticket 실행)
+    """
 
     strategy: str
     total_return: float      # % — 누적 수익률
@@ -66,7 +74,7 @@ def run_phase65(
     client: NexusMCPClient | None = None,
     fee_bps: float = 15.0,
     tax_bps: float = 20.0,
-) -> list[BacktestResult]:
+) -> list[StrategyBacktestResult]:
     """종목의 전략 시퀀스를 백테스트.
 
     Args:
@@ -85,7 +93,7 @@ def run_phase65(
         RuntimeError: MCP 호출 실패 시 (호출자가 핸들링)
     """
     mcp = client or NexusMCPClient()
-    results: list[BacktestResult] = []
+    results: list[StrategyBacktestResult] = []
 
     for strat in strategies:
         args = {
@@ -106,7 +114,7 @@ def run_phase65(
     return results
 
 
-def _parse_result(strategy: str, resp: dict) -> BacktestResult:
+def _parse_result(strategy: str, resp: dict) -> StrategyBacktestResult:
     """MCP 응답 dict → `BacktestResult` 정규화.
 
     MCP 응답 형식이 버전별로 다를 수 있으므로 관대한 키 추출.
@@ -132,7 +140,7 @@ def _parse_result(strategy: str, resp: dict) -> BacktestResult:
     )
 
 
-def save_raw(results: Sequence[BacktestResult], path: str) -> None:
+def save_raw(results: Sequence[StrategyBacktestResult], path: str) -> None:
     """원본 MCP 응답을 `data_backtest_results.json` 으로 저장 (F4 규칙)."""
     payload = {r.strategy: r.raw for r in results}
     with open(path, "w", encoding="utf-8") as f:

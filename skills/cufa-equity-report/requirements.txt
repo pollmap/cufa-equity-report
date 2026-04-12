@@ -1,0 +1,8 @@
+# CUFA Equity Report — Python dependencies
+# All other functionality uses Python stdlib only (pathlib, re, json, dataclasses, etc.)
+
+openpyxl>=3.1.0   # Excel 6-sheet builder (builder/xlsx_builder.py)
+
+# ── Dev / test ──────────────────────────────────────────────────────────────
+pytest>=8.0.0
+pytest-cov>=5.0.0

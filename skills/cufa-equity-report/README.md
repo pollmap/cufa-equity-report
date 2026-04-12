@@ -1,11 +1,22 @@
-# CUFA Equity Report Skill v16.0
+# CUFA Equity Report Skill v16.3
 
 > **1인 AI 퀀트 운용사 실행 도구** — 학회 분량 페티시 완전 폐기, HF/퀀트 실행가능성 중심 전환.
 > Nexus Finance MCP(398도구) → CUFA 보고서 → open-trading-api/QuantPipeline 선순환 파이프라인.
 
 **핵심 원칙**: 보고서는 Trade Ticket으로 끝난다. Evaluator v3 12/12 ALL PASS = 배포 기준.
 
+![Tests](https://img.shields.io/badge/tests-115%20passed-brightgreen) ![Python](https://img.shields.io/badge/python-3.11%2B-blue)
+
 ---
+
+## What's New in v16.3
+
+| 버전 | 변경 |
+|------|------|
+| **v16.3** | `tests/` 115 테스트 + CLI `python -m cufa_report` + `requirements.txt` + `BacktestResult` 중복 제거 + frozen dataclass 뮤테이션 버그 수정 |
+| v16.2 | Excel 6시트 빌더 완성 (IS/BS/CF/Peer/추정/밸류) |
+| v16.1 | section3 checklist, evaluator catalyst fix, PWA + share |
+| v16.0 | HF 퀀트 실행가능성 전환, Trade Ticket YAML, Phase 7 피드백 루프 |
 
 ## What's New in v16
 
@@ -18,6 +29,32 @@
 | 피드백 | 없음 | **Phase 7 분기별 복기** |
 
 ---
+
+## 설치
+
+```bash
+# 의존성 설치 (openpyxl 1개 + 테스트 도구)
+pip install -r requirements.txt
+
+# 테스트 실행
+python -m pytest tests/ -v   # 115 passed
+```
+
+## CLI
+
+```bash
+# 종목 정보 요약 + R/R 계산
+python -X utf8 -m cufa_report 329180 --opinion BUY --tp 528750 --sl 410000 --entry 475000
+
+# Trade Ticket YAML 즉시 생성 (보고서 없이)
+python -X utf8 -m cufa_report 329180 --ticket-only --tp 528750 --sl 410000 --entry 475000 --size 5.0
+
+# 기존 HTML 보고서 Evaluator v3 검증
+python -X utf8 -m cufa_report 329180 --evaluate output/HD현대중공업_CUFA.html
+
+# 도움말
+python -m cufa_report --help
+```
 
 ## Quick Start
 
@@ -111,22 +148,31 @@ print(f"Report: {html_path}")
 ```
 cufa-equity-report/
 ├── SKILL.md                    ← 전체 프로토콜 (v16)
+├── requirements.txt            ← ⭐ v16.3: openpyxl + pytest
+├── conftest.py                 ← ⭐ v16.3: pytest 루트 설정
+├── cufa_report/                ← ⭐ v16.3: CLI 진입점
+│   └── __main__.py             ←   python -m cufa_report
+├── tests/                      ← ⭐ v16.3: 115 단위 테스트
+│   ├── test_evaluator.py       ←   12개 탐지 함수 + evaluate()
+│   └── test_trade_ticket.py    ←   validate / yaml / generate
 ├── preflight/                  ← Phase 0: MCP 실데이터 검증
 ├── config/                     ← 종목별 StockConfig
 ├── builder/                    ← HTML 빌드 엔진
-├── trade_ticket/               ← ⭐ v16 신규: Trade Ticket YAML 파이프라인
-│   ├── schema.py               ← TradeTicket 스키마 + validate()
-│   ├── generator.py            ← config → TradeTicket
-│   ├── backtest_hook.py        ← open-trading-api/QuantPipeline 연동
-│   └── feedback.py             ← Phase 7 복기 엔진
+├── trade_ticket/               ← ⭐ v16: Trade Ticket YAML 파이프라인
+│   ├── schema.py               ←   TradeTicket 스키마 + validate()
+│   ├── generator.py            ←   config → TradeTicket
+│   ├── backtest_hook.py        ←   open-trading-api/QuantPipeline (frozen=True)
+│   └── feedback.py             ←   Phase 7 복기 엔진
 ├── evaluator/                  ← v3 실행가능성 검증 (12 binary)
+│   ├── criteria.py             ←   EvaluatorV3Criteria
+│   └── run.py                  ←   evaluate() + 12개 탐지 헬퍼
 ├── sections/                   ← 7섹션 HF 빌더
-│   ├── section1_bluf.py        ← Investment Summary
-│   ├── section2_thesis.py      ← 3축 Thesis
+│   ├── section1_bluf.py        ←   Investment Summary
+│   ├── section2_thesis.py      ←   3축 Thesis
 │   ├── section3_business_setup.py
-│   ├── section4_numbers.py     ← Financial + Peer + Estimate + Valuation
-│   ├── section5_risks.py       ← Bear Case First + Kill Conditions
-│   ├── section6_trade.py       ← ⭐ Trade Implementation
+│   ├── section4_numbers.py     ←   Financial + Peer + Estimate + Valuation
+│   ├── section5_risks.py       ←   Bear Case First + Kill Conditions
+│   ├── section6_trade.py       ←   ⭐ Trade Implementation
 │   └── section7_appendix.py
 ├── post_processing/            ← Re-rating Note v2
 └── output/                     ← 생성 결과

@@ -36,7 +36,7 @@ from .schema import TradeTicket
 # Result Schema
 # ---------------------------------------------------------------------------
 
-@dataclass
+@dataclass(frozen=True)
 class BacktestResult:
     ticker: str
     period_start: str           # ISO date
@@ -134,13 +134,21 @@ def submit_to_backtest(
         print(f"[backtest_hook] ERROR running QuantPipeline: {e}")
         return None
 
-    # Parse result
+    # Compute deviation before constructing frozen dataclass
+    exit_price: int = raw_result.get("exit_price", ticket.entry_price)
+    deviation_pct: float = 0.0
+    if ticket.target_price > 0:
+        deviation_pct = round(
+            (exit_price - ticket.target_price) / ticket.target_price * 100, 2
+        )
+
+    # Parse result (frozen=True — all fields set at construction time)
     result = BacktestResult(
         ticker=ticket.ticker,
         period_start=raw_result.get("period_start", date.today().isoformat()),
         period_end=raw_result.get("period_end", date.today().isoformat()),
         entry_price=ticket.entry_price,
-        exit_price=raw_result.get("exit_price", ticket.entry_price),
+        exit_price=exit_price,
         stop_loss=ticket.stop_loss,
         target_price=ticket.target_price,
         realized_return_pct=raw_result.get("return_pct", 0.0),
@@ -148,15 +156,10 @@ def submit_to_backtest(
         hit_target=raw_result.get("hit_target", False),
         hit_kill=raw_result.get("hit_kill"),
         max_drawdown_pct=raw_result.get("max_drawdown_pct", 0.0),
+        deviation_pct=deviation_pct,
         backtest_engine=ticket.backtest_engine,
         raw=raw_result,
     )
-
-    # Compute deviation from TP estimate
-    if ticket.target_price > 0:
-        result.deviation_pct = round(
-            (result.exit_price - ticket.target_price) / ticket.target_price * 100, 2
-        )
 
     # Persist result
     if output_dir is None:
