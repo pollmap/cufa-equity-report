@@ -69,7 +69,9 @@ def _render_ticket_box(tt: dict, current: float, ticker: str) -> str:
     entry = tt.get("entry_price", tt.get("current_price", current))
     stop = tt.get("stop_loss", 0)
     target = tt.get("target_price", 0)
-    horizon = tt.get("horizon", "")
+    horizon = tt.get("horizon_months", tt.get("horizon", ""))   # v16 schema: horizon_months
+    if horizon:
+        horizon = f"{horizon}개월" if str(horizon).isdigit() else str(horizon)
     pos_pct = tt.get("position_size_pct", 3.0)
     rr = tt.get("risk_reward", 0)
     rationale = tt.get("rationale", tt.get("reason", ""))
@@ -159,7 +161,9 @@ def _render_ticket_yaml(tt: dict, ticker: str, company: str) -> str:
     entry = tt.get("entry_price", tt.get("current_price", ""))
     stop = tt.get("stop_loss", "")
     target = tt.get("target_price", "")
-    horizon = tt.get("horizon", "")
+    horizon = tt.get("horizon_months", tt.get("horizon", ""))   # v16 schema: horizon_months
+    if horizon:
+        horizon = f"{horizon}개월" if str(horizon).isdigit() else str(horizon)
     pos_pct = tt.get("position_size_pct", 3.0)
     rr = tt.get("risk_reward", "")
     rationale = tt.get("rationale", tt.get("reason", ""))
