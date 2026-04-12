@@ -1,5 +1,30 @@
 # CUFA Equity Report Skill — CHANGELOG
 
+## v16.2 — 2026-04-12 (Excel 6시트 빌더 완성)
+
+### 신규
+
+| 파일 | 내용 |
+|---|---|
+| `builder/xlsx_builder.py` | Excel 6시트 자동 생성 — IS/BS/CF/Peer/추정/밸류에이션 |
+
+### 시트 상세
+
+| 시트 | 데이터 소스 | 주요 내용 |
+|---|---|---|
+| IS | `config.IS_CFS` | 매출/영업이익/OPM/EPS + Forward E |
+| BS | `config.BS_CFS` | 자산/부채/자본 전체 구조 |
+| CF | `config.CF_CFS` | OCF/ICF/FCF/CAPEX |
+| Peer | `config.PEERS` | Fwd PER/PBR/ROE/OPM + 대상기업 강조 |
+| 추정 | `config.TARGET_PRICE.sensitivity` | 핵심 가정 + Bull/Base/Bear 시나리오 |
+| 밸류 | `config.TARGET_PRICE.methods` + `config.WACC` | Football Field + WACC + Trade Ticket 요약 |
+
+### 커밋
+
+`(이번 커밋)` — feat: v16.2
+
+---
+
 ## v16.1 — 2026-04-12 (버그 수정 + PWA + 공유 헬퍼)
 
 ### 버그 수정

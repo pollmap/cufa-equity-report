@@ -23,6 +23,7 @@ import 방법:
 """
 from .core import BuildContext, SectionBuilder, build_report, write_output
 from .pwa import gen_manifest, gen_pwa_meta_tags, gen_service_worker
+from .xlsx_builder import build_excel
 from .css import gen_css
 from .design_tokens import (
     BORDER_RADIUS,
@@ -95,6 +96,8 @@ __all__ = [
     "gen_manifest",
     "gen_pwa_meta_tags",
     "gen_service_worker",
+    # excel
+    "build_excel",
     # css / tokens
     "gen_css",
     "CSS_VARS",
