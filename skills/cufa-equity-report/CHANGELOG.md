@@ -1,5 +1,61 @@
 # CUFA Equity Report Skill — CHANGELOG
 
+## v16.0 — 2026-04-12 (HF 퀀트 실행가능성 전환 완료)
+
+### Breaking Changes
+
+- **Evaluator v2 폐기** → v3 (실행가능성 binary 12개)
+  - 분량 기반 (80K자/25SVG/25TBL) 완전 제거
+  - SMIC 문체 강제 (동사/본서/전술한) 완전 폐기
+- **11섹션 → 7섹션 HF 구조** (BLUF/Thesis/Business/Numbers/Risks/Trade/Appendix)
+- `sections/minima.py` 삭제 (섹션별 최소 자수 폐기)
+- `post_processing/smic_injector.py` 삭제
+- `sections/section1_company.py` ~ `section11_appendix.py` 11개 삭제
+
+### 신규 파일 (13개)
+
+| 파일 | 역할 |
+|---|---|
+| `trade_ticket/__init__.py` | Trade Ticket 패키지 |
+| `trade_ticket/schema.py` | TradeTicket 스키마 + validate() |
+| `trade_ticket/generator.py` | config → TradeTicket |
+| `trade_ticket/backtest_hook.py` | QuantPipeline 연동 |
+| `trade_ticket/feedback.py` | Phase 7 복기 엔진 |
+| `sections/section1_bluf.py` | Investment Summary (BLUF) |
+| `sections/section2_thesis.py` | 3축 Thesis |
+| `sections/section3_business_setup.py` | Business & Industry |
+| `sections/section4_numbers.py` | Financial + Peer + Valuation 통합 |
+| `sections/section5_risks.py` | Bear Case First + Kill Conditions |
+| `sections/section6_trade.py` | Trade Implementation ⭐ |
+| `sections/section7_appendix.py` | 압축 Appendix A-1~A-4 |
+| `SKILL_legacy_v15_backup.md` | v15 원본 백업 |
+
+### 수정 파일
+
+| 파일 | 변경 내용 |
+|---|---|
+| `SKILL.md` | 1,306줄 v15 → ~680줄 v16 (7섹션 + Trade Ticket + Evaluator v3) |
+| `evaluator/criteria.py` | HARD_MIN/SMIC → 12개 실행가능성 binary EvaluatorV3Criteria |
+| `evaluator/run.py` | 분량 카운팅 → actionability regex + 하드코딩 ticker 제거 (버그 수정) |
+| `sections/__init__.py` | 11섹션 → 7섹션 매핑 |
+| `config/_template.py` | StockConfig에 trade_ticket/kill_conditions/backtest_config/feedback_loop 추가 |
+| `builder/core.py` | docstring v16 업데이트 (smic_inject 참조 제거) |
+| `builder/css.py` | .ticket-box / .thesis-box 클래스 추가 |
+| `preflight/industry_checklist.py` | 조선 산업 체크리스트 추가 (11개 항목) |
+| `skill.meta.json` | version 16.0, description 업데이트 |
+| `README.md` | v16 전면 재작성 |
+
+### 버그 수정
+
+- `evaluator/run.py::_has_trade_ticket()`: HD현대중공업 티커(329180) 하드코딩 제거 → 범용 패턴으로 교체
+
+### 검증
+
+- HD현대중공업 HF 프로토타입: Evaluator v3 12/12 ALL PASS 확인
+- Trade Ticket YAML 파싱 검증 완료
+
+---
+
 ## v15.2 — 2026-04-11 (확장 포인트 전체 구현 완료)
 
 ### 신규 모듈

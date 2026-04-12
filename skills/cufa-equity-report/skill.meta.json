@@ -1,11 +1,11 @@
 {
     "name": "cufa-equity-report",
-    "version": "15.2",
+    "version": "16.0",
     "tier": "domain",
     "owner": "local",
     "status": "active",
     "quality_level": "managed",
-    "description": "CUFA 가치투자학회 기업분석보고서 표준 스킬 v15.0. 모든 종목에 재사용 가능한 표준화 프로토콜. Phase 0 Pre-flight 5점 검증 → Build → Evaluator v2 ALL PASS → Re-rating Note(조건부). 상수 레지스트리(PreflightThresholds·EvaluatorCriteria·IndustryChecklist) + 모듈 아키텍처(preflight·evaluator·post_processing). 종목별 하드코딩 금지. 트리거: '기업분석보고서', 'CUFA 보고서', '투자보고서', 'equity research', 'SMIC 스타일'.",
+    "description": "CUFA Equity Report v16 — 1인 AI 퀀트 운용사 실행 도구. 학회 스타일(분량 페티시) 완전 폐기, HF/퀀트 실행가능성 중심으로 전환. 7섹션 HF 구조(BLUF→Thesis→Business→Numbers→Risks→Trade→Appendix) + Trade Ticket YAML + Evaluator v3(12개 binary) + Phase 7 피드백 루프. Nexus Finance MCP(398도구) → CUFA 보고서 → open-trading-api/QuantPipeline 선순환 파이프라인. 트리거: '기업분석보고서', 'CUFA 보고서', 'equity research', '투자보고서', 'HF 보고서'.",
     "source": "local-.claude",
     "target_harnesses": [
         "codex",
@@ -13,33 +13,52 @@
         "openclaw"
     ],
     "dependencies": [
-        "skills/artifact/xlsx"
+        "skills/artifact/xlsx",
+        "skills/quant-fund"
     ],
     "modules": {
-        "preflight": "Phase 0 표준 검증 (PreflightConfig, preflight_validate, NexusMCPClient)",
-        "builder": "HTML 빌드 엔진 (core, css, svg 32종, helpers, components, markdown, design_tokens, figure)",
-        "evaluator": "v2 자동 검증 (HARD_MIN + SMIC_STYLE + HALLUCINATION)",
-        "post_processing": "SMIC 문체 주입 + 보호-치환-복원",
-        "config": "종목별 설정 템플릿 (_template.py)"
+        "preflight": "Phase 0 표준 검증 (PreflightThresholds, 조선 포함 9개 산업 체크리스트)",
+        "builder": "HTML 빌드 엔진 (core, css v16 + ticket-box/thesis-box, svg 10종, helpers)",
+        "evaluator": "v3 실행가능성 검증 (12개 binary: opinion/TP/SL/position/bear/kill/catalyst/ticket/source/backtest/falsifiable/RR)",
+        "trade_ticket": "Trade Ticket 모듈 (schema, generator, backtest_hook, feedback) — v16 신규",
+        "sections": "7섹션 HF 빌더 (BLUF/Thesis/Business/Numbers/Risks/Trade/Appendix)",
+        "post_processing": "Re-rating Note v2 + protect_replace (SMIC injector 삭제)",
+        "config": "종목별 설정 (v16 추가: trade_ticket/kill_conditions/backtest_config/feedback_loop)"
     },
     "entry_points": {
         "standards": "SKILL.md",
         "changelog": "CHANGELOG.md",
-        "legacy": "SKILL_legacy_v14_2_backup.md"
+        "legacy_v15": "SKILL_legacy_v15_backup.md",
+        "legacy_v14": "SKILL_legacy_v14_2_backup.md"
     },
     "trigger_policy": "description-first, progressive-disclosure references only when needed",
     "tags": [
         "finance",
         "equity-research",
+        "quant",
+        "hedge-fund",
+        "trade-ticket",
         "reporting",
         "standardized",
-        "module-architecture"
+        "module-architecture",
+        "feedback-loop"
     ],
-    "breaking_changes_v15": [
-        "SKILL.md 75% 감축 (5268줄 → 1306줄)",
-        "종목별 하드코딩 금지 → config/*.py로 이동",
-        "임계값 상수화 (PreflightThresholds, EvaluatorCriteria)",
-        "모듈 디렉토리 신설 (preflight/, evaluator/, post_processing/)",
-        "검증 케이스는 SKILL.md Appendix A로 분리"
+    "pipeline": {
+        "input": "Nexus Finance MCP (398 tools)",
+        "process": "CUFA Equity Report v16",
+        "output_primary": "HTML Report + Trade Ticket YAML",
+        "output_backtest": "open-trading-api/QuantPipeline",
+        "output_feedback": "Phase 7 복기 (quarterly actual vs estimated)"
+    },
+    "breaking_changes_v16": [
+        "Evaluator v2(분량 기반) → v3(실행가능성 binary 12개)",
+        "SMIC 문체 강제(동사/본서/전술한) 완전 폐기",
+        "11섹션 → 7섹션 HF 구조",
+        "sections/minima.py + smic_injector.py 삭제",
+        "Trade Ticket YAML 모듈 신설 (trade_ticket/)",
+        "Phase 7 피드백 루프 신설",
+        "StockConfig에 trade_ticket/kill_conditions/backtest_config/feedback_loop 필드 추가",
+        "조선 산업 체크리스트 추가 (11개 항목)",
+        "CSS에 .ticket-box / .thesis-box 클래스 추가"
     ]
 }

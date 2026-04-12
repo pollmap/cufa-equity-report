@@ -1,10 +1,10 @@
 """CUFA Builder — 메인 오케스트레이터.
 
 `build_report()` 는 `StockConfig` + 섹션 생성자 시퀀스를 받아 HTML을 조립하고,
-post-processing (SMIC 주입) + evaluator ALL PASS 루프까지 한번에 수행한다.
+post-processing + Evaluator v3 ALL PASS 루프까지 한번에 수행한다.
 
-v15.0 패턴: 종목별 하드코딩 금지. `config/{stock_code}.py` 에서
-`StockConfig` 인스턴스를 만들어 넘기면 된다.
+v16.0: 7섹션 HF 구조, SMIC 문체 강제 폐기, Trade Ticket YAML 신설.
+`config/{stock_code}.py` 에서 `StockConfig` 인스턴스를 만들어 넘기면 된다.
 """
 from __future__ import annotations
 

@@ -1,40 +1,35 @@
-"""CUFA Sections — 11섹션 생성자 + 공통 데이터 모델.
+"""CUFA Sections — 7섹션 HF 구조 (v16.0).
+
+v15 11섹션 → v16 7섹션 전환.
+분량 기반 SMIC 문체 구조 폐기 → 실행가능성 중심 HF 구조.
+
+7-Section Structure:
+    §1 BLUF           — Investment Summary (Bottom Line Up Front)
+    §2 Thesis         — 3축 통합 투자 논리
+    §3 Business Setup — 사업 구조 + 산업 설정
+    §4 Numbers        — Financial + Peer + Estimate + Valuation
+    §5 Risks          — Bear Case First + Kill Conditions
+    §6 Trade          — Trade Implementation (⚡ 핵심)
+    §7 Appendix       — 압축 Appendix (A-1~A-4)
 
 사용 예시:
-    from sections import (
-        SectionData, SECTION_MINIMA,
-        build_section1, build_section2, ..., build_section11,
-    )
-
-    data1 = SectionData(keywords=[...], narrative_html="...", charts=[...])
-    html1 = build_section1(config, data1)
-
-각 section_N.build_section() 은 동일한 시그니처 `(config, data) -> str`.
+    from sections import SECTION_BUILDERS
+    html = SECTION_BUILDERS[1](config, html_content)
 """
+
 from .base import SectionData, assemble_section, close_section, render_chart_grid
-from .minima import (
-    SECTION_MINIMA,
-    SectionMinimum,
-    total_min_chars,
-    total_min_charts,
-    total_min_tables,
-)
 
-from .section1_company import build_section as build_section1
-from .section2_industry import build_section as build_section2
-from .section3_ip1 import build_section as build_section3
-from .section4_ip2 import build_section as build_section4
-from .section5_ip3 import build_section as build_section5
-from .section6_financial import build_section as build_section6
-from .section7_peer import build_section as build_section7
-from .section8_estimate import build_section as build_section8
-from .section9_valuation import build_section as build_section9
-from .section10_risk import build_section as build_section10
-from .section11_appendix import build_section as build_section11
+from .section1_bluf import build_section as build_section1
+from .section2_thesis import build_section as build_section2
+from .section3_business_setup import build_section as build_section3
+from .section4_numbers import build_section as build_section4
+from .section5_risks import build_section as build_section5
+from .section6_trade import build_section as build_section6
+from .section7_appendix import build_section as build_section7
 
 
-#: 번호 → 빌더 함수 매핑. 동적 호출 시 `SECTION_BUILDERS[3](config, data)` 식으로.
-SECTION_BUILDERS = {
+#: 번호 → 빌더 함수. SECTION_BUILDERS[n](config, html_content) 형식.
+SECTION_BUILDERS: dict[int, object] = {
     1: build_section1,
     2: build_section2,
     3: build_section3,
@@ -42,23 +37,38 @@ SECTION_BUILDERS = {
     5: build_section5,
     6: build_section6,
     7: build_section7,
-    8: build_section8,
-    9: build_section9,
-    10: build_section10,
-    11: build_section11,
+}
+
+#: 섹션 번호 → ID 매핑 (TOC 앵커용)
+SECTION_IDS: dict[int, str] = {
+    1: "s1_bluf",
+    2: "s2_thesis",
+    3: "s3_business",
+    4: "s4_numbers",
+    5: "s5_risks",
+    6: "s6_trade",
+    7: "s7_appendix",
+}
+
+#: 섹션 번호 → 한국어 제목
+SECTION_TITLES: dict[int, str] = {
+    1: "Investment Summary",
+    2: "투자 Thesis",
+    3: "Business & Industry Setup",
+    4: "The Numbers",
+    5: "Risks — Bear Case First",
+    6: "Trade Implementation",
+    7: "Appendix",
 }
 
 __all__ = [
     "SectionData",
-    "SectionMinimum",
-    "SECTION_MINIMA",
     "SECTION_BUILDERS",
+    "SECTION_IDS",
+    "SECTION_TITLES",
     "assemble_section",
     "close_section",
     "render_chart_grid",
-    "total_min_chars",
-    "total_min_charts",
-    "total_min_tables",
     "build_section1",
     "build_section2",
     "build_section3",
@@ -66,8 +76,4 @@ __all__ = [
     "build_section5",
     "build_section6",
     "build_section7",
-    "build_section8",
-    "build_section9",
-    "build_section10",
-    "build_section11",
 ]

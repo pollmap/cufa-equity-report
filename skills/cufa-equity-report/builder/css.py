@@ -126,6 +126,21 @@ table.data .highlight-row td { background:rgba(124,106,247,0.08); font-weight:60
 .compliance-notice ul { font-size:11px; line-height:1.4; color:var(--text-sec); padding-left:16px; }
 .compliance-notice li { margin-bottom:4px; }
 .ai-watermark { position:fixed; bottom:8px; left:12px; font-size:10px; color:rgba(124,106,247,0.3); z-index:100; pointer-events:none; }
+/* v16 Trade Ticket & Thesis boxes */
+.ticket-box { background:var(--surface2); border:2px solid var(--purple); border-radius:var(--border-radius); padding:20px 24px; margin:20px 0; }
+.ticket-box .ticket-header { font-size:11px; font-weight:700; color:var(--purple); letter-spacing:1px; text-transform:uppercase; margin-bottom:12px; }
+.ticket-box .ticket-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+.ticket-box .ticket-item { background:var(--surface); border:1px solid var(--border); padding:10px 14px; border-radius:var(--border-radius); }
+.ticket-box .ticket-item .ti-label { font-size:10px; color:var(--text-sec); margin-bottom:2px; }
+.ticket-box .ticket-item .ti-value { font-size:16px; font-weight:700; }
+.ticket-box .ticket-item .ti-value.buy { color:var(--positive); }
+.ticket-box .ticket-item .ti-value.sell { color:var(--negative); }
+.ticket-box .ticket-item .ti-value.hold { color:var(--amber); }
+.ticket-box .ticket-yaml { background:#0a0a0a; border:1px solid var(--border2); border-radius:var(--border-radius); padding:14px; margin-top:14px; font-family:'Courier New',monospace; font-size:10px; color:#a8ff78; overflow-x:auto; white-space:pre; }
+.thesis-box { background:var(--purple-bg); border:1px solid var(--purple-border); border-radius:var(--border-radius); padding:16px 20px; margin:16px 0; }
+.thesis-box .thesis-axis { display:flex; gap:8px; align-items:flex-start; margin-bottom:8px; }
+.thesis-box .axis-num { background:var(--purple); color:#fff; min-width:20px; height:20px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:700; flex-shrink:0; }
+.thesis-box .axis-text { font-size:12px; color:var(--text); }
 @media (max-width:1400px) { .float-toc, .section-dots { display:none; } }
 @media (max-width:768px) {
   body { font-size:11px; }
