@@ -14,6 +14,7 @@ from typing import Callable, Protocol
 
 from .css import gen_css
 from .figure import reset_figures
+from .pwa import gen_manifest, gen_pwa_meta_tags, gen_service_worker
 
 
 class SectionBuilder(Protocol):
@@ -94,23 +95,37 @@ def build_report(
 
 
 def write_output(ctx: BuildContext, config) -> Path:
-    """빌드 결과를 `{output_dir}/{company}_CUFA_보고서.html` 로 저장."""
+    """빌드 결과를 저장한다.
+
+    생성 파일:
+    - `{output_dir}/{company}_CUFA_보고서.html`  ← 메인 보고서
+    - `{output_dir}/manifest.json`                ← PWA 앱 정의
+    - `{output_dir}/sw.js`                        ← Service Worker (오프라인 캐시)
+    """
     out_dir = Path(config.output_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
+
     out_path = out_dir / f"{config.company_name}_CUFA_보고서.html"
     out_path.write_text(ctx.output_html, encoding="utf-8")
+
+    # PWA 보조 파일
+    (out_dir / "manifest.json").write_text(gen_manifest(config), encoding="utf-8")
+    (out_dir / "sw.js").write_text(gen_service_worker(), encoding="utf-8")
+
     return out_path
 
 
 # ─── 내부 HTML 프래그먼트 생성 ───────────────────────────────────────
 
 def _gen_head(config) -> str:
+    pwa_tags = gen_pwa_meta_tags(config)
     return (
         '<!DOCTYPE html>\n<html lang="ko">\n<head>\n'
         '<meta charset="UTF-8">\n'
         '<meta name="viewport" content="width=device-width, initial-scale=1.0">\n'
         f'<title>{config.company_name} ({config.stock_code}) '
         f'— CUFA 기업분석보고서</title>\n'
+        f'{pwa_tags}'
         f'<style>{gen_css()}</style>\n'
         '</head>\n<body>\n<div class="report">\n'
     )

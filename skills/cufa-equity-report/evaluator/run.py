@@ -124,15 +124,35 @@ def _count_kill_conditions(html: str) -> int:
 
 
 def _count_catalysts(html: str) -> int:
-    """날짜 붙은 Catalyst 이벤트 개수."""
-    # Look for patterns like "2025Q3", "2026-01", "25년", "Q1 2026"
-    date_patterns = [
-        r'\d{4}[년Q/\-]\s*[0-9Q]',   # 2025Q3, 2026-01, 2025년 Q1
-        r'Q[1-4]\s*\d{4}',           # Q3 2025
-        r'\d{2}년 \d{1,2}월',        # 26년 3월
+    """Catalyst 이벤트 개수 — 재무 테이블 연도 오탐 방지.
+
+    전략: catalyst 전용 섹션/테이블을 먼저 탐색하고,
+    그 안의 <li>/<tr> 항목을 카운팅한다.
+    섹션이 없으면 "Q1 2025 – [설명]" 패턴처럼
+    날짜 뒤에 이벤트 설명이 붙는 경우만 카운팅.
+    """
+    # 1차: catalyst 전용 섹션 안의 목록 항목 카운팅
+    catalyst_section = re.search(
+        r'(catalyst|카탈리스트|이벤트\s*일정|Catalyst\s*Timeline)'
+        r'(.*?)(</section>|<div\s+class="section|<h[2-3]\s)',
+        html, re.IGNORECASE | re.DOTALL
+    )
+    if catalyst_section:
+        body = catalyst_section.group(2)
+        li_count = len(re.findall(r'<li[\s>]', body))
+        tr_count = max(0, len(re.findall(r'<tr[\s>]', body)) - 1)  # 헤더 제외
+        return max(li_count, tr_count)
+
+    # 2차: "날짜 + 서술 텍스트" 패턴 (숫자만 있는 재무 데이터 제외)
+    # Q1 2025, 2026년 1분기, 26년 3월 뒤에 한국어/영어 설명이 붙는 경우만
+    catalyst_patterns = [
+        r'Q[1-4]\s*20\d{2}\s*[-:–]\s*\S',          # Q3 2025 - 신조선 인도
+        r'20\d{2}년\s*[1-4]분기\s*[-:–]\s*\S',      # 2025년 2분기 – 실적
+        r'\d{2}년\s*\d{1,2}월\s*[-:–]\s*\S',        # 26년 3월 – 발표
+        r'(H[12]|상반기|하반기)\s*20\d{2}\s*[-:–]', # H2 2025 -
     ]
     total = 0
-    for pat in date_patterns:
+    for pat in catalyst_patterns:
         total += len(re.findall(pat, html))
     return total
 

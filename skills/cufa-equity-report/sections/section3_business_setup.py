@@ -13,6 +13,11 @@ from __future__ import annotations
 
 from typing import Any
 
+try:
+    from preflight.industry_checklist import INDUSTRY_CHECKLIST
+except ImportError:
+    INDUSTRY_CHECKLIST: dict = {}
+
 
 def build_section(config: Any, html_content: str = "") -> str:
     """§3 Business & Industry Setup 섹션 HTML 생성.
@@ -26,7 +31,13 @@ def build_section(config: Any, html_content: str = "") -> str:
     """
     meta = getattr(config, "META", {}) or {}
     business = getattr(config, "BUSINESS", {}) or {}
-    industry = getattr(config, "INDUSTRY_DATA", {}) or {}
+    industry_data = getattr(config, "INDUSTRY_DATA", {}) or {}
+
+    # v16: StockConfig.industry 필드 (preflight 산업 체크리스트 키)
+    industry_name = (
+        getattr(config, "industry", None)
+        or meta.get("industry", "")
+    )
 
     company = meta.get("company_name", meta.get("name", ""))
     ticker = meta.get("ticker", "")
@@ -34,7 +45,8 @@ def build_section(config: Any, html_content: str = "") -> str:
     segments_html = _render_segments(business.get("segments", []))
     moat_html = _render_moat(business.get("moat", {}))
     key_metrics_html = _render_key_metrics(business.get("key_metrics", {}))
-    industry_html = _render_industry(industry)
+    industry_html = _render_industry(industry_data)
+    checklist_html = _render_industry_checklist(industry_name)
     counter_html = _render_counter(business)
 
     body = html_content or ""
@@ -51,6 +63,7 @@ def build_section(config: Any, html_content: str = "") -> str:
   {moat_html}
   {key_metrics_html}
   {industry_html}
+  {checklist_html}
   {counter_html}
   {body}
 </section>
@@ -142,6 +155,30 @@ def _render_industry(industry: dict) -> str:
 <p style="font-size:12px;line-height:1.6;color:var(--text)">{overview}</p>
 {structure_html}
 {drivers_html}
+"""
+
+
+def _render_industry_checklist(industry_name: str) -> str:
+    if not industry_name or industry_name not in INDUSTRY_CHECKLIST:
+        return ""
+    items = INDUSTRY_CHECKLIST[industry_name]
+    rows = "".join(
+        f'<tr><td style="font-size:11px;color:var(--text)">{item}</td>'
+        f'<td style="text-align:center;font-size:11px;color:var(--text-sec)">□</td></tr>'
+        for item in items
+    )
+    return f"""
+<div style="margin:20px 0">
+  <p style="font-size:13px;font-weight:700;margin-bottom:8px;color:var(--purple)">
+    {industry_name} 산업 데이터 체크리스트 (Pre-flight)
+  </p>
+  <div class="table-scroll">
+  <table class="data">
+    <thead><tr><th>확인 항목</th><th style="width:60px">완료</th></tr></thead>
+    <tbody>{rows}</tbody>
+  </table>
+  </div>
+</div>
 """
 
 
