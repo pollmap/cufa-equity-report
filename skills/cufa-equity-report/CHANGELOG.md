@@ -1,5 +1,32 @@
 # CUFA Equity Report Skill — CHANGELOG
 
+## v16.1 — 2026-04-12 (버그 수정 + PWA + 공유 헬퍼)
+
+### 버그 수정
+
+- `sections/section3_business_setup.py`: `_render_industry_checklist()` 함수 미구현으로 인한 `NameError` 수정 — 함수 본체 추가
+- `evaluator/run.py::_count_catalysts()`: 재무 테이블 연도("2025년 매출" 등)가 Catalyst로 오탐되는 버그 수정
+  - 기존: 날짜 패턴 전체 카운팅
+  - 수정: catalyst 전용 섹션 내 `<li>`/`<tr>` 항목 우선 카운팅 → 없으면 "날짜 + 설명" 패턴만
+
+### 신규 기능
+
+| 파일 | 내용 |
+|---|---|
+| `builder/pwa.py` | PWA 지원 — `gen_manifest()` / `gen_service_worker()` / `gen_pwa_meta_tags()` |
+| `post_processing/share.py` | 공유 헬퍼 — `serve_local()` / `copy_path()` / `zip_report()` |
+
+### 수정
+
+- `builder/core.py`: `_gen_head()`에 PWA 메타 태그 주입, `write_output()`에서 manifest.json + sw.js 동시 저장
+- `builder/__init__.py`: pwa 3개 함수 re-export 추가
+
+### 커밋
+
+`27ef25d` — feat: v16.1
+
+---
+
 ## v16.0 — 2026-04-12 (HF 퀀트 실행가능성 전환 완료)
 
 ### Breaking Changes
