@@ -1,3 +1,4 @@
+from pathlib import Path
 # -*- coding: utf-8 -*-
 """
 삼성전자(005930) CUFA 재무데이터 엑셀 생성
@@ -512,7 +513,7 @@ auto_width(ws10)
 # ============================================================
 # 저장
 # ============================================================
-OUTPUT_PATH = 'C:/Users/lch68/Desktop/cufa-equity-report/output/삼성전자_재무데이터.xlsx'
+OUTPUT_PATH = str(Path(__file__).resolve().parent.parent.parent / 'output' / '삼성전자_재무데이터.xlsx')
 wb.save(OUTPUT_PATH)
 print(f'[OK] Excel saved: {OUTPUT_PATH}')
 print(f'     시트 수: {len(wb.sheetnames)}개')

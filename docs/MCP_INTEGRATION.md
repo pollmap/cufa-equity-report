@@ -25,12 +25,12 @@ python data/collector.py 462350
 ## 2. 네트워크
 
 ```
-[로컬 Windows] --SSH 터널--> [VPS 62.171.141.206]
+[로컬 Windows] --SSH 터널--> [VPS <MCP_VPS_HOST>]
 collector.py                   127.0.0.1:8100/mcp
                                Nexus MCP (316도구)
 ```
 
-SSH 터널: `ssh -f -N -L 18100:127.0.0.1:8100 -i ~/.ssh/cbnupollmap root@62.171.141.206`
+SSH 터널: `ssh -f -N -L 18100:127.0.0.1:8100 -i ~/.ssh/cbnupollmap root@<MCP_VPS_HOST>`
 이후 `http://127.0.0.1:18100/mcp`로 요청.
 
 ## 3. 5대 핵심 MCP 도구

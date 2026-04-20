@@ -11,7 +11,7 @@ from typing import Any, Protocol
 
 from .tool_schemas import validate_args
 
-NEXUS_MCP_URL = "http://62.171.141.206/mcp"
+NEXUS_MCP_URL = __import__("os").environ.get("NEXUS_MCP_URL", "")
 KIS_BACKTEST_URL = "http://127.0.0.1:3846/mcp"
 
 SSE_HEADERS: tuple[str, ...] = (
@@ -31,7 +31,7 @@ class MCPError(RuntimeError):
 
 
 class NexusMCPClient:
-    """Nexus Finance MCP (VPS 62.171.141.206) 클라이언트.
+    """Nexus Finance MCP (VPS <MCP_VPS_HOST>) 클라이언트.
 
     - Streamable HTTP + SSE 응답 파싱
     - 호출 전 `tool_schemas`로 인자 검증

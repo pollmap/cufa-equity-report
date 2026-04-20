@@ -16,3 +16,6 @@ Thumbs.db
 *.tmp
 
 .worktrees/
+
+# Audit 2026-04-20
+output/

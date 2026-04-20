@@ -1044,7 +1044,7 @@ def validate_args(tool_name: str, arguments: dict) -> None:
 import json, re, subprocess
 from typing import Any, Protocol
 
-NEXUS_MCP_URL = "http://62.171.141.206/mcp"
+NEXUS_MCP_URL = "http://<MCP_VPS_HOST>/mcp"
 SSE_HEADERS = [
     "-H", "Content-Type: application/json",
     "-H", "Accept: application/json, text/event-stream",  # 필수!

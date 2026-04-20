@@ -25,7 +25,7 @@ from zoneinfo import ZoneInfo
 sys.stdout.reconfigure(encoding='utf-8')
 
 ROOT     = Path(__file__).resolve().parent.parent
-MCP_URL  = "http://62.171.141.206/mcp"
+MCP_URL  = os.environ.get("NEXUS_MCP_URL", "")
 MCP_TOKEN = f"Bearer {__import__('os').environ.get('CUFA_MCP_TOKEN', '')}"
 KST      = ZoneInfo('Asia/Seoul')
 TODAY    = datetime.now(KST)
@@ -382,7 +382,7 @@ SECTOR          = "TODO: 섹터"
 LISTING_DATE    = "TODO: 상장일"
 
 TEAM_NAME       = "CUFA 리서치팀"
-TEAM_MEMBERS    = ["이찬희"]
+TEAM_MEMBERS    = ["TODO: 팀원 입력"]
 
 # ── 주가 데이터 (출처: pykrx KRX, {TODAY.strftime("%Y-%m-%d")}) ──
 CURRENT_PRICE       = {current_price:_}        # 원
